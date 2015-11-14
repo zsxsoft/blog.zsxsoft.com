@@ -17,6 +17,7 @@ import {
   IconButton,
   FlatButton,
   EnhancedButton,
+  FloatingActionButton,
   Mixins,
   Card,
   CardHeader,

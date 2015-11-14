@@ -15,6 +15,7 @@ import {
   IconButton,
   FlatButton,
   EnhancedButton,
+  FloatingActionButton,
   Mixins,
   Card,
   CardHeader,
@@ -55,9 +56,6 @@ class PageList extends ReactComponentWithMixin {
     );
   }
   
-  prepareStyles() {
-    return Mixins.StylePropable.prepareStyles.call(this);
-  }
   
   getAutoResponsiveProps() {
     return {
@@ -93,7 +91,19 @@ class PageList extends ReactComponentWithMixin {
     this.setState({mounted: false});
     window.resizeQueue.remove(listResizeId);
   }
-
+  
+  pageTo(pageForward) {
+    let currentPage = this.state.data.pagebar.current;
+    let nextPage = currentPage + pageForward;
+    let maxPage = parseInt(this.state.data.pagebar.max / this.state.data.pagebar.pageCount) + 1;
+    console.log(nextPage);
+    console.log(maxPage);
+    if (nextPage <= 0 || nextPage > maxPage) nextPage = currentPage;
+    return this.props.location.pathname.replace(/page\/(\d*)/, (substring, page) => {
+      return "page/" + nextPage;
+    });
+  }
+  
   render() {
     let data = this.state.data;
     let singleTargetStyle = this.state.responsiveStyle;
@@ -122,12 +132,23 @@ class PageList extends ReactComponentWithMixin {
         
         </div>
        })}
-       </AutoResponsive></div>
+       </AutoResponsive>
+       <div style={{position: "fixed", top: "58%", left: "90%"}}>
+        <Link to={this.pageTo(-1)}><FloatingActionButton style={{float: "left"}}>
+          <span style={{color: "white"}}>&lt;</span>
+        </FloatingActionButton></Link>&nbsp;
+        <Link to={this.pageTo(1)}><FloatingActionButton style={{float: "right"}}>
+          <span style={{color: "white"}}>&gt;</span>
+        </FloatingActionButton></Link>
+       </div>
+       </div>
       );
+
     }
     return (
       <FullWidthSection>
       {childContext}
+
       </FullWidthSection>
     );
   }

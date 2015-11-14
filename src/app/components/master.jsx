@@ -2,7 +2,9 @@
 import React from 'react';
 import Router from 'react-router';
 import FullWidthSection from './full-width-section';
-import AppLeftNav from './app-left-nav'
+import AppLeftNav from './app-left-nav';
+import MyTheme from '../theme';
+import Config from '../config';
 import ReactComponentWithMixin from './component-with-mixin';
 import {
   AppBar,
@@ -27,7 +29,6 @@ let {
   Colors, Spacing, Typography,
 } = Styles;
 let ThemeManager = Styles.ThemeManager;
-let DefaultRawTheme = Styles.LightRawTheme;
 let styles = {
   footer: {
     backgroundColor: Colors.grey900,
@@ -53,7 +54,7 @@ class Master extends ReactComponentWithMixin {
 
   constructor(props) {
     super(props);
-    let muiTheme = ThemeManager.getMuiTheme(DefaultRawTheme);
+    let muiTheme = ThemeManager.getMuiTheme(MyTheme);
     this.state = {
       muiTheme,
     };
@@ -71,10 +72,15 @@ class Master extends ReactComponentWithMixin {
       renderTabs: !(document.body.clientWidth <= 647),
     });
   }
+  
+  componentDidUpdate() {
+    setTimeout(() => {
+      window.doRemain();
+    }, 1000);
+  }
 
   componentWillMount() {
     let newMuiTheme = this.state.muiTheme;
-    newMuiTheme.inkBar.backgroundColor = Colors.yellow200;
     this.setState({
       muiTheme: newMuiTheme,
       tabIndex: 0,
@@ -117,7 +123,7 @@ class Master extends ReactComponentWithMixin {
   _getTabs() {
     let styles = {
       root: {
-        backgroundColor: Colors.cyan500,
+        backgroundColor: "#2e8bcc",
         position: 'fixed',
         height: 64,
         top: 0,
@@ -143,18 +149,13 @@ class Master extends ReactComponentWithMixin {
         width: 300,
         left: Spacing.desktopGutter,
       },
-      svgLogo: {
-        width: 65,
-        backgroundColor: Colors.cyan500,
-        position: 'absolute',
-        top: 20,
-      },
       tabs: {
         width: 425,
         bottom: 0,
       },
       tab: {
         height: 64,
+        backgroundColor: "#2e8bcc",
       },
 
     };
@@ -206,13 +207,12 @@ class Master extends ReactComponentWithMixin {
   }
 
   _getAppBar() {
-    let title = "zsx's Blog";
 
     return (
       <div>
         <AppBar
           onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap.bind(this)}
-          title={title}
+          title={Config.title}
           zDepth={0}
           style={{position: 'absolute', top: 0}}/>
       </div>);

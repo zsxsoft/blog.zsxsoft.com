@@ -6,7 +6,7 @@ import FullWidthSection from '../full-width-section';
 import Style from '../styles/style';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
-import {formatDate} from '../../utils';
+import {formatDate, formatArticleContent} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
 
 import {
@@ -49,7 +49,7 @@ class PageArticle extends ReactComponentWithMixin {
         marginLeft: "auto",
         marginRight: "auto",
         transform: "translate(50%, 0)", 
-        webkitTransform: "translate(50%, 0)",
+        WebkitTransform: "translate(50%, 0)",
       },
       containerWidth: containerWidth,
     }, 
@@ -91,8 +91,9 @@ class PageArticle extends ReactComponentWithMixin {
     let childContext = (<div>Please wait..</div>);
     if (data) { 
       let article = data.article;
-      let contentHtml = {__html: article.Content};
+      let contentHtml = {__html: formatArticleContent(article.Content)};
       let linkTo = "/post/" + article.ID;
+      document.title = article.Title + " - " + Config.title;
       childContext = (
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        <div style={singleTargetStyle} key={article.ID}>

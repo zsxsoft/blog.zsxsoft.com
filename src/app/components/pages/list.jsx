@@ -77,6 +77,10 @@ class PageList extends ReactComponentWithMixin {
     window.addEventListener('resize', this.resizeChangeWidth.bind(this));
   }
   
+  componentDidMount() {
+    document.title = "文章列表 - " + Config.title;
+  }
+  
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeChangeWidth);
   }

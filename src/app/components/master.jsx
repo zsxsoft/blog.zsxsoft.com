@@ -5,6 +5,7 @@ import FullWidthSection from './full-width-section';
 import AppLeftNav from './app-left-nav';
 import MyTheme from '../theme';
 import Config from '../config';
+import {isMobile} from '../utils';
 import ReactComponentWithMixin from './component-with-mixin';
 import {
   AppBar,
@@ -68,8 +69,9 @@ class Master extends ReactComponentWithMixin {
   }
   
   setTabsState() {
+
     this.setState({
-      renderTabs: !(document.body.clientWidth <= 647),
+      renderTabs: !isMobile(),
     });
   }
   

@@ -11,3 +11,6 @@ export function formatArticleContent(articleString) {
   });
   return articleString;
 }
+export function isMobile() {
+  return document.body.clientWidth <= 647;
+}

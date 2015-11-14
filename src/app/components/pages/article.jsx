@@ -5,7 +5,7 @@ import {Link, Router} from 'react-router';
 import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
-import {formatDate, formatArticleContent} from '../../utils';
+import {formatDate, formatArticleContent, isMobile as checkMobile} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
 
 import {
@@ -30,25 +30,30 @@ let {
 let {
   Colors, Spacing, Typography,
 } = Styles;
-
+let isMobile = checkMobile();
 let ThemeManager = Styles.ThemeManager;
 class PageArticle extends ReactComponentWithMixin {
 
   resizeChangeWidth() {
     let container = ReactDOM.findDOMNode(this.refs.container);
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
-    containerWidth /= 2;
+    if (isMobile) {
+      containerWidth -= 50;
+    } else {
+      containerWidth /= 2;
+    }
+    
     this.setState({
       responsiveStyle: {
-        padding: "15px", 
+        padding: isMobile ? 0 : 15, 
         paddingBottom: "10px",
         display: "block",
         minHeight: 1000,
         width: containerWidth,
         marginLeft: "auto",
         marginRight: "auto",
-        transform: "translate(50%, 0)", 
-        WebkitTransform: "translate(50%, 0)",
+        transform: isMobile ? "" : "translate(50%, 0)", 
+        WebkitTransform: isMobile ? "" : "translate(50%, 0)",
       },
       containerWidth: containerWidth,
     }, 
@@ -94,6 +99,7 @@ class PageArticle extends ReactComponentWithMixin {
       let linkTo = "/post/" + article.ID;
       document.title = article.Title + " - " + Config.title;
       childContext = (
+      <div style={{paddingTop: isMobile ? 30 : 0}}>
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        <div style={singleTargetStyle} key={article.ID}>
         <Card>
@@ -107,7 +113,7 @@ class PageArticle extends ReactComponentWithMixin {
         </CardText>
         </Card>
         </div>
-       </AutoResponsive>
+       </AutoResponsive></div>
       );
     }
     return (

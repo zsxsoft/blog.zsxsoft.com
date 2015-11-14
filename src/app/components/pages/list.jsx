@@ -5,9 +5,8 @@ import {Link, Router} from 'react-router';
 import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
-import {formatDate} from '../../utils';
+import {formatDate, isMobile as checkMobile} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
-
 import {
   Avatar,
   AppCanvas,
@@ -30,7 +29,7 @@ let {
 let {
   Colors, Spacing, Typography,
 } = Styles;
-
+let isMobile = checkMobile();
 let ThemeManager = Styles.ThemeManager;
 class PageList extends ReactComponentWithMixin {
 
@@ -40,11 +39,12 @@ class PageList extends ReactComponentWithMixin {
     this.setState({
       responsiveStyle: {
         display: "inline-block",
-        padding: "15px", 
+        padding: isMobile ? 0 : 15,
+        paddingTop: 15,
         minHeight: 100,
         height: "auto",
         //width: 300,
-        width: (containerWidth * 0.88) / 3,
+        width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.88,
       },
       containerWidth: containerWidth,
     }, 
@@ -53,7 +53,7 @@ class PageList extends ReactComponentWithMixin {
   
   getAutoResponsiveProps() {
     return {
-      itemMargin: 10,
+      itemMargin: isMobile ? 0 : 10,
       //containerWidth: this.state.containerWidth || document.body.clientWidth,
       itemClassName: 'item',
       transitionDuration: '.8',
@@ -89,7 +89,7 @@ class PageList extends ReactComponentWithMixin {
     let singleTargetStyle = this.state.responsiveStyle;
     let childContext = (<div>Please wait..</div>);
     if (data) {
-      childContext = (
+      childContext = (<div style={{paddingTop: isMobile ? 15 : 0}} >
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        {data.articles.map((article) => {
         let introHtml = {__html: article.Intro};
@@ -97,7 +97,7 @@ class PageList extends ReactComponentWithMixin {
         return <div style={singleTargetStyle} key={article.ID}>
         
         <Card>
-          <Link to={linkTo} style={{textDecoration: "none !important"}}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit"}}/></FlatButton></Link>
+          <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit"}}/></FlatButton></Link>
           <CardText dangerouslySetInnerHTML={introHtml} style={{background: "#F5F5F5"}}>
           </CardText>
           <CardText>
@@ -108,7 +108,7 @@ class PageList extends ReactComponentWithMixin {
         
         </div>
        })}
-       </AutoResponsive>
+       </AutoResponsive></div>
       );
     }
     return (

@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router} from 'react-router';
 import FullWidthSection from '../full-width-section';
-import Style from '../styles/style';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
 import {formatDate} from '../../utils';

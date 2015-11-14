@@ -1,6 +1,7 @@
 ///<reference path="../../typings/tsd.d.ts" />
 import React from 'react'
 import Router from 'react-router';
+import Config from '../config';
 import ReactComponentWithMixin from './component-with-mixin';
 import {
   MenuItem,
@@ -19,31 +20,13 @@ let {
   StyleResizable,
 } = Mixins;
 let menuItems = [{
-  route: 'get-started',
-  text: 'Get Started',
+  route: '/',
+  text: '首页',
 }, {
-  route: 'customization',
-  text: 'Customization',
-}, {
-  route: 'components',
-  text: 'Components',
-}, {
-  type: MenuItem.Types.SUBHEADER,
-  text: 'Resources',
-}, {
-  type: MenuItem.Types.LINK,
-  payload: 'https://github.com/callemall/material-ui',
+  payload: 'https://github.com/zsxsoft/',
   text: 'GitHub',
-}, {
   type: MenuItem.Types.LINK,
-  payload: 'http://facebook.github.io/react',
-  text: 'React',
-}, {
-  type: MenuItem.Types.LINK,
-  payload: 'https://www.google.com/design/spec/material-design/introduction.html',
-  text: 'Material Design',
-}, 
-];
+}];
 
 
 class AppNextNav extends ReactComponentWithMixin {
@@ -60,7 +43,7 @@ class AppNextNav extends ReactComponentWithMixin {
       color: Typography.textFullWhite,
       lineHeight: Spacing.desktopKeylineIncrement + 'px',
       fontWeight: Typography.fontWeightLight,
-      backgroundColor: Colors.cyan500,
+      backgroundColor: "#2e8bcc",
       paddingLeft: Spacing.desktopGutter,
       paddingTop: '0px',
       marginBottom: '8px',
@@ -69,8 +52,8 @@ class AppNextNav extends ReactComponentWithMixin {
 
   render() {
     let header = (
-      <div style={this.prepareStyles(this.getStyles())} onTouchTap={this._onHeaderClick}>
-        material ui
+      <div style={this.prepareStyles(this.getStyles())} onTouchTap={this._onHeaderClick.bind(this)}>
+        {Config.title}
       </div>
     );
 
@@ -82,7 +65,7 @@ class AppNextNav extends ReactComponentWithMixin {
         header={header}
         menuItems={menuItems}
         selectedIndex={this._getSelectedIndex()}
-        onChange={this._onLeftNavChange} />
+        onChange={this._onLeftNavChange.bind(this)} />
     );
   }
 

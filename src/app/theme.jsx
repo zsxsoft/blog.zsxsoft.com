@@ -28,7 +28,7 @@ let MyTheme = {
     spacing = spacing || Spacing;
     let obj = {
       appBar: {
-        color: palette.primary1Color,
+        color: "#2e8bcc",
         textColor: Colors.darkWhite,
         height: spacing.desktopKeylineIncrement,
       },

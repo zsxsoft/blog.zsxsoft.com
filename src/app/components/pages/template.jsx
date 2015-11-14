@@ -2,7 +2,6 @@
 import React from 'react';
 import Router from 'react-router';
 import FullWidthSection from '../full-width-section';
-import Style from '../styles/style.jsx';
 import ReactComponentWithMixin from '../component-with-mixin';
 import {
   AppCanvas,

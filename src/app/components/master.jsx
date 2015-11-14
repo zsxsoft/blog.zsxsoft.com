@@ -112,7 +112,7 @@ class Master extends ReactComponentWithMixin {
         <FullWidthSection style={styles.footer}>
           <div>
             <p style={this.prepareStyles(styles.p)}>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议（查看普通文本）</a>，转载本站内容即代表您同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎（查看法律文本） </a>。</p>
-            <p style={this.prepareStyles(styles.p)}>后台API由<a href="http://www.zblogcn.com/" target="_blank">Z-BlogPHP</a>最新版本强力驱动；前端代码基于<a href="https://angularjs.org/" target="_blank" rel="nofollow">AngularJS</a> + <a href="https://github.com/TalksLab/metro-bootstrap" target="_blank" rel="nofollow">Metro-bootstrap</a>。</p>
+            <p style={this.prepareStyles(styles.p)}>后台API由<a href="http://www.zblogcn.com/" target="_blank">Z-BlogPHP</a>最新版本强力驱动；前端代码基于<a href="https://facebook.github.io/react/" target="_blank" rel="nofollow">React</a> + <a href="http://material-ui.com/" target="_blank" rel="nofollow">material-ui</a>。</p>
             <p style={this.prepareStyles(styles.p)}><a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15006942号</a> &nbsp; <a href="http://blog.zsxsoft.com/post/9">[关于]</a> <a href="/feed.php" target="_blank">[RSS]</a> <a href="javascript:;" onclick="alert('逗你玩呢');">[后台]</a></p>
           </div>
         </FullWidthSection>
@@ -214,7 +214,7 @@ class Master extends ReactComponentWithMixin {
           onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap.bind(this)}
           title={Config.title}
           zDepth={0}
-          style={{position: 'absolute', top: 0}}/>
+          style={{position: 'absolute', top: 0, background: "#2e8bcc"}}/>
       </div>);
   }
 

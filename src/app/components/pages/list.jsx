@@ -98,7 +98,7 @@ class PageList extends ReactComponentWithMixin {
     let singleTargetStyle = this.state.responsiveStyle;
     let childContext = (<div>Please wait..</div>);
     if (data) {
-      childContext = (<div style={{paddingTop: isMobile ? 15 : 0}} >
+      childContext = (<div style={{paddingTop: isMobile ? 60 : 30}} >
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        {data.articles.map((article) => {
         let introHtml = {__html: article.Intro};

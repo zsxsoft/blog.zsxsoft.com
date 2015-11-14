@@ -27,7 +27,9 @@
   "dependencies": {
     "autoresponsive-react": "^1.1.8",
     "babel-polyfill": "^6.1.19",
+    "exports-loader": "^0.6.2",
     "history": "^1.13.0",
+    "imports-loader": "^0.6.5",
     "material-ui": "^0.13.0",
     "react": "^0.14.0",
     "react-addons-create-fragment": "^0.14.0",
@@ -37,6 +39,7 @@
     "react-dom": "^0.14.2",
     "react-mixin": "^3.0.3",
     "react-router": "^1.0.0-rc4",
-    "react-tap-event-plugin": "^0.2.1"
+    "react-tap-event-plugin": "^0.2.1",
+    "whatwg-fetch": "^0.10.1"
   }
 }

@@ -37,7 +37,11 @@ var config = {
     //Moves files
     new TransferWebpackPlugin([
       {from: 'www'}
-    ], path.resolve(__dirname, "src"))
+    ], path.resolve(__dirname, "src")),
+    // Fetch
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ],
   module: {
     //Loaders to interpret non-vanilla javascript code as well as most other extensions including images and text.

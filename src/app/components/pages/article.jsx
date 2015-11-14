@@ -7,6 +7,8 @@ import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
 import {formatDate, formatArticleContent, isMobile as checkMobile} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
+import EmbedDuoshuo from '../duoshuo/embed-thread';
+import ShareDuoshuo from '../duoshuo/share';
 
 import {
   Avatar,
@@ -114,7 +116,7 @@ class PageArticle extends ReactComponentWithMixin {
       let linkTo = "/post/" + article.ID;
       document.title = article.Title + " - " + Config.title;
       childContext = (
-      <div style={{paddingTop: isMobile ? 30 : 0}}>
+      <div style={{paddingTop: isMobile ? 60 : 30}}>
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        <div style={singleTargetStyle} key={article.ID}>
         <Card>
@@ -125,6 +127,8 @@ class PageArticle extends ReactComponentWithMixin {
             <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 9}}><time>{formatDate(article.PostTime)}</time> in {article.Category.Name}</span>
           </div>
           <article dangerouslySetInnerHTML={contentHtml}></article>
+          <ShareDuoshuo type="share" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
+          <EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} />
         </CardText>
         </Card>
         </div>

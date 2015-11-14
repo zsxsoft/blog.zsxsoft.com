@@ -69,14 +69,16 @@ class PageList extends ReactComponentWithMixin {
     };
   }
   
-  constructor(props) {
-    super(props);
-    fetch(Config.url + this.props.location.pathname).then((data) => {
+  initState(props) {
+    fetch(Config.url + props.location.pathname).then((data) => {
       return data.json();
     }).then((json) => {
       this.setState({data: json});
     });
-    
+  }
+  constructor(props) {
+    super(props);  
+    this.initState(props);  
   }
 
   componentWillMount() {
@@ -104,6 +106,14 @@ class PageList extends ReactComponentWithMixin {
     return this.props.location.pathname.replace(/page\/(\d*)/, (substring, page) => {
       return "page/" + nextPage;
     });
+  }
+  
+  componentWillReceiveProps(props) {
+    this.initState(props);
+  }
+  
+  shouldComponentUpdate (nextProps) {
+    return (nextProps.location.pathname === this.props.location.pathname);
   }
   
   render() {

@@ -7,6 +7,7 @@ import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
 import {formatDate, isMobile as checkMobile} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
+import ExtensionDuoshuo from '../duoshuo/extensions';
 import {
   Avatar,
   AppCanvas,
@@ -111,7 +112,11 @@ class PageList extends ReactComponentWithMixin {
           </CardText>
           <CardText>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 
-            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7}}>{formatDate(article.PostTime)} in {article.Category.Name}</span>
+            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7}}>
+              {formatDate(article.PostTime)} in {article.Category.Name} 
+              <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
+              <span> / </span>{article.ViewNums}
+            </span>
           </CardText>
         </Card>
         

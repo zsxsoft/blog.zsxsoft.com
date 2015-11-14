@@ -47,6 +47,7 @@ let styles = {
     color: Colors.darkWhite,
   },
 };
+let masterResizeId = 0;
 
 class Master extends ReactComponentWithMixin {
   static childContextTypes = {
@@ -60,8 +61,8 @@ class Master extends ReactComponentWithMixin {
       muiTheme,
     };
   }
-
-
+  
+  
   getChildContext() {
     return {
       muiTheme: this.state.muiTheme,
@@ -88,11 +89,11 @@ class Master extends ReactComponentWithMixin {
       tabIndex: 0,
     });
     this.setTabsState();
-    window.addEventListener('resize', this.setTabsState.bind(this));
+    masterResizeId = window.resizeQueue.add(this.setTabsState.bind(this));
   }
   
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.setTabsState);
+  componentWillUnmount () {
+    window.resizeQueue.remove(masterResizeId);
   }
 
   componentWillReceiveProps(nextProps, nextContext) {

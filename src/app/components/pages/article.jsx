@@ -32,18 +32,21 @@ let {
 } = Styles;
 let isMobile = checkMobile();
 let ThemeManager = Styles.ThemeManager;
-class PageArticle extends ReactComponentWithMixin {
+let articleResizeId = 0;
+let resizeChangeWidthOriginal = (context, focus) => {
 
-  resizeChangeWidth() {
-    let container = ReactDOM.findDOMNode(this.refs.container);
+    if (!context.state.mounted && !focus) return;
+    
+    isMobile = checkMobile();
+    let container = ReactDOM.findDOMNode(context.refs.container);
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
     if (isMobile) {
-      containerWidth -= 50;
+      containerWidth /= 1.1
     } else {
       containerWidth /= 2;
     }
     
-    this.setState({
+    context.setState({
       responsiveStyle: {
         padding: isMobile ? 0 : 15, 
         paddingBottom: "10px",
@@ -58,6 +61,12 @@ class PageArticle extends ReactComponentWithMixin {
       containerWidth: containerWidth,
     }, 
     );
+};
+let resizeChangeWidth;
+
+class PageArticle extends ReactComponentWithMixin {
+  prepareStyles() {
+    return Mixins.StylePropable.prepareStyles.call(this);
   }
   
   getAutoResponsiveProps() {
@@ -72,6 +81,10 @@ class PageArticle extends ReactComponentWithMixin {
   
   constructor(props) {
     super(props);
+    let self = this;
+    resizeChangeWidth = (focus) => {
+      resizeChangeWidthOriginal(self, focus);
+    }
     fetch(Config.url + this.props.location.pathname).then((data) => {
       return data.json();
     }).then((json) => {
@@ -81,12 +94,14 @@ class PageArticle extends ReactComponentWithMixin {
   }
 
   componentWillMount() {
-    this.resizeChangeWidth();
-    window.addEventListener('resize', this.resizeChangeWidth.bind(this));
+    this.setState({mounted: true});
+    resizeChangeWidth(true);
+    articleResizeId = window.resizeQueue.add(resizeChangeWidth);
   }
-  
+    
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeChangeWidth);
+    this.setState({mounted: false});
+    window.resizeQueue.remove(articleResizeId);
   }
 
   render() {

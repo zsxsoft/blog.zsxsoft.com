@@ -8,8 +8,20 @@ let {
 	StylePropable, 
 	StyleResizable,
 } = Mixins;
-let ComponentWithMixin = React.createClass({
-	mixins: [StylePropable, StyleResizable],
-	render: () => {},
-});
+class ComponentWithMixin extends React.Component {
+	mergeAndPrefix() {
+		return Mixins.StylePropable.mergeAndPrefix.apply(this, arguments);
+	}
+	isDeviceSize() {
+		return Mixins.StyleResizable.isDeviceSize.apply(this, arguments);
+	}
+  	prepareStyles() {
+    	return Mixins.StylePropable.prepareStyles.apply(this, arguments);
+  	}
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+}
+
 export default ComponentWithMixin;

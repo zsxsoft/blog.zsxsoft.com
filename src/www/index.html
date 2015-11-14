@@ -46,7 +46,23 @@
   <script>
     window.doRemain = function() {
       Prism.highlightAll();
-      
+    }
+    window.resizeQueue = {
+      queue: [],
+      add: function(func) {
+        this.queue.push(func);
+        console.log(func);
+        return this.queue.length - 1;
+      }, 
+      remove: function(id) {
+        delete this.queue[id];
+        console.log(this.queue);
+      }
+    };
+    window.onresize = function() {
+      window.resizeQueue.queue.map(function(value) {
+        value();
+      });
     }
     
   </script>

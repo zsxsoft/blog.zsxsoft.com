@@ -31,24 +31,31 @@ let {
 } = Styles;
 let isMobile = checkMobile();
 let ThemeManager = Styles.ThemeManager;
+let listResizeId = 0;
 class PageList extends ReactComponentWithMixin {
 
-  resizeChangeWidth() {
+  resizeChangeWidth(focus) {
+    if (!this.state.mounted && !focus) return;
+    isMobile = checkMobile();
     let container = ReactDOM.findDOMNode(this.refs.container);
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
     this.setState({
       responsiveStyle: {
         display: "inline-block",
-        padding: isMobile ? 0 : 15,
+        padding: !isMobile ? 0 : 15,
         paddingTop: 15,
         minHeight: 100,
         height: "auto",
         //width: 300,
-        width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.88,
+        width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.9,
       },
       containerWidth: containerWidth,
     }, 
     );
+  }
+  
+  prepareStyles() {
+    return Mixins.StylePropable.prepareStyles.call(this);
   }
   
   getAutoResponsiveProps() {
@@ -72,16 +79,18 @@ class PageList extends ReactComponentWithMixin {
   }
 
   componentWillMount() {
-    this.resizeChangeWidth();
-    window.addEventListener('resize', this.resizeChangeWidth.bind(this));
+    this.setState({mounted: true});
+    this.resizeChangeWidth(true);
+    listResizeId = window.resizeQueue.add(this.resizeChangeWidth.bind(this));
   }
   
   componentDidMount() {
     document.title = "文章列表 - " + Config.title;
   }
   
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.resizeChangeWidth);
+  componentWillUnmount () {
+    this.setState({mounted: false});
+    window.resizeQueue.remove(listResizeId);
   }
 
   render() {

@@ -21,6 +21,8 @@ import {
   CardHeader,
   CardTitle,
   CardText,
+  List, 
+  ListItem,
   Styles,
   Paper,
 }
@@ -132,6 +134,7 @@ class PageList extends ReactComponentWithMixin {
         
         </div>
        })}
+
        </AutoResponsive>
        <div style={{position: "fixed", top: "58%", left: "90%"}}>
         <Link to={this.pageTo(-1)}><FloatingActionButton style={{float: "left"}}>
@@ -156,3 +159,30 @@ class PageList extends ReactComponentWithMixin {
 };
 
 export default PageList;
+
+/*
+       {data.sidebar.map((sidebar) => {
+        let contentHtml = {__html: sidebar.Content};
+        let sidebarContainer;
+       
+        if (sidebar.Type === "div") {
+          sidebarContainer = (<div id={sidebar.HtmlID}><span dangerouslySetInnerHTML={contentHtml} style={{background: "#F5F5F5"}} /></div>);
+        } else {
+          let result;
+          let reg = /<li(.*?)>([\w\W]*?)<\/li>/gi;
+          let liContainer = [];
+          while ((result = reg.exec(sidebar.Content)) != null)  {
+              liContainer.push(<ListItem key={result.index} {...result[1]}><div dangerouslySetInnerHTML={{__html: result[2]}} /></ListItem>);
+          }
+          sidebarContainer = (<List id={sidebar.HtmlID}>{liContainer}</List>);
+        }
+        return <div style={singleTargetStyle} key={sidebar.HtmlID}>
+        <Card>
+          <CardTitle title={sidebar.Name}/>
+          <CardText>
+           {sidebarContainer}
+          </CardText>
+        </Card>
+        </div>
+       })}
+*/

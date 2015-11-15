@@ -43,6 +43,11 @@ class PageList extends ReactComponentWithMixin {
     isMobile = checkMobile();
     let container = ReactDOM.findDOMNode(this.refs.container);
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
+    if (container === null) {
+      containerWidth -= 48;
+    } else {
+      
+    }
     this.setState({
       responsiveStyle: {
         display: "inline-block",
@@ -117,7 +122,7 @@ class PageList extends ReactComponentWithMixin {
     let singleTargetStyle = this.state.responsiveStyle;
     let childContext = (<div>Please wait..</div>);
     if (data) {
-      childContext = (<div style={{paddingTop: isMobile ? 60 : 30}} >
+      childContext = (<div style={{paddingTop: isMobile ? 30 : 15}} className="list-container">
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        {data.articles.map((article) => {
         let introHtml = {__html: article.Intro};
@@ -130,7 +135,7 @@ class PageList extends ReactComponentWithMixin {
           </CardText>
           <CardText>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 
-            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7}}>
+            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7, fontSize: isMobile ? 10 : 14}}>
               {formatDate(article.PostTime)} in <Link to={getNewListUri(this.props.location.pathname, {cate: article.Category.ID})}>{article.Category.Name}</Link> 
               <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
               <span> / </span>{article.ViewNums}

@@ -39,14 +39,14 @@ class AppNextNav extends ReactComponentWithMixin {
     return {
       cursor: 'pointer',
       //.mui-font-style-headline
-      fontSize: '24px',
+      fontSize: 24,
       color: Typography.textFullWhite,
       lineHeight: Spacing.desktopKeylineIncrement + 'px',
       fontWeight: Typography.fontWeightLight,
       backgroundColor: "#2e8bcc",
       paddingLeft: Spacing.desktopGutter,
-      paddingTop: '0px',
-      marginBottom: '8px',
+      paddingTop: 0,
+      marginBottom: 8,
     };
   }
 

@@ -26,7 +26,6 @@ export function getNewListUri(originalUri, object) {
   }
   keys.forEach((key) => {
     ret = ret.replace(new RegExp(key + "\/(\\d+)", "ig"), (substring, item) => {
-      console.log(substring);
       return key + "/" + object[key];
     });
   });

@@ -43,8 +43,8 @@ let resizeChangeWidthOriginal = (context, focus) => {
     isMobile = checkMobile();
     let container = ReactDOM.findDOMNode(context.refs.container);
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
-    if (isMobile) {
-      containerWidth /= 1.1
+    if (container === null) {
+      containerWidth -= 56;
     } else {
       containerWidth /= 2;
     }
@@ -98,6 +98,9 @@ class PageArticle extends ReactComponentWithMixin {
 
   componentWillMount() {
     this.setState({mounted: true});
+  }
+  
+  componentDidMount() {
     resizeChangeWidth(true);
     articleResizeId = window.resizeQueue.add(resizeChangeWidth);
   }
@@ -117,7 +120,7 @@ class PageArticle extends ReactComponentWithMixin {
       let linkTo = "/post/" + article.ID;
       document.title = article.Title + " - " + Config.title;
       childContext = (
-      <div style={{paddingTop: isMobile ? 60 : 30}}>
+      <div style={{paddingTop: isMobile ? 60 : 15}}>
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        <div style={singleTargetStyle} key={article.ID}>
         <Card>

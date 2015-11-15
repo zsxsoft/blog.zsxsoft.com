@@ -88,7 +88,7 @@ let MyTheme = {
       },
       menuItem: {
         dataHeight: 32,
-        height: 48,
+        height: 28,
         hoverColor: 'rgba(0, 0, 0, .035)',
         padding: spacing.desktopGutter,
         selectedTextColor: palette.accent1Color,
@@ -163,7 +163,7 @@ let MyTheme = {
         borderColor: palette.borderColor,
       },
       tableRowColumn: {
-        height: 48,
+        height: 28,
         spacing: 24,
       },
       timePicker: {

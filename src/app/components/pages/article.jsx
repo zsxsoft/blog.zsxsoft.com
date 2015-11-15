@@ -45,9 +45,9 @@ let resizeChangeWidthOriginal = (context, focus) => {
     let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
     if (container === null) {
       containerWidth -= 56;
-    } else {
+    } //else {
       containerWidth /= 2;
-    }
+    //}
     
     context.setState({
       responsiveStyle: {

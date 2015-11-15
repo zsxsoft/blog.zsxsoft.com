@@ -22,7 +22,8 @@ var config = {
     devtool: 'eval',
     hot: true,        //Live-reload
     inline: true,
-    port: 3000        //Port Number
+    port: 3000,        //Port Number
+    host: "0.0.0.0"
   },
   devtool: 'eval',
   output: {

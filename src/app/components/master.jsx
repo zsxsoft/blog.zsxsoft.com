@@ -76,6 +76,10 @@ class Master extends ReactComponentWithMixin {
     });
   }
   
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
+  
   componentDidUpdate() {
     setTimeout(() => {
       window.doRemain();

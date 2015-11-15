@@ -46,7 +46,7 @@ let resizeChangeWidthOriginal = (context, focus) => {
     if (container === null) {
       containerWidth -= 56;
     } //else {
-      containerWidth /= 2;
+    if (!isMobile) containerWidth /= 2;
     //}
     
     context.setState({

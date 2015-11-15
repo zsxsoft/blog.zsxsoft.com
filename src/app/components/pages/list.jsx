@@ -54,7 +54,7 @@ class PageList extends ReactComponentWithMixin {
         padding: !isMobile ? 0 : 15,
         paddingTop: 15,
         minHeight: 100,
-        height: "auto",
+        //height: "auto",
         //width: 300,
         width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.9,
       },
@@ -131,7 +131,7 @@ class PageList extends ReactComponentWithMixin {
         
         <Card>
           <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit"}}/></FlatButton></Link>
-          <CardText dangerouslySetInnerHTML={introHtml} style={{background: "#F5F5F5"}}>
+          <CardText dangerouslySetInnerHTML={introHtml} style={{background: "#F5F5F5", height: 100}}>
           </CardText>
           <CardText>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 

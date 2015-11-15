@@ -4,7 +4,7 @@ export function formatDate(timeString) {
 }
 export function formatArticleContent(articleString) {
   // Step 1: Convert SyntaxHighLighter -> Prism
-  articleString = articleString.replace(/<pre(.*)class="brush:([a-zA-Z0-9\#]+);.*?"(.*)>([\W\w]*?)<\/pre>/ig, (substring, beforeClass, language, afterClass, code) => {
+  articleString = articleString.replace(/<pre(.*?)class="brush:([a-zA-Z0-9\#]+);.*?"(.*?)>([\W\w]*?)<\/pre>/igm, (substring, beforeClass, language, afterClass, code) => {
     let lowerLanguage = language.toLowerCase();
     if (lowerLanguage === "c#") language = "csharp";   
     return '<pre><code class="language-' + language + '">' + code + '</code></pre>';

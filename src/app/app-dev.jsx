@@ -7,8 +7,9 @@ import {
 }
 from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import createHistory from 'history/lib/createBrowserHistory';
+import createHistory from 'history/lib/createHashHistory';
 import AppRoutes from './app-routes';
+window.debugging = true;
 injectTapEventPlugin();
 
 ReactDOM.render(

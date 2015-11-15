@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
     "build": "webpack --config webpack-production.config.js --progress --colors"
   },
-  "author": "",
+  "author": "zsx <zsx@zsxsoft.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^5.8.21",
@@ -41,5 +41,13 @@
     "react-router": "^1.0.0-rc4",
     "react-tap-event-plugin": "^0.2.1",
     "whatwg-fetch": "^0.10.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zsxsoft/blog.zsxsoft.com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zsxsoft/blog.zsxsoft.com/issues"
+  },
+  "homepage": "http://blog.zsxsoft.com"
 }

@@ -11,6 +11,24 @@ export function formatArticleContent(articleString) {
   });
   return articleString;
 }
+export function filterHtml(html) {
+  return html.replace(/<.+>/g, "");
+}
 export function isMobile() {
   return document.body.clientWidth <= 647;
+}
+export function getNewListUri(originalUri, object) {
+  let keys = Object.keys(object);
+  let ret = originalUri;
+  if (keys.length >= 1 && keys.indexOf("page") === -1) {
+    keys.push("page");
+    object.page = 1;
+  }
+  keys.forEach((key) => {
+    ret = ret.replace(new RegExp(key + "\/(\\d+)", "ig"), (substring, item) => {
+      console.log(substring);
+      return key + "/" + object[key];
+    });
+  });
+  return ret;
 }

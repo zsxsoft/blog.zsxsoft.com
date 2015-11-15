@@ -5,7 +5,7 @@ import {Link, Router} from 'react-router';
 import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
-import {formatDate, isMobile as checkMobile} from '../../utils';
+import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
 import ExtensionDuoshuo from '../duoshuo/extensions';
 import {
@@ -100,12 +100,8 @@ class PageList extends ReactComponentWithMixin {
     let currentPage = this.state.data.pagebar.current;
     let nextPage = currentPage + pageForward;
     let maxPage = parseInt(this.state.data.pagebar.max / this.state.data.pagebar.pageCount) + 1;
-    console.log(nextPage);
-    console.log(maxPage);
     if (nextPage <= 0 || nextPage > maxPage) nextPage = currentPage;
-    return this.props.location.pathname.replace(/page\/(\d*)/, (substring, page) => {
-      return "page/" + nextPage;
-    });
+    return getNewListUri(this.props.location.pathname, {page: nextPage});
   }
   
   componentWillReceiveProps(props) {
@@ -135,8 +131,8 @@ class PageList extends ReactComponentWithMixin {
           <CardText>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 
             <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7}}>
-              {formatDate(article.PostTime)} in {article.Category.Name} 
-              <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
+              {formatDate(article.PostTime)} in <Link to={getNewListUri(this.props.location.pathname, {cate: article.Category.ID})}>{article.Category.Name}</Link> 
+              <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
               <span> / </span>{article.ViewNums}
             </span>
           </CardText>

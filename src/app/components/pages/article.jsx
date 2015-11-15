@@ -128,7 +128,7 @@ class PageArticle extends ReactComponentWithMixin {
           <Link to={linkTo} style={{textDecoration: "none !important"}}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit"}}/></FlatButton></Link>
           <div style={{marginBottom: 10}}>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 
-            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7}}>
+            <span style={{color: "rgba(0, 0, 0, 0.54)", float: "right", marginTop: 7, fontSize: isMobile ? 10 : 14}}>
               {formatDate(article.PostTime)} in {article.Category.Name} 
               <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
               <span> / </span>{article.ViewNums}

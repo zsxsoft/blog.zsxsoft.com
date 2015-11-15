@@ -10,53 +10,53 @@
     <link href="https://fonts.useso.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="http://static-file.zsxsoft.com/prism-151114/prism.css" />
     <style type="text/css">
-        .list-container {}
-        
-        a {
-            color: #428bca;
-            text-decoration: none
-        }
-        
-        a:hover {
-            color: #42abca
-        }
-        
-        html {
-            font-family: 'Roboto', sans-serif
-        }
-        
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin: 0
-        }
-        
-        body {
-            font-size: 15px;
-            line-height: 24px
-        }
-        
-        .ds-share-icons-32 {
-            margin-left: 20%!important;
-            margin-right: 20%!important
-        }
-        
-        .ds-share-icons-32 li {
-            float: left!important;
-            margin-left: 10px!important
-        }
+    .list-container {}
+    
+    a {
+        color: #428bca;
+        text-decoration: none
+    }
+    
+    a:hover {
+        color: #42abca
+    }
+    
+    html {
+        font-family: 'Roboto', sans-serif
+    }
+    
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0
+    }
+    
+    body {
+        font-size: 15px;
+        line-height: 24px
+    }
+    
+    .ds-share-icons-32 {
+        margin-left: 20%!important;
+        margin-right: 20%!important
+    }
+    
+    .ds-share-icons-32 li {
+        float: left!important;
+        margin-left: 10px!important
+    }
     </style>
 </head>
 
 <body>
     <div id="app"></div>
     <script>
-        window.doRemain = function() {
-            console.log("Component did update!");
+    window.doRemain = function() {
+        console.log("Component did update!");
         var removeOldDom = function(className) {
             var dom = document.querySelector("." + className);
             if (typeof dom != "undefined" && dom !== null && dom !== undefined && 'remove' in dom) {
@@ -77,7 +77,7 @@
                 var s = document.getElementById('s-insert-tag');
                 s.parentNode.insertBefore(hm, s);
                 removeOldDom("old-baidu");
-            })();  
+            })();
         })();
     }
     window.resizeQueue = {

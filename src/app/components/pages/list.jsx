@@ -59,6 +59,7 @@ class PageList extends ReactComponentWithMixin {
         width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.9,
       },
       containerWidth: containerWidth,
+      isMobile: isMobile,
     }, 
     );
   }
@@ -120,6 +121,8 @@ class PageList extends ReactComponentWithMixin {
   render() {
     let data = this.state.data;
     let singleTargetStyle = this.state.responsiveStyle;
+    console.log(this.state);
+    let cardTextStyle = {background: "#F5F5F5", height: this.state.isMobile ? "auto" : 100, overflow: "hidden"};
     let childContext = (<div>Please wait..</div>);
     if (data) {
       childContext = (<div style={{paddingTop: isMobile ? 30 : 15}} className="list-container">
@@ -130,8 +133,8 @@ class PageList extends ReactComponentWithMixin {
         return <div style={singleTargetStyle} key={article.ID}>
         
         <Card>
-          <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit"}}/></FlatButton></Link>
-          <CardText dangerouslySetInnerHTML={introHtml} style={{background: "#F5F5F5", height: 100}}>
+          <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit", height: 30, overflow: "hidden"}}/></FlatButton></Link>
+          <CardText dangerouslySetInnerHTML={introHtml} style={cardTextStyle}>
           </CardText>
           <CardText>
             <Avatar src={article.Author.Avatar} style={{verticalAlign: "middle", marginRight: 5}}/>zsx 

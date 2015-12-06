@@ -20,6 +20,7 @@ let Palette = {
     borderColor: Colors.grey300,
     disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
 };
+
 let MyTheme = {
   spacing: Spacing,
   contentFontFamily: "'微软雅黑 Light', '微软雅黑', 'Android Sans', 'Roboto', sans-serif",

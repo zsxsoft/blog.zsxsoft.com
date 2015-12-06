@@ -165,7 +165,13 @@ class PageList extends ReactComponentWithMixin {
         let sidebarContainer;
        
         if (sidebar.Type === "div") {
-          sidebarContainer = (<div id={sidebar.HtmlID}><span dangerouslySetInnerHTML={contentHtml} style={{background: "#F5F5F5"}} /></div>);
+          // For duoshuo
+          if (sidebar.HtmlID === "Duoshuo_RecentComments") {
+            sidebarContainer = (<ExtensionDuoshuo type="recent-comments" data-num-items="5"/>);
+          } else {
+            sidebarContainer = (<div id={sidebar.HtmlID} dangerouslySetInnerHTML={contentHtml}></div>);
+          }
+
         } else {
           let result;
           let reg = /<li(.*?)>([\w\W]*?)<\/li>/gi;

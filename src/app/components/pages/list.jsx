@@ -5,7 +5,7 @@ import {Link, Router, PropTypes} from 'react-router';
 import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
-import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri} from '../../utils';
+import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConcat} from '../../utils';
 import AutoResponsive from 'autoresponsive-react';
 import ExtensionDuoshuo from '../duoshuo/extensions';
 import {
@@ -120,6 +120,15 @@ class PageList extends ReactComponentWithMixin {
     this.context.history.pushState(null, url);
   }
   
+  resizeCard(cardState) {
+    let originalState = this.state[cardState];
+    let returnObject = {};
+    if (!originalState) originalState = {};
+    originalState.height = originalState.height !== this.state.responsiveStyle.height ? this.state.responsiveStyle.height : "auto";
+    returnObject[cardState] = originalState;
+    this.setState(returnObject);
+  }
+  
   render() {
     let that = this;
     let data = this.state.data;
@@ -146,10 +155,12 @@ class PageList extends ReactComponentWithMixin {
           </CardText>
         </Card>);      
        })}
-       </AutoResponsive>
-
-       <AutoResponsive ref="sidebarContainer" {...this.getAutoResponsiveProps()}>
         {data.sidebar.map((sidebar) => {
+        let sidebarStyle = this.state.responsiveStyle;
+
+        if (this.state["sidebar_" + sidebar.HtmlID]) {
+          sidebarStyle = jsonConcat(sidebarStyle, this.state["sidebar_" + sidebar.HtmlID]);
+        }
         let contentHtml = {__html: sidebar.Content};
         let sidebarContainer;
        
@@ -180,8 +191,8 @@ class PageList extends ReactComponentWithMixin {
           sidebarContainer = (<List id={sidebar.HtmlID}>{liContainer}</List>);
         }
         return (
-        <Card style={singleTargetStyle} key={sidebar.HtmlID}>
-          <CardTitle title={sidebar.Name}/>
+        <Card style={sidebarStyle} key={sidebar.HtmlID}>
+          <CardTitle title={sidebar.Name} onClick={that.resizeCard.bind(that, "sidebar_" + sidebar.HtmlID)}/>
           <CardText>
            {sidebarContainer}
           </CardText>

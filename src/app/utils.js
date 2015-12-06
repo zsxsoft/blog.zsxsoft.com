@@ -31,3 +31,14 @@ export function getNewListUri(originalUri, object) {
   });
   return ret;
 }
+export function jsonConcat() {
+  let returnJson = {};
+  Array.from(arguments).forEach((value) => {
+    Object.keys(value).forEach((key) => {
+      if (returnJson[key] === value[key]) return;
+      // Not deep copy
+      returnJson[key] = value[key];
+    })
+  });
+  return returnJson;
+}

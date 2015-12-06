@@ -123,8 +123,12 @@ class PageList extends ReactComponentWithMixin {
   resizeCard(cardState) {
     let originalState = this.state[cardState];
     let returnObject = {};
-    if (!originalState) originalState = {};
+    if (!originalState) originalState = {
+      height: this.state.responsiveStyle.height,
+      keyboardArrow: "keyboard_arrow_down",
+    };
     originalState.height = originalState.height !== this.state.responsiveStyle.height ? this.state.responsiveStyle.height : "auto";
+    originalState.keyboardArrow = originalState.keyboardArrow === "keyboard_arrow_down" ? "keyboard_arrow_up" : "keyboard_arrow_down";
     returnObject[cardState] = originalState;
     this.setState(returnObject);
   }
@@ -157,8 +161,9 @@ class PageList extends ReactComponentWithMixin {
        })}
         {data.sidebar.map((sidebar) => {
         let sidebarStyle = this.state.responsiveStyle;
-
-        if (this.state["sidebar_" + sidebar.HtmlID]) {
+        let sidebarSingleState = this.state["sidebar_" + sidebar.HtmlID];
+        sidebarStyle.position = "relative";        
+        if (sidebarSingleState) {
           sidebarStyle = jsonConcat(sidebarStyle, this.state["sidebar_" + sidebar.HtmlID]);
         }
         let contentHtml = {__html: sidebar.Content};
@@ -198,7 +203,10 @@ class PageList extends ReactComponentWithMixin {
         }
         return (
         <Card style={sidebarStyle} key={sidebar.HtmlID}>
-          <CardTitle title={sidebar.Name} onClick={that.resizeCard.bind(that, "sidebar_" + sidebar.HtmlID)}/>
+          <CardTitle title={sidebar.Name}/>
+          <FlatButton onClick={that.resizeCard.bind(that, "sidebar_" + sidebar.HtmlID)} backgroundColor="#000000" style={{fontSize: 32, color: "#ffffff", height: 32, position: "absolute", bottom: 0, width: "100%", opacity: 0.7, zIndex: 100000, float: "left", verticalAlign: "bottom"}}>
+            <i className="material-icons">{sidebarSingleState ? sidebarSingleState.keyboardArrow : "keyboard_arrow_down"}</i>
+          </FlatButton>
           <CardText>
            {sidebarContainer}
           </CardText>

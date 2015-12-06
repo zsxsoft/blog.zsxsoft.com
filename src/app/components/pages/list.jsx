@@ -1,7 +1,7 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Link, Router} from 'react-router';
+import {Link, Router, PropTypes} from 'react-router';
 import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
@@ -51,12 +51,9 @@ class PageList extends ReactComponentWithMixin {
     this.setState({
       responsiveStyle: {
         display: "inline-block",
-        padding: !isMobile ? 0 : 15,
-        paddingTop: 15,
-        minHeight: 100,
-        //height: "auto",
+        height: 260,
         //width: 300,
-        width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth * 0.9,
+        width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth,// * 0.9,
       },
       containerWidth: containerWidth,
       isMobile: isMobile,
@@ -67,7 +64,7 @@ class PageList extends ReactComponentWithMixin {
   
   getAutoResponsiveProps() {
     return {
-      itemMargin: isMobile ? 0 : 10,
+      itemMargin: 10,
       //containerWidth: this.state.containerWidth || document.body.clientWidth,
       itemClassName: 'item',
       transitionDuration: '.8',
@@ -118,22 +115,25 @@ class PageList extends ReactComponentWithMixin {
     return (nextProps.location.pathname === this.props.location.pathname);
   }
   
+  sidebarListClick(url) {
+    console.log(this.context);
+    this.context.history.pushState(null, url);
+  }
+  
   render() {
+    let that = this;
     let data = this.state.data;
     let singleTargetStyle = this.state.responsiveStyle;
-    console.log(this.state);
-    let cardTextStyle = {background: "#F5F5F5", height: this.state.isMobile ? "auto" : 100, overflow: "hidden"};
+    let cardTextStyle = {background: "#F5F5F5", height: 100, overflow: "hidden"};
     let childContext = (<div>Please wait..</div>);
     if (data) {
-      childContext = (<div style={{paddingTop: isMobile ? 30 : 15}} className="list-container">
+      childContext = (<div style={{paddingTop: isMobile ? 50 : 15}} className="list-container">
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        {data.articles.map((article) => {
         let introHtml = {__html: article.Intro};
         let linkTo = "/post/" + article.ID;
-        return <div style={singleTargetStyle} key={article.ID}>
-        
-        <Card>
-          <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit", height: 30, overflow: "hidden"}}/></FlatButton></Link>
+        return (<Card style={singleTargetStyle} key={article.ID}>
+          <Link to={linkTo}><FlatButton style={{width: "100%"}}><CardTitle title={article.Title} style={{position: "inherit", padding: 10, height: 30, overflow: "hidden"}}/></FlatButton></Link>
           <CardText dangerouslySetInnerHTML={introHtml} style={cardTextStyle}>
           </CardText>
           <CardText>
@@ -144,11 +144,49 @@ class PageList extends ReactComponentWithMixin {
               <span> / </span>{article.ViewNums}
             </span>
           </CardText>
-        </Card>
-        
-        </div>
+        </Card>);      
        })}
+       </AutoResponsive>
 
+       <AutoResponsive ref="sidebarContainer" {...this.getAutoResponsiveProps()}>
+        {data.sidebar.map((sidebar) => {
+        let contentHtml = {__html: sidebar.Content};
+        let sidebarContainer;
+       
+        if (sidebar.Type === "div") {
+          sidebarContainer = (<div id={sidebar.HtmlID}><span dangerouslySetInnerHTML={contentHtml} style={{background: "#F5F5F5"}} /></div>);
+        } else {
+          let result;
+          let reg = /<li(.*?)>([\w\W]*?)<\/li>/gi;
+          let liContainer = [];
+          while ((result = reg.exec(sidebar.Content)) !== null)  {
+              let listObject = ((htmlContent) => {
+                  let ret = {
+                    html: null, 
+                    attr: {},
+                  };
+                  let result;
+                  let reg = /<a(.*?)href="(.*?)"(.*?)>([\w\W]*?)<\/a>/gi;
+                  if ((result = reg.exec(htmlContent)) !== null) {
+                    ret.attr.primaryText = result[4];
+                    ret.attr.onClick = that.sidebarListClick.bind(that, result[2]);
+                  } else {
+                    ret.html = <div dangerouslySetInnerHTML={{__html: htmlContent}} />;
+                  }
+                  return ret;
+              })(result[2]);
+              liContainer.push(<ListItem key={result.index} {...listObject.attr}>{listObject.html}</ListItem>);
+          }
+          sidebarContainer = (<List id={sidebar.HtmlID}>{liContainer}</List>);
+        }
+        return (
+        <Card style={singleTargetStyle} key={sidebar.HtmlID}>
+          <CardTitle title={sidebar.Name}/>
+          <CardText>
+           {sidebarContainer}
+          </CardText>
+        </Card>)
+       })}
        </AutoResponsive>
        <div style={{position: "fixed", top: "58%", left: "90%"}}>
         <Link to={this.pageTo(-1)}><FloatingActionButton style={{float: "left"}}>
@@ -171,32 +209,9 @@ class PageList extends ReactComponentWithMixin {
   }
 
 };
-
+PageList.contextTypes = { history: PropTypes.history }
 export default PageList;
 
 /*
-       {data.sidebar.map((sidebar) => {
-        let contentHtml = {__html: sidebar.Content};
-        let sidebarContainer;
-       
-        if (sidebar.Type === "div") {
-          sidebarContainer = (<div id={sidebar.HtmlID}><span dangerouslySetInnerHTML={contentHtml} style={{background: "#F5F5F5"}} /></div>);
-        } else {
-          let result;
-          let reg = /<li(.*?)>([\w\W]*?)<\/li>/gi;
-          let liContainer = [];
-          while ((result = reg.exec(sidebar.Content)) != null)  {
-              liContainer.push(<ListItem key={result.index} {...result[1]}><div dangerouslySetInnerHTML={{__html: result[2]}} /></ListItem>);
-          }
-          sidebarContainer = (<List id={sidebar.HtmlID}>{liContainer}</List>);
-        }
-        return <div style={singleTargetStyle} key={sidebar.HtmlID}>
-        <Card>
-          <CardTitle title={sidebar.Name}/>
-          <CardText>
-           {sidebarContainer}
-          </CardText>
-        </Card>
-        </div>
-       })}
+
 */

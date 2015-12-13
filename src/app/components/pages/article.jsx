@@ -42,13 +42,17 @@ let resizeChangeWidthOriginal = (context, focus) => {
     
     isMobile = checkMobile();
     let container = ReactDOM.findDOMNode(context.refs.container);
-    let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
-    if (container === null) {
-      containerWidth -= 56;
-    } //else {
-    if (!isMobile) containerWidth /= 2;
+
+    let containerWidth = document.body.clientWidth;//container === null ? document.body.clientWidth : container.clientWidth;
+    //if (container === null) {
+      containerWidth -= 50;
+    //} //else {
+    if (!isMobile) {
+      containerWidth /= 2;
+    }
     //}
-    
+
+        
     context.setState({
       responsiveStyle: {
         padding: isMobile ? 0 : 15, 
@@ -58,8 +62,8 @@ let resizeChangeWidthOriginal = (context, focus) => {
         width: containerWidth,
         marginLeft: "auto",
         marginRight: "auto",
-        transform: isMobile ? "" : "translate(50%, 0)", 
-        WebkitTransform: isMobile ? "" : "translate(50%, 0)",
+        left: isMobile ? "0" : "50%", 
+        position: "relative",
       },
       containerWidth: containerWidth,
     }, 
@@ -120,7 +124,7 @@ class PageArticle extends ReactComponentWithMixin {
       let linkTo = "/post/" + article.ID;
       document.title = article.Title + " - " + Config.title;
       childContext = (
-      <div style={{paddingTop: isMobile ? 60 : 15}}>
+      <div style={{paddingTop: isMobile ? 60 : 15, position: "relative", float: "left"}}>
        <AutoResponsive ref="container" {...this.getAutoResponsiveProps()}>
        <div style={singleTargetStyle} key={article.ID}>
         <Card>

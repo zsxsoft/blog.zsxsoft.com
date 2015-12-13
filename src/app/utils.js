@@ -6,7 +6,9 @@ export function formatArticleContent(articleString) {
   // Step 1: Convert SyntaxHighLighter -> Prism
   articleString = articleString.replace(/<pre(.*?)class="brush:([a-zA-Z0-9\#]+);.*?"(.*?)>([\W\w]*?)<\/pre>/igm, (substring, beforeClass, language, afterClass, code) => {
     let lowerLanguage = language.toLowerCase();
-    if (lowerLanguage === "c#") language = "csharp";   
+    if (lowerLanguage === "c#") {
+      language = "csharp";   
+    }
     return '<pre><code class="language-' + language + '">' + code + '</code></pre>';
   });
   return articleString;
@@ -15,7 +17,7 @@ export function filterHtml(html) {
   return html.replace(/<.+>/g, "");
 }
 export function isMobile() {
-  return document.body.clientWidth <= 647;
+  return document.body.clientWidth <= 800;
 }
 export function getNewListUri(originalUri, object) {
   let keys = Object.keys(object);
@@ -25,7 +27,7 @@ export function getNewListUri(originalUri, object) {
     object.page = 1;
   }
   keys.forEach((key) => {
-    ret = ret.replace(new RegExp(key + "\/(\\d+)", "ig"), (substring, item) => {
+    ret = ret.replace(new RegExp(key + "\/(\\d+)", "ig"), () => {
       return key + "/" + object[key];
     });
   });
@@ -35,7 +37,9 @@ export function jsonConcat() {
   let returnJson = {};
   Array.from(arguments).forEach((value) => {
     Object.keys(value).forEach((key) => {
-      if (returnJson[key] === value[key]) return;
+      if (returnJson[key] === value[key]) {
+        return;
+      }
       // Not deep copy
       returnJson[key] = value[key];
     })

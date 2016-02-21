@@ -59,8 +59,8 @@ var config = {
       {
         //React-hot loader and
         test: /\.(js|jsx)$/,  //All .js and .jsx files
-        loaders: ['react-hot','babel-loader?optional=runtime&stage=0'], //react-hot is like browser sync and babel loads jsx and es6-7
-        exclude: [nodeModulesPath]
+        loaders: ['react-hot','babel'], //react-hot is like browser sync and babel loads jsx and es6-7
+        exclude: [nodeModulesPath],
       }, 
       /** 
        * I can't use TypeScript because a issue

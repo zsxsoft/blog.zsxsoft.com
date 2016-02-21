@@ -14,6 +14,10 @@
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.3",
+    "babel-plugin-transform-runtime": "^6.5.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.5.0",
     "eslint": "^2.2.0",
     "eslint-loader": "^1.3.0",
@@ -49,5 +53,15 @@
   "bugs": {
     "url": "https://github.com/zsxsoft/blog.zsxsoft.com/issues"
   },
-  "homepage": "http://blog.zsxsoft.com"
+  "homepage": "http://blog.zsxsoft.com",
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ], 
+    "plugins": [
+        "transform-runtime"
+    ]
+  }
 }

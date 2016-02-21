@@ -10,12 +10,8 @@ import ReactComponentWithMixin from './component-with-mixin';
 import {
   AppBar,
   AppCanvas,
-  FontIcon,
-  IconButton,
   EnhancedButton,
-  Menu,
   Mixins,
-  RaisedButton,
   Styles,
   Tab,
   Tabs,
@@ -43,15 +39,13 @@ let styles = {
     padding: 0,
     color: Colors.lightWhite,
   },
-  iconButton: {
-    color: Colors.darkWhite,
-  },
 };
 let masterResizeId = 0;
 
 class Master extends ReactComponentWithMixin {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
+    location: React.PropTypes.object, 
   };
 
   constructor(props) {
@@ -112,10 +106,10 @@ class Master extends ReactComponentWithMixin {
 
     return (
       <AppCanvas>
-        {this.state.renderTabs ? this._getTabs(): this._getAppBar()}
+        {this.state.renderTabs ? this._getTabs(): <div/>}
 
         {this.props.children}
-        <AppLeftNav ref="leftNav" history={this.props.history} />
+        <AppLeftNav ref="leftNav" location={this.props.location}/>
         <FullWidthSection style={styles.footer}>
           <div>
             <p style={this.prepareStyles(styles.p)}>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议</a>，转载本站内容即代表同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎</a>。</p>
@@ -150,7 +144,8 @@ class Master extends ReactComponentWithMixin {
         color: Colors.white,
         fontWeight: Typography.fontWeightLight,
         left: 45,
-        top: 6,
+        top: -9,
+        width: 100, 
         position: 'absolute',
         fontSize: 20,
       },
@@ -216,21 +211,7 @@ class Master extends ReactComponentWithMixin {
     //this.setState({tabIndex: 0});
   }
 
-  _getAppBar() {
 
-    return (
-      <div>
-        <AppBar
-          onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap.bind(this)}
-          title={Config.title}
-          zDepth={0}
-          style={{position: 'absolute', top: 0, background: "#2e8bcc"}}/>
-      </div>);
-  }
-
-  _onLeftIconButtonTouchTap() {
-    this.refs.leftNav.toggle();
-  }
 };
 
 export default Master;

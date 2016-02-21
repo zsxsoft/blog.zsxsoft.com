@@ -4,17 +4,17 @@ import ReactDOM from 'react-dom';
 import Polyfill from 'babel-polyfill';
 import {
 	Router,
+    hashHistory, 
 }
 from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import createHistory from 'history/lib/createHashHistory';
 import AppRoutes from './app-routes';
 window.debugging = true;
 injectTapEventPlugin();
 
 ReactDOM.render(
 	<Router
-    history={createHistory({queryKey: false})}
+    history={hashHistory}
     onUpdate={() => window.scrollTo(0, 0)}
   >
   {AppRoutes}

@@ -9,7 +9,7 @@ class DuoshuoExtensions extends React.Component {
         let duoshuoType = "ds-" + this.props.type;
         setTimeout(() => {
             window.DUOSHUO.initSelector("." + duoshuoType, window.DUOSHUO.selectors['.' + duoshuoType]);
-        }.bind(this), 1000);
+        }, 1000);
     }
     render() {
         let {

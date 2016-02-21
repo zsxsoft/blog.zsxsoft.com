@@ -12,11 +12,7 @@ import ShareDuoshuo from '../duoshuo/share';
 import ExtensionDuoshuo from '../duoshuo/extensions';
 import {
   Avatar,
-  AppCanvas,
-  FontIcon,
-  IconButton,
   FlatButton,
-  EnhancedButton,
   FloatingActionButton,
   Mixins,
   Card,
@@ -24,7 +20,6 @@ import {
   CardTitle,
   CardText,
   Styles,
-  Paper,
 }
 from 'material-ui';
 let {

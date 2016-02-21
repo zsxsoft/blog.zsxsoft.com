@@ -4,6 +4,7 @@ import Router from 'react-router';
 import Config from '../config';
 import ReactComponentWithMixin from './component-with-mixin';
 import {
+  AppBar,
   MenuItem,
   LeftNav,
   Styles,
@@ -19,20 +20,11 @@ let {
   StylePropable,
   StyleResizable,
 } = Mixins;
-let menuItems = [{
-  route: '/',
-  text: '首页',
-}, {
-  payload: 'https://github.com/zsxsoft/',
-  text: 'GitHub',
-  type: MenuItem.Types.LINK,
-}];
 
-
-class AppNextNav extends ReactComponentWithMixin {
+class AppLeftNav extends ReactComponentWithMixin {
   static contextTypes = {
     muiTheme: React.PropTypes.object,
-    router: React.PropTypes.func,
+    location: React.PropTypes.object, 
   };
 
   getStyles() {
@@ -56,16 +48,21 @@ class AppNextNav extends ReactComponentWithMixin {
         {Config.title}
       </div>
     );
-
+    
     return (
       <LeftNav
         ref="leftNav"
         docked={false}
         isInitiallyOpen={false}
-        header={header}
-        menuItems={menuItems}
-        selectedIndex={this._getSelectedIndex()}
-        onChange={this._onLeftNavChange.bind(this)} />
+      >
+        <AppBar
+          onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap.bind(this)}
+          title={Config.title}
+          zDepth={0}
+          style={{position: 'absolute', top: 0, background: "#2e8bcc"}}/>
+        <MenuItem onTouchTap={this.toUrl.bind(this, '/')}>首页</MenuItem>
+        <MenuItem onTouchTap={this.toUrl.bind(this, 'https://github.com/zsxsoft')}>GitHub</MenuItem>
+      </LeftNav>
     );
   }
 
@@ -73,24 +70,23 @@ class AppNextNav extends ReactComponentWithMixin {
     this.refs.leftNav.toggle();
   }
 
-  _getSelectedIndex() {
-    let currentItem;
-
-    for (let i = menuItems.length - 1; i >= 0; i--) {
-      currentItem = menuItems[i];
-      if (currentItem.route && this.props.history.isActive(currentItem.route)) return i;
-    }
+  toUrl(url) {
+      if (url[0] !== "/") {
+          window.open(url);
+      } else {
+          this.props.history.pushState(null, url);
+      }
   }
 
-  _onLeftNavChange(e, key, payload) {
-    this.props.history.pushState(null, payload.route);
-  }
 
   _onHeaderClick() {
     this.props.history.pushState(null, '/');
     this.refs.leftNav.close();
   }
 
+  _onLeftIconButtonTouchTap() {
+    this.refs.leftNav.toggle();
+  }
 };
 
-export default AppNextNav;
+export default AppLeftNav;

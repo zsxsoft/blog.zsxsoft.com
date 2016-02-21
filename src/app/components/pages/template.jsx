@@ -5,12 +5,8 @@ import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import {
   AppCanvas,
-  FontIcon,
-  IconButton,
-  EnhancedButton,
   Mixins,
   Styles,
-  Paper,
 }
 from 'material-ui';
 let {

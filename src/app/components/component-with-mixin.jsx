@@ -9,8 +9,8 @@ let {
 	StyleResizable,
 } = Mixins;
 class ComponentWithMixin extends React.Component {
-	mergeAndPrefix() {
-		return Mixins.StylePropable.mergeAndPrefix.apply(this, arguments);
+	mergeAndPrefix() { // for old support
+		return Mixins.StylePropable.mergeStyles.apply(this, arguments);
 	}
 	isDeviceSize() {
 		return Mixins.StyleResizable.isDeviceSize.apply(this, arguments);

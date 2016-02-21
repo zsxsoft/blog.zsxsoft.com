@@ -10,7 +10,7 @@ export function formatArticleContent(articleString) {
       language = "csharp";   
     }
     return '<pre><code class="language-' + language + '">' + code + '</code></pre>';
-  });
+  }).replace(/(class=".*?)prism-highlight(.+?)>([\W\w]*?)<\/pre>/ig, `$1$2><code class="$2>$3</code></pre>`);
   return articleString;
 }
 export function filterHtml(html) {

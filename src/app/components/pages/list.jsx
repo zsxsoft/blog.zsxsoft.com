@@ -10,12 +10,8 @@ import AutoResponsive from 'autoresponsive-react';
 import ExtensionDuoshuo from '../duoshuo/extensions';
 import {
   Avatar,
-  AppCanvas,
-  FontIcon,
-  IconButton,
+  FloatingActionButton, 
   FlatButton,
-  EnhancedButton,
-  FloatingActionButton,
   Mixins,
   Card,
   CardHeader,
@@ -213,10 +209,10 @@ class PageList extends ReactComponentWithMixin {
         </Card>)
        })}
        </AutoResponsive>
-       <div style={{position: "fixed", top: "58%", left: "90%"}}>
+       <div style={{position: "fixed", top: "92%", right: "5%", width: "120px", zIndex: 100000}}>
         <Link to={this.pageTo(-1)}><FloatingActionButton style={{float: "left"}}>
           <span style={{color: "white"}}>&lt;</span>
-        </FloatingActionButton></Link>&nbsp;
+        </FloatingActionButton></Link>
         <Link to={this.pageTo(1)}><FloatingActionButton style={{float: "right"}}>
           <span style={{color: "white"}}>&gt;</span>
         </FloatingActionButton></Link>

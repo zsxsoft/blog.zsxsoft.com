@@ -56,12 +56,14 @@ class AppLeftNav extends ReactComponentWithMixin {
         isInitiallyOpen={false}
       >
         <AppBar
-          onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap.bind(this)}
           title={Config.title}
+          showMenuIconButton={false}
           zDepth={0}
-          style={{position: 'absolute', top: 0, background: "#2e8bcc"}}/>
+          style={{background: "#2e8bcc"}}/>
+          <div>
         <MenuItem onTouchTap={this.toUrl.bind(this, '/')}>首页</MenuItem>
         <MenuItem onTouchTap={this.toUrl.bind(this, 'https://github.com/zsxsoft')}>GitHub</MenuItem>
+        </div>
       </LeftNav>
     );
   }

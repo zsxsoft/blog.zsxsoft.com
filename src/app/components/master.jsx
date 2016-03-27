@@ -46,10 +46,10 @@ class Master extends ReactComponentWithMixin {
     static childContextTypes = {
         muiTheme: React.PropTypes.object,
     };
-    
+
     static contextTypes = {
         location: React.PropTypes.object,
-        router: React.PropTypes.object.isRequired, 
+        router: React.PropTypes.object.isRequired,
     };
 
     constructor(props) {
@@ -167,12 +167,11 @@ class Master extends ReactComponentWithMixin {
 
         };
 
-        let materialIcon = this.state.tabIndex !== '0' ? (
-            <EnhancedButton
-                linkButton={true}
-                href="/">
-                <span style={this.prepareStyles(styles.span) }>zsx&#39; s Blog</span>
-            </EnhancedButton>) : null;
+        let materialIcon = <EnhancedButton
+            linkButton={true}
+            href="/">
+            <span style={this.prepareStyles(styles.span) }>zsx&#39; s Blog</span>
+        </EnhancedButton>;
 
         return (
             <div>
@@ -216,10 +215,10 @@ class Master extends ReactComponentWithMixin {
             return;
         }
         this.context.router.push(tab.props.route);
-        this.setState({tabIndex: value});
-        
+        this.setState({ tabIndex: value });
+
         //return;
-        
+
     }
     _getAppBar() {
 

@@ -49,6 +49,9 @@ class PageList extends ReactComponentWithMixin {
             responsiveStyle: {
                 display: "inline-block",
                 height: 260,
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: isMobile ? "0" : containerWidth / 22 + 0.008 * containerWidth,
                 //width: 300,
                 width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth,// * 0.9,
             },

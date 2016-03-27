@@ -213,7 +213,7 @@ class PageList extends ReactComponentWithMixin {
                             </Card>)
                     }) }
                 </AutoResponsive>
-                <div style={{ position: "fixed", top: "92%", right: "5%", width: "120px", zIndex: 100000 }}>
+                <div style={{ position: "fixed", top: "90%", right: "2%", width: "120px", zIndex: 100000 }}>
                     <Link to={this.pageTo(-1) }><FloatingActionButton style={{ float: "left" }}>
                         <span style={{ color: "white" }}>&lt; </span>
                     </FloatingActionButton></Link>

@@ -1,27 +1,27 @@
-///<reference path="../../typings/tsd.d.ts" />
+///<reference path="../../../typings/tsd.d.ts" />
 import React from 'react';
 import {
-	Mixins,
+    Mixins,
 }
 from 'material-ui';
 let {
-	StylePropable, 
-	StyleResizable,
+    StylePropable,
+    StyleResizable,
 } = Mixins;
 class ComponentWithMixin extends React.Component {
-	mergeAndPrefix() { // for old support
-		return Mixins.StylePropable.mergeStyles.apply(this, arguments);
-	}
-	isDeviceSize() {
-		return Mixins.StyleResizable.isDeviceSize.apply(this, arguments);
-	}
-  	prepareStyles() {
-    	return Mixins.StylePropable.prepareStyles.apply(this, arguments);
-  	}
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+    mergeAndPrefix() { // for old support
+        return Mixins.StylePropable.mergeStyles.apply(this, arguments);
+    }
+    isDeviceSize() {
+        return Mixins.StyleResizable.isDeviceSize.apply(this, arguments);
+    }
+    prepareStyles() {
+        return Mixins.StylePropable.prepareStyles.apply(this, arguments);
+    }
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 }
 
 export default ComponentWithMixin;

@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Polyfill from 'babel-polyfill';
 import {
-	Router,
-    hashHistory, 
+    Router,
+    hashHistory,
 }
 from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -13,9 +13,9 @@ window.debugging = true;
 injectTapEventPlugin();
 
 ReactDOM.render(
-	<Router
-    history={hashHistory}
-    onUpdate={() => window.scrollTo(0, 0)}
-  >
-  {AppRoutes}
-  </Router>, document.getElementById('app'));
+    <Router
+        history={hashHistory}
+        onUpdate={() => window.scrollTo(0, 0) }
+        >
+        {AppRoutes}
+    </Router>, document.getElementById('app'));

@@ -1,4 +1,4 @@
-///<reference path="../../typings/tsd.d.ts" />
+///<reference path="../../../typings/tsd.d.ts" />
 import React from 'react';
 import {
   ClearFix,

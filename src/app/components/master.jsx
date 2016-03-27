@@ -45,7 +45,11 @@ let masterResizeId = 0;
 class Master extends ReactComponentWithMixin {
     static childContextTypes = {
         muiTheme: React.PropTypes.object,
+    };
+    
+    static contextTypes = {
         location: React.PropTypes.object,
+        router: React.PropTypes.object.isRequired, 
     };
 
     constructor(props) {
@@ -53,6 +57,7 @@ class Master extends ReactComponentWithMixin {
         let muiTheme = ThemeManager.getMuiTheme(MyTheme);
         this.state = {
             muiTheme,
+            tabIndex: "0",
         };
     }
 
@@ -84,7 +89,6 @@ class Master extends ReactComponentWithMixin {
         let newMuiTheme = this.state.muiTheme;
         this.setState({
             muiTheme: newMuiTheme,
-            tabIndex: 0,
         });
         this.setTabsState();
         masterResizeId = window.resizeQueue.add(this.setTabsState.bind(this));
@@ -97,7 +101,6 @@ class Master extends ReactComponentWithMixin {
     componentWillReceiveProps(nextProps, nextContext) {
         let newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
         this.setState({
-            tabIndex: 0,
             muiTheme: newMuiTheme,
         });
     }
@@ -109,7 +112,7 @@ class Master extends ReactComponentWithMixin {
                 {this.state.renderTabs ? this._getTabs() : this._getAppBar() }
 
                 {this.props.children}
-                <AppLeftNav ref="leftNav" location={this.props.location}/>
+                <AppLeftNav ref="leftNav" location={this.props.location} history={this.props.history} />
                 <FullWidthSection style={styles.footer}>
                     <div>
                         <p style={this.prepareStyles(styles.p) }>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议</a>，转载本站内容即代表同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎</a>。</p>
@@ -182,7 +185,7 @@ class Master extends ReactComponentWithMixin {
                         <Tabs
                             style={styles.tabs}
                             tabItemContainerStyle={styles.tabItemContainer}
-                            value="0"
+                            value={this.state.tabIndex}
                             onChange={this._handleTabChange.bind(this) }>
                             <Tab
                                 value="0"
@@ -212,8 +215,11 @@ class Master extends ReactComponentWithMixin {
             window.open("https://github.com/zsxsoft");
             return;
         }
-        this.props.history.pushState(null, tab.props.route);
-        //this.setState({tabIndex: 0});
+        this.context.router.push(tab.props.route);
+        this.setState({tabIndex: value});
+        
+        //return;
+        
     }
     _getAppBar() {
 

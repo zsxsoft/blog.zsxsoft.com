@@ -1,6 +1,6 @@
 ///<reference path="../../typings/tsd.d.ts" />
 import React from 'react'
-import Router from 'react-router';
+import {Link, Router, PropTypes} from 'react-router';
 import Config from '../config';
 import ReactComponentWithMixin from './component-with-mixin';
 import {
@@ -22,11 +22,8 @@ let {
 } = Mixins;
 
 class AppLeftNav extends ReactComponentWithMixin {
-    static contextTypes = {
-        muiTheme: React.PropTypes.object,
-        location: React.PropTypes.object,
-    };
 
+    
     getStyles() {
         return {
             cursor: 'pointer',
@@ -77,13 +74,14 @@ class AppLeftNav extends ReactComponentWithMixin {
         if (url[0] !== "/") {
             window.open(url);
         } else {
-            this.props.history.pushState(null, url);
+            this.context.router.push(url);
+            this.refs.leftNav.close();
         }
     }
 
 
     _onHeaderClick() {
-        this.props.history.pushState(null, '/');
+        this.context.router.push('/');
         this.refs.leftNav.close();
     }
 
@@ -91,5 +89,10 @@ class AppLeftNav extends ReactComponentWithMixin {
         this.refs.leftNav.toggle();
     }
 };
-
+AppLeftNav.contextTypes = {
+    history: PropTypes.history,
+    muiTheme: React.PropTypes.object,
+    location: React.PropTypes.object,
+    router: React.PropTypes.object.isRequired, 
+};
 export default AppLeftNav;

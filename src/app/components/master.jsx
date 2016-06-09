@@ -2,7 +2,6 @@
 import React from 'react';
 import Router from 'react-router';
 import FullWidthSection from './full-width-section';
-import AppLeftNav from './app-left-nav';
 import Config from '../config';
 import {isMobile} from '../utils';
 

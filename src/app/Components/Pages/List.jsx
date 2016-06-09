@@ -54,7 +54,6 @@ export default class List extends React.Component {
     }
 
     sidebarListClick(url) {
-        console.log(this.context);
         this.context.history.pushState(null, url);
     }
 
@@ -91,7 +90,6 @@ export default class List extends React.Component {
                 }
                 return ret;
             })(result[2]);
-            console.log(listObject);
             liContainer.push(<ListGroupItem key={result.index} {...listObject.attr}><Button>{listObject.html}</Button><Ink/></ListGroupItem>);
         }
         sidebarContainer = (<ListGroup id={sidebar.HtmlID}>{liContainer}</ListGroup>);
@@ -136,10 +134,10 @@ export default class List extends React.Component {
                 </Col>
 
                 <div style={{ position: "fixed", top: "90%", right: "2%", width: "120px", zIndex: 100000 }}>
-                    <Link to={this.pageTo(-1) }><Button bsStyle="primary btn-fab" style={{ float: "left" }}>
+                    <Link to={this.pageTo(-1) }><Button bsStyle="primary" className="btn-fab" style={{ float: "left" }}>
                         <span style={{ color: "white" }}>&lt; </span><Ink/>
                     </Button></Link>
-                    <Link to={this.pageTo(1) }><Button bsStyle="primary btn-fab" style={{ float: "right" }}>
+                    <Link to={this.pageTo(1) }><Button bsStyle="primary" className="btn-fab" style={{ float: "right" }}>
                         <span style={{ color: "white" }}>&gt; </span><Ink/>
                     </Button></Link>
                 </div>
@@ -149,4 +147,3 @@ export default class List extends React.Component {
     }
 
 };
-//List.contextTypes = { history: PropTypes.history }

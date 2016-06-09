@@ -65,7 +65,7 @@ export default class Article extends React.Component {
                         </Row>
                         <Row><br/></Row>
                         <Row><article dangerouslySetInnerHTML={contentHtml}></article></Row>
-                        <Row><Container><Col mdOffset={1}><ShareDuoshuo type="share" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} /></Col></Container></Row>
+                        <Row><Container><Col mdOffset={2}><ShareDuoshuo type="share" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} /></Col></Container></Row>
                         <Row><EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} /></Row>
                     </Well>
                 </Container>

@@ -11,8 +11,21 @@ export default class Master extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabIndex: "0",
+            activeKey: 0,
         };
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        let path = nextProps.location.pathname;
+        if (/^\/list/.test(path)) {
+            return this.setState({activeKey: 0});
+        } else if (/\/post\/2$/.test(path)) {
+            return this.setState({activeKey: 2});
+        } else if (/\/post\/9$/.test(path)) {
+            return this.setState({activeKey: 9});
+        } else {
+             return this.setState({activeKey: -1});
+        }
     }
 
     componentDidMount() {
@@ -23,12 +36,6 @@ export default class Master extends React.Component {
         setTimeout(() => {
             window.doRemain();
         }, 1000);
-    }
-
-    componentWillMount() {
-    }
-
-    componentWillUnmount() {
     }
 
     render() {
@@ -44,20 +51,18 @@ export default class Master extends React.Component {
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
-                        <Nav>
-                            <NavItem eventKey={1} href="#">首页<Ink/></NavItem>
-                            <NavItem eventKey={2} href="#">留言<Ink/></NavItem>
+                        <Nav activeKey={this.state.activeKey}>
+                            <NavItem onClickCapture={this._handleTabChange.bind(this)} eventKey={0} href="/">首页<Ink/></NavItem>
+                            <NavItem onClickCapture={this._handleTabChange.bind(this)} eventKey={2} href="/post/2">留言<Ink/></NavItem>
                         </Nav>
-                        <Nav pullRight>
-                            <NavItem eventKey={1} href="#">GitHub<Ink/></NavItem>
-                            <NavItem eventKey={2} href="#">About<Ink/></NavItem>
+                        <Nav activeKey={this.state.activeKey} pullRight>
+                            <NavItem onClickCapture={this._handleTabChange.bind(this)} href="https://github.com/zsxsoft/">GitHub<Ink/></NavItem>
+                            <NavItem onClickCapture={this._handleTabChange.bind(this)} eventKey={9} href="/post/9">About<Ink/></NavItem>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 </div>
-                <Container>{this.props.children}
-                
-                </Container>
+                <Container>{this.props.children}</Container>
                 <Container>
                 <div style={{textAlign: "center"}}>
                         <p>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议</a>，转载本站内容即代表同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎</a>。</p>
@@ -69,16 +74,18 @@ export default class Master extends React.Component {
         );
     }
 
-    _getTabs() {
-    }
-
-    _handleTabChange(value, e, tab) {
-        if (tab.props.route === "github") {
-            window.open("https://github.com/zsxsoft");
+    _handleTabChange(value) {
+        event.preventDefault();
+        console.log(event.defaultPrevented);
+        return;
+        let parentElement = value.target.parentElement;
+        let href = parentElement.getAttribute("href");
+        if (/^http/.test(href) && href.indexOf(location.host) < 0) {
+            window.open(href);
             return;
         }
-        this.context.router.push(tab.props.route);
-        this.setState({ tabIndex: value });
+        this.context.router.push(href);
+          
     }
 
 

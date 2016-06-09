@@ -5,9 +5,9 @@ import {
   Redirect,
 }
 from 'react-router';
-import List from './components/pages/list';
-import Article from './components/pages/article';
-import Master from './components/master';
+import List from './Components/Pages/List';
+import Article from './Components/Pages/Article';
+import Master from './Components/Master';
 
 let AppRoutes = (
   /**

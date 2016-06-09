@@ -3,14 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router, PropTypes} from 'react-router';
 import FullWidthSection from '../full-width-section';
-import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
 import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConcat} from '../../utils';
 import ExtensionDuoshuo from '../duoshuo/extensions';
 
 let isMobile = checkMobile();
 let listResizeId = 0;
-export default class PageList extends ReactComponentWithMixin {
+export default class List extends ReactComponentWithMixin {
 
     initState(props) {
         fetch(Config.url + props.location.pathname).then((data) => {

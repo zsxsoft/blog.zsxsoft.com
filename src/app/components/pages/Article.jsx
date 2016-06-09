@@ -13,7 +13,7 @@ let isMobile = checkMobile();
 let articleResizeId = 0;
 let resizeChangeWidth;
 
-export default class PageArticle extends React.Component {
+export default class Article extends React.Component {
 
 
     constructor(props) {

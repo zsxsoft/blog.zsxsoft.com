@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
-    "bootstrap-material-design": "^0.5.10",
     "react": "^15.1.0",
     "react-addons-create-fragment": "^15.1.0",
     "react-addons-transition-group": "^15.1.0",

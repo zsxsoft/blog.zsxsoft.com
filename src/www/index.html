@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-Hans-cn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>zsx's Blog</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-material-design.min.css" rel="stylesheet" />
     <link href="//fonts.useso.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="css/player.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="http://static-file.zsxsoft.com/prism-151114/prism.css" />
     <style type="text/css">
     
@@ -22,16 +24,6 @@
     
     html {
         font-family: 'Roboto', sans-serif
-    }
-    
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: 0
     }
     
     body {
@@ -49,55 +41,6 @@
         margin-left: 10px!important
     }
 
-
-    #player {
-        position: fixed;
-        bottom: 0%;
-        transition: .5s;
-        width: 320px;
-        left: -320px;
-        height: 300px;
-        z-index: 100000;
-    }
-    #player #switch-buttons {
-        cursor: pointer;
-        bottom: 0;
-        width: 0;
-        right: 0;
-        position: absolute;
-        display: inline-block;
-    }
-    #player .switch-exit {
-        display: none;
-    }
-    #player #player-iframe {
-        height: 300px;
-    }
-    #player.show {
-        -webkit-transform: translate3d(320px, 0, 0);
-        transform: translate3d(320px, 0, 0);
-    }
-    #player.show .switch-angle {
-        transform: rotate(180deg);
-        -webkit-transform: rotate(180deg);
-    }
-    #player.show #player-iframe, #player.show .switch-exit {
-        display: inline-block;
-    }
-    #player.show #switch-buttons {
-        left: 200px;
-    }
-    #player iframe {
-        height: 300px;
-        width: 200px;
-        border: none;
-        z-index: 10000;
-    }
-    @media screen and (max-width: 800px) and (max-height: 600px) {
-        #player {
-            display: none;
-        }
-    }
     </style>
 </head>
 

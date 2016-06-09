@@ -2,12 +2,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router} from 'react-router';
-import FullWidthSection from '../full-width-section';
+import Container from '../Container';
 import Config from '../../config';
 import {formatDate, formatArticleContent, isMobile as checkMobile} from '../../utils';
-import EmbedDuoshuo from '../duoshuo/embed-thread';
-import ShareDuoshuo from '../duoshuo/share';
-import ExtensionDuoshuo from '../duoshuo/extensions';
+import {default as EmbedDuoshuo} from '../Duoshuo/EmbedThread';
+import {default as ShareDuoshuo} from '../Duoshuo/Share';
+import {default as ExtensionDuoshuo} from '../Duoshuo/Extensions';
 
 let isMobile = checkMobile();
 let articleResizeId = 0;
@@ -55,9 +55,9 @@ export default class Article extends React.Component {
             
         }
         return (
-            <FullWidthSection>
+            <Container>
                 {childContext}
-            </FullWidthSection>
+            </Container>
         );
     }
 

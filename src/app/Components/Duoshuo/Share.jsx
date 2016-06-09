@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Extension from './extensions';
-export default class DuoshuoExtensions extends React.Component {
+export default class Share extends React.Component {
     constructor(props) {
         super(props);
     }

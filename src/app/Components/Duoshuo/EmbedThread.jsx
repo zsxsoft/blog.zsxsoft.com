@@ -1,7 +1,7 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-export default class DuoshuoEmbedThread extends React.Component {
+export default class EmbedThread extends React.Component {
     constructor(props) {
         super(props);
     }

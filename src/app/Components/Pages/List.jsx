@@ -2,14 +2,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router, PropTypes} from 'react-router';
-import FullWidthSection from '../full-width-section';
+import Container from '../Container';
 import Config from '../../config';
 import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConcat} from '../../utils';
-import ExtensionDuoshuo from '../duoshuo/extensions';
+import {default as ExtensionDuoshuo} from '../Duoshuo/Extensions';
 
 let isMobile = checkMobile();
 let listResizeId = 0;
-export default class List extends ReactComponentWithMixin {
+export default class List extends React.Component {
 
     initState(props) {
         fetch(Config.url + props.location.pathname).then((data) => {
@@ -26,8 +26,6 @@ export default class List extends ReactComponentWithMixin {
 
     componentWillMount() {
         this.setState({ mounted: true });
-        this.resizeChangeWidth(true);
-        listResizeId = window.resizeQueue.add(this.resizeChangeWidth.bind(this));
     }
 
     componentDidMount() {
@@ -36,7 +34,6 @@ export default class List extends ReactComponentWithMixin {
 
     componentWillUnmount() {
         this.setState({ mounted: false });
-        window.resizeQueue.remove(listResizeId);
     }
 
     pageTo(pageForward) {
@@ -73,7 +70,7 @@ export default class List extends ReactComponentWithMixin {
     }
 
 };
-PageList.contextTypes = { history: PropTypes.history }
+List.contextTypes = { history: PropTypes.history }
 
 
 

@@ -6,16 +6,28 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react/react.d.ts": {
-      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
     },
     "react-dom/react-dom.d.ts": {
       "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
     },
     "react-router/react-router.d.ts": {
-      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
     },
     "history/history.d.ts": {
       "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+    },
+    "react/react-dom.d.ts": {
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
+    },
+    "react-bootstrap/react-bootstrap.d.ts": {
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
+    },
+    "whatwg-fetch/whatwg-fetch.d.ts": {
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
+    },
+    "react-router/history.d.ts": {
+      "commit": "f481e77dfca5a146db1b4f5f20f15929b30c8729"
     }
   }
 }

@@ -1,7 +1,6 @@
 ///<reference path="../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Polyfill from 'babel-polyfill';
 import {
     Router,
     hashHistory,

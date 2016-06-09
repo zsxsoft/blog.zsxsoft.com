@@ -1,4 +1,4 @@
-///<reference path="../../../typings/tsd.d.ts" />
+///<reference path="../../../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router, PropTypes} from 'react-router';
@@ -6,71 +6,11 @@ import FullWidthSection from '../full-width-section';
 import ReactComponentWithMixin from '../component-with-mixin';
 import Config from '../../config';
 import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConcat} from '../../utils';
-import AutoResponsive from 'autoresponsive-react';
 import ExtensionDuoshuo from '../duoshuo/extensions';
-import {
-    Avatar,
-    FloatingActionButton,
-    FlatButton,
-    Mixins,
-    Card,
-    CardHeader,
-    CardTitle,
-    CardText,
-    List,
-    ListItem,
-    Styles,
-    Paper,
-}
-from 'material-ui';
-let {
-    StylePropable,
-} = Mixins;
-let {
-    Colors, Spacing, Typography,
-} = Styles;
+
 let isMobile = checkMobile();
-let ThemeManager = Styles.ThemeManager;
 let listResizeId = 0;
-class PageList extends ReactComponentWithMixin {
-
-    resizeChangeWidth(focus) {
-        if (!this.state.mounted && !focus) return;
-        isMobile = checkMobile();
-        let container = ReactDOM.findDOMNode(this.refs.container);
-        let containerWidth = container === null ? document.body.clientWidth : container.clientWidth;
-        if (container === null) {
-            containerWidth -= 48;
-        } else {
-
-        }
-
-        this.setState({
-            responsiveStyle: {
-                display: "inline-block",
-                height: 260,
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: isMobile ? "0" : containerWidth / 22 + 0.008 * containerWidth,
-                //width: 300,
-                width: !isMobile ? (containerWidth * 0.88) / 3 : containerWidth,// * 0.9,
-            },
-            containerWidth: containerWidth,
-            isMobile: isMobile,
-        },
-        );
-    }
-
-
-    getAutoResponsiveProps() {
-        return {
-            itemMargin: 10,
-            //containerWidth: this.state.containerWidth || document.body.clientWidth,
-            itemClassName: 'item',
-            transitionDuration: '.8',
-            transitionTimingFunction: 'easeIn',
-        };
-    }
+export default class PageList extends ReactComponentWithMixin {
 
     initState(props) {
         fetch(Config.url + props.location.pathname).then((data) => {
@@ -79,6 +19,7 @@ class PageList extends ReactComponentWithMixin {
             this.setState({ data: json });
         });
     }
+    
     constructor(props) {
         super(props);
         this.initState(props);
@@ -120,27 +61,25 @@ class PageList extends ReactComponentWithMixin {
         this.context.history.pushState(null, url);
     }
 
-    resizeCard(cardState) {
-        let originalState = this.state[cardState];
-        let returnObject = {};
-        if (!originalState) originalState = {
-            height: this.state.responsiveStyle.height,
-            keyboardArrow: "keyboard_arrow_down",
-        };
-        originalState.height = originalState.height !== this.state.responsiveStyle.height ? this.state.responsiveStyle.height : "auto";
-        originalState.keyboardArrow = originalState.keyboardArrow === "keyboard_arrow_down" ? "keyboard_arrow_up" : "keyboard_arrow_down";
-        returnObject[cardState] = originalState;
-        this.setState(returnObject);
-    }
-
     render() {
         let that = this;
         let data = this.state.data;
-        let singleTargetStyle = this.state.responsiveStyle;
-        let cardTextStyle = { background: "#F5F5F5", height: 100, overflow: "hidden" };
-        let childContext = (<div>Please wait..</div>);
-        if (data) {
-            childContext = (<div style={{ paddingTop: isMobile ? 50 : 15 }} className="list-container">
+        return (<div></div>);
+        /*
+            <FullWidthSection>
+                {childContext}
+
+            </FullWidthSection>
+        */
+    }
+
+};
+PageList.contextTypes = { history: PropTypes.history }
+
+
+
+/*
+<div style={{ paddingTop: isMobile ? 50 : 15 }} className="list-container">
                 <AutoResponsive ref="container" {...this.getAutoResponsiveProps() }>
                     {data.articles.map((article) => {
                         let introHtml = { __html: article.Intro };
@@ -222,21 +161,4 @@ class PageList extends ReactComponentWithMixin {
                     </FloatingActionButton></Link>
                 </div>
             </div>
-            );
-
-        }
-        return (
-            <FullWidthSection>
-                {childContext}
-
-            </FullWidthSection>
-        );
-    }
-
-};
-PageList.contextTypes = { history: PropTypes.history }
-export default PageList;
-
-/*
-
-*/
+ */

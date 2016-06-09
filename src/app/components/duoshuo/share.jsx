@@ -1,8 +1,8 @@
-///<reference path="../../../typings/tsd.d.ts" />
+///<reference path="../../../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Extension from './extensions';
-class DuoshuoExtensions extends React.Component {
+export default class DuoshuoExtensions extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -24,5 +24,3 @@ class DuoshuoExtensions extends React.Component {
         );
     }
 };
-
-export default DuoshuoExtensions;

@@ -58,16 +58,22 @@
         window.config.bridgeUrl = "http://192.168.1.2:8080/api/bridge.php";
     }
 
-    window.doRemain = function() {
-        Prism.highlightAll();
+    window.doPageFinished = function() {
         baiduTongji();
     }
+    window.doGlobal = function() {}
+    window.doArticleLoaded = function() {
+        Prism.highlightAll();
+    }
+    window.doListLoaded = function() {}
+
+
     window.duoshuoQuery = {
         short_name: "zsx-blog",
         myIds: [592176],
         getUAString: function(local) {
             var userAgent = USERAGENT.analyze(local.agent);
-            return [(local.webmaster ? '&nbsp;<span class="ds-webmaster text-info">[ADMIN]</span>' : ''), '<span class="ds-os" title="' + userAgent.ua.replace(/"|'|\<|\>/g, "") + '">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/' + userAgent.platform.dir + '/' + userAgent.platform.image + '.png" alt="' + userAgent.platform.name + '" /></span>', userAgent.platform.full, '</span>' + '&nbsp;<span class="ds-br">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/browser/' + userAgent.browser.image + '.png" alt="' + userAgent.browser.name + '" /></span>', userAgent.browser.full, '</span>'].join("");
+            return [(local.webmaster ? '&nbsp;<span class="ds-webmaster text-info">[ADMIN]</span>&nbsp;&nbsp;' : ''), '<span class="ds-os" title="' + userAgent.ua.replace(/"|'|\<|\>/g, "") + '">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/' + userAgent.platform.dir + '/' + userAgent.platform.image + '.png" alt="' + userAgent.platform.name + '" /></span>', userAgent.platform.full, '</span>' + '&nbsp;<span class="ds-br">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/browser/' + userAgent.browser.image + '.png" alt="' + userAgent.browser.name + '" /></span>', userAgent.browser.full, '</span>'].join("");
         }
     };
 })();

@@ -14,10 +14,7 @@ let isMobile = checkMobile();
 
 export default class Article extends React.Component {
 
-
-    constructor(props) {
-        super(props);
-        let self = this;
+    initState(props) {
         fetch(window.config.apiUrl + this.props.location.pathname).then((data) => {
             return data.json();
         }).then(json => {
@@ -25,11 +22,23 @@ export default class Article extends React.Component {
                 this.setState({ data: json });
             }
         });
+    }
 
+    constructor(props) {
+        super(props);
+        this.initState(props);
     }
 
     componentWillMount() {
         this.setState({ mounted: true });
+    }
+    
+    shouldComponentUpdate(nextProps) {
+        return (nextProps.location.pathname === this.props.location.pathname);
+    }
+
+    componentWillReceiveProps(props) {
+        this.initState(props);
     }
 
     componentDidMount() {
@@ -38,6 +47,12 @@ export default class Article extends React.Component {
     componentWillUnmount() {
         this.setState({ mounted: false });
     }
+    
+    componentDidUpdate() {
+        window.doArticleLoaded();
+        window.doGlobal();
+    }
+
 
     render() {
         let data = this.state.data;
@@ -47,7 +62,7 @@ export default class Article extends React.Component {
             let contentHtml = { __html: formatArticleContent(article.Content) };
             let linkTo = "/post/" + article.ID;
             document.title = article.Title + " - " + window.config.title;
-            childContext = <div>
+            childContext = 
                 <Container>
                     <Well bsSize="large" key={article.ID}>
                         <h1 style={{ width: "100%", fontSize: 20 }} className="articleTitle">{article.Title}</h1>
@@ -69,7 +84,7 @@ export default class Article extends React.Component {
                         <Row><Col md={12}><EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} /></Col></Row>
                     </Well>
                 </Container>
-            </div>
+            
         }
         return (
             <Container>
@@ -79,10 +94,3 @@ export default class Article extends React.Component {
     }
 
 };
-
-
-/*
-childContext = (
-                
-            );
- */

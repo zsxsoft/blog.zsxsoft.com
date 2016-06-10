@@ -9,6 +9,7 @@ from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoutes from './app-routes';
 import './global';
+import 'babel-polyfill';
 injectTapEventPlugin();
 
 import '../www/css/bootstrap.css';

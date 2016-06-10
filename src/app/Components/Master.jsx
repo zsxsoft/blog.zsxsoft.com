@@ -3,7 +3,6 @@ import React from 'react';
 import Router from 'react-router';
 import Container from './Container';
 import {Navbar, Nav, NavItem, Button, MenuItem, Image} from 'react-bootstrap';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Ink from 'react-ink';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -36,7 +35,8 @@ export default class Master extends React.Component {
 
     componentDidUpdate() {
         setTimeout(() => {
-            window.doRemain();
+            window.doPageFinished();
+            window.doGlobal();
         }, 1000);
     }
 
@@ -54,27 +54,18 @@ export default class Master extends React.Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav activeKey={this.state.activeKey}>
-                            <LinkContainer to="/"><NavItem eventKey={0} href="/" onClick={this._handleTabChange.bind(this)}>首页<Ink/></NavItem></LinkContainer>
+                            <LinkContainer to="/"><NavItem eventKey={0} onClick={this._handleTabChange.bind(this)}>首页<Ink/></NavItem></LinkContainer>
                             <LinkContainer to="/post/2"><NavItem eventKey={2} onClick={this._handleTabChange.bind(this)}>留言<Ink/></NavItem></LinkContainer>
                         </Nav>
                         <Nav activeKey={this.state.activeKey} pullRight>
-                            <NavItem><a onClick={this._handleTabChange.bind(this)} href="https://github.com/zsxsoft/">GitHub<Ink/></a></NavItem>
-                            <LinkContainer to="/post/9"><NavItem><a onClick={this._handleTabChange.bind(this)} eventKey={9} href="/post/9">About<Ink/></a></NavItem></LinkContainer>
+                            <NavItem onClick={this._handleTabChange.bind(this)} href="https://github.com/zsxsoft/" target="_blank">GitHub<Ink/></NavItem>
+                            <LinkContainer to="/post/9"><NavItem onClick={this._handleTabChange.bind(this)} eventKey={9}>About<Ink/></NavItem></LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
                 </div>
                 <Container className="mainContent" style={{wordBreak: "break-all", wordWrap: "break-word", paddingTop: 10, opacity: 0.9}}>
-                    <ReactCSSTransitionGroup
-                        component="div"
-                        transitionName="fade"
-                        transitionEnterTimeout={300}
-                        transitionLeaveTimeout={300}
-                    >
-                        {React.cloneElement(this.props.children, {
-                            key: location.href, 
-                        })}
-                    </ReactCSSTransitionGroup>
+                    {this.props.children}
                 </Container>
                 
                 <Container dangerouslySetInnerHTML={{__html: document.getElementById("footer-template").innerHTML}} />

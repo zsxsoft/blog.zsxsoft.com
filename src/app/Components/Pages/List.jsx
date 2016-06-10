@@ -36,6 +36,11 @@ export default class List extends React.Component {
         document.title = "文章列表 - " + window.config.title;
     }
 
+    componentDidUpdate() {
+        window.doListLoaded();
+        window.doGlobal();
+    }
+
     componentWillUnmount() {
         this.setState({ mounted: false });
     }
@@ -55,15 +60,6 @@ export default class List extends React.Component {
     shouldComponentUpdate(nextProps) {
         return (nextProps.location.pathname === this.props.location.pathname);
     }
-
-    sidebarListClick(url) {
-        this.context.history.pushState(null, url);
-    }
-
-    inkOnclick(e) {
-        console.log(e);
-    }
-
     getSidebarContainer(sidebar) {
         let that = this;
         let sidebarContainer = <div/>;

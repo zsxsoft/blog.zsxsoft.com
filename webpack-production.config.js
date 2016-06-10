@@ -45,6 +45,9 @@ let config = {
       template: path.join(__dirname, '/src/www/index.html'),
       //minify: true, 
     }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
     new ExtractTextPlugin("style.css"),
     new purify({
       basePath: __dirname,

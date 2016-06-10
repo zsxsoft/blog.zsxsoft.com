@@ -77,21 +77,18 @@ export default class List extends React.Component {
         let liContainer = [];
         while ((result = reg.exec(sidebar.Content)) !== null) {
             let listObject = (htmlContent => {
-                let ret = {
-                    html: null,
-                    attr: {},
-                };
                 let result;
                 let reg = /<a(.*?)href="(.*?)"(.*?)>([\w\W]*?)<\/a>/gi;
                 if ((result = reg.exec(htmlContent)) !== null) {
-                    ret.html = result[4];
-                    ret.attr.href = result[2];
+                    if (result[2].indexOf(location.host) < 0) {
+                        return <a href={result[2]} target="_blank">{result[4]}</a>;
+                    }
+                    return <Link to={result[2]}>{result[4]}</Link>
                 } else {
-                    ret.html = <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+                    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
                 }
-                return ret;
             })(result[2]);
-            liContainer.push(<ListGroupItem key={result.index} {...listObject.attr}><Button>{listObject.html}</Button><Ink/></ListGroupItem>);
+            liContainer.push(<ListGroupItem key={result.index}><Button>{listObject}</Button><Ink/></ListGroupItem>);
         }
         sidebarContainer = (<ListGroup id={sidebar.HtmlID}>{liContainer}</ListGroup>);
         return sidebarContainer;

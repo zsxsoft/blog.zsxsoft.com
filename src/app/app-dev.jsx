@@ -12,9 +12,6 @@ import './global';
 window.debugging = true;
 injectTapEventPlugin();
 
-import './Stylesheets/bootstrap.css';
-import './Stylesheets/bootstrap-material-design.css';
-import './Stylesheets/others.css';
 
 ReactDOM.render(
     <Router

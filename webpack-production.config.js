@@ -82,7 +82,6 @@ let config = {
         exclude: [nodeModulesPath],  //exclude node_modules so that they are not all compiled
       },
       { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
-
     ],
   },
   eslint: {

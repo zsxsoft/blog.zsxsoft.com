@@ -11,9 +11,10 @@ import AppRoutes from './app-routes';
 import './global';
 injectTapEventPlugin();
 
-import './Stylesheets/bootstrap.css';
-import './Stylesheets/bootstrap-material-design.css';
-import './Stylesheets/others.css';
+import '../www/css/bootstrap.css';
+import '../www/css/bootstrap-material-design.css';
+import '../www/css/others.css';
+import '../www/css/player.css';
 
 ReactDOM.render(
     <Router

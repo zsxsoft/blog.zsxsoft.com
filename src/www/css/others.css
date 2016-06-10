@@ -14,7 +14,7 @@ nav a:focus {
     color: #ffffff;
 }
 
-.articleTitle span {
+.articleTitle a {
     color: #000000;
     display: block;
     overflow: hidden;

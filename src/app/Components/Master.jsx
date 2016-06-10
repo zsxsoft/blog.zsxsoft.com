@@ -5,6 +5,8 @@ import Container from './Container';
 import {Navbar, Nav, NavItem, Button, MenuItem, Image} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Ink from 'react-ink';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 export default class Master extends React.Component {
 
@@ -52,12 +54,12 @@ export default class Master extends React.Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav activeKey={this.state.activeKey}>
-                            <NavItem eventKey={0}><a href="/" onClick={this._handleTabChange.bind(this)}>首页<Ink/></a></NavItem>
-                            <NavItem eventKey={2}><a href="/post/2" onClick={this._handleTabChange.bind(this)}>留言<Ink/></a></NavItem>
+                            <LinkContainer to="/"><NavItem eventKey={0} href="/" onClick={this._handleTabChange.bind(this)}>首页<Ink/></NavItem></LinkContainer>
+                            <LinkContainer to="/post/2"><NavItem eventKey={2} onClick={this._handleTabChange.bind(this)}>留言<Ink/></NavItem></LinkContainer>
                         </Nav>
                         <Nav activeKey={this.state.activeKey} pullRight>
                             <NavItem><a onClick={this._handleTabChange.bind(this)} href="https://github.com/zsxsoft/">GitHub<Ink/></a></NavItem>
-                            <NavItem><a onClick={this._handleTabChange.bind(this)} eventKey={9} href="/post/9">About<Ink/></a></NavItem>
+                            <LinkContainer to="/post/9"><NavItem><a onClick={this._handleTabChange.bind(this)} eventKey={9} href="/post/9">About<Ink/></a></NavItem></LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -81,15 +83,7 @@ export default class Master extends React.Component {
     }
 
     _handleTabChange(value, what, e) {
-        event.preventDefault();
-        let parentElement = value.target.parentElement;
-        let href = parentElement.getAttribute("href");
-        if (/^http/.test(href) && href.indexOf(location.host) < 0) {
-            window.open(href);
-            return;
-        }
-        this.context.router.push(href);
-          
+        /* Useless */
     }
 
 

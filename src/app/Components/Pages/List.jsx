@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom';
 import {Link, Router} from 'react-router';
 import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConcat} from '../../utils';
 import ExtensionDuoshuo from '../Duoshuo/Extensions';
-import {Navbar, Nav, NavItem, Button, Col, Well, Image, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Navbar, Nav, NavItem, Col, Well, Image, Row, ListGroup, ListGroupItem} from 'react-bootstrap';
 import Container from '../Container';
+import Button from '../DivButton';
 import Ink from 'react-ink';
+import { LinkContainer } from 'react-router-bootstrap';
 
 let isMobile = checkMobile();
 export default class List extends React.Component {
@@ -58,6 +60,10 @@ export default class List extends React.Component {
         this.context.history.pushState(null, url);
     }
 
+    inkOnclick(e) {
+        console.log(e);
+    }
+
     getSidebarContainer(sidebar) {
         let that = this;
         let sidebarContainer = <div/>;
@@ -80,15 +86,17 @@ export default class List extends React.Component {
                 let result;
                 let reg = /<a(.*?)href="(.*?)"(.*?)>([\w\W]*?)<\/a>/gi;
                 if ((result = reg.exec(htmlContent)) !== null) {
-                    if (result[2].indexOf(location.host) < 0) {
-                        return <a href={result[2]} target="_blank">{result[4]}</a>;
+                    if (result[2].indexOf(location.host) < 0 && /^http/.test(result[2])) {
+                        return <a href={result[2]} target="_blank">{result[4]}<Ink/></a>;
+                    } else {
+                        return <Link to={result[2].replace(location.origin, "")}>{result[4]}<Ink/></Link>
                     }
-                    return <Link to={result[2]}>{result[4]}</Link>
+                    
                 } else {
                     return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
                 }
             })(result[2]);
-            liContainer.push(<ListGroupItem key={result.index}><Button>{listObject}</Button><Ink/></ListGroupItem>);
+            liContainer.push(<ListGroupItem key={result.index}><Button style={{textAlign: "left"}}>{listObject}</Button></ListGroupItem>);
         }
         sidebarContainer = (<ListGroup id={sidebar.HtmlID}>{liContainer}</ListGroup>);
         return sidebarContainer;
@@ -105,7 +113,7 @@ export default class List extends React.Component {
                         let introHtml = { __html: article.Intro };
                         let linkTo = "/post/" + article.ID;
                         return (<Well bsSize="large" key={article.ID} style={{padding: 0}}>
-                            <Button style={{ width: "100%", fontSize: 24, margin: 0}} className="articleTitle"><Link to={linkTo}><span>{article.Title}</span><Ink/></Link></Button>
+                            <Button style={{ width: "100%", fontSize: 24, margin: 0}} className="articleTitle"><Link to={linkTo}>{article.Title}<Ink/></Link></Button>
                             <div style={{backgroundColor: "#F5F5F5", padding: 16}}><div dangerouslySetInnerHTML={introHtml}></div></div>
                             <div style={{padding: 15}}>
                                 <Col md={2} xs={5}>

@@ -1,7 +1,6 @@
 ///<reference path="../../../typings/tsd.d.ts" />
 import React from 'react';
 import Router from 'react-router';
-import Config from '../config';
 import Container from './Container';
 import {Navbar, Nav, NavItem, Button, MenuItem, Image} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
@@ -42,12 +41,12 @@ export default class Master extends React.Component {
     render() {
 
         return (
-            <div style={{backgroundImage: "url(images/00017.m2ts_snapshot_00.46.jpg)", backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "50%, 50%", minHeight: "100%"}}>
+            <div style={{backgroundImage: `url(${window.config.backgroundUrl})`, backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "50%, 50%", minHeight: "100%"}}>
             <div>
                 <Navbar style={{background: "#000000", zIndex: 10000, opacity: 0.5}}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href="//blog.zsxsoft.com">zsx's Blog<Ink/></a>
+                            <a href="//blog.zsxsoft.com">{window.config.title}<Ink/></a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>

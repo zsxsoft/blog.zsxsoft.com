@@ -1,7 +1,7 @@
 ///<reference path="../../../../typings/tsd.d.ts" />
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Extension from './extensions';
+import Extension from './Extensions';
 export default class Share extends React.Component {
     constructor(props) {
         super(props);

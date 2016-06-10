@@ -6,17 +6,18 @@ import {formatDate, isMobile as checkMobile, filterHtml, getNewListUri, jsonConc
 import ExtensionDuoshuo from '../Duoshuo/Extensions';
 import {Navbar, Nav, NavItem, Button, Col, Well, Image, ListGroup, ListGroupItem} from 'react-bootstrap';
 import Container from '../Container';
-import Config from '../../config';
 import Ink from 'react-ink';
 
 let isMobile = checkMobile();
 export default class List extends React.Component {
 
     initState(props) {
-        fetch(Config.url + props.location.pathname).then((data) => {
+        fetch(window.config.apiUrl + props.location.pathname).then((data) => {
             return data.json();
-        }).then((json) => {
-            this.setState({ data: json });
+        }).then(json => {
+            if (this.state.mounted) {
+                this.setState({ data: json });
+            }
         });
     }
 
@@ -30,7 +31,7 @@ export default class List extends React.Component {
     }
 
     componentDidMount() {
-        document.title = "文章列表 - " + Config.title;
+        document.title = "文章列表 - " + window.config.title;
     }
 
     componentWillUnmount() {
@@ -124,7 +125,7 @@ export default class List extends React.Component {
                         </Well>);
                     }) }
                 </Col>
-                <Col md={4} xs={12}>
+                <Col md={3} xs={12}>
                     {data.sidebar.map(sidebar => {
                         return <Well bsSize="large" key={sidebar.HtmlID}>
                         <p style={{ width: "100%", fontSize: 20 }}>{sidebar.Name}</p>

@@ -4,11 +4,14 @@ let buildPath = path.resolve(__dirname, 'build');
 let nodeModulesPath = path.resolve(__dirname, 'node_modules');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let TransferWebpackPlugin = require('transfer-webpack-plugin');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let purify = require("purifycss-webpack-plugin");
+
 
 let config = {
   //Entry point to the project
   entry: [
-    path.join(__dirname, '/src/app/app.jsx'), 
+    path.join(__dirname, '/src/app/app.jsx'),
   ],
   //Webpack config options on how to obtain modules
   resolve: {
@@ -40,12 +43,22 @@ let config = {
     new HtmlWebpackPlugin({
       inject: false,
       template: path.join(__dirname, '/src/www/index.html'),
+      //minify: true, 
+    }),
+    new ExtractTextPlugin("style.css"),
+    new purify({
+      basePath: __dirname,
+      paths: [
+        "src/www/index.html",
+      ],
+      purifyOptions: {
+        minify: true,
+      },
     }),
     //Allows error warninggs but does not stop compiling. Will remove when eslint is added
     new webpack.NoErrorsPlugin(),
     //Transfer Files
     new TransferWebpackPlugin([
-      { from: 'www/css', to: 'css' },
       { from: 'www/images', to: 'images' },
     ], path.resolve(__dirname, "src")),
 
@@ -68,6 +81,8 @@ let config = {
         include: [__dirname, path.resolve(__dirname, '../src')], //include these files
         exclude: [nodeModulesPath],  //exclude node_modules so that they are not all compiled
       },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+
     ],
   },
   eslint: {

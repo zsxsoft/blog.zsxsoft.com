@@ -8,8 +8,13 @@ import {
 from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoutes from './app-routes';
+import './global';
 window.debugging = true;
-//injectTapEventPlugin();
+injectTapEventPlugin();
+
+import './Stylesheets/bootstrap.css';
+import './Stylesheets/bootstrap-material-design.css';
+import './Stylesheets/others.css';
 
 ReactDOM.render(
     <Router

@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link, Router} from 'react-router';
 import Container from '../Container';
-import Config from '../../config';
 import {formatDate, formatArticleContent, filterHtml, isMobile as checkMobile} from '../../utils';
 import EmbedDuoshuo from '../Duoshuo/EmbedThread';
 import ShareDuoshuo from '../Duoshuo/Share';
@@ -19,10 +18,12 @@ export default class Article extends React.Component {
     constructor(props) {
         super(props);
         let self = this;
-        fetch(Config.url + this.props.location.pathname).then((data) => {
+        fetch(window.config.apiUrl + this.props.location.pathname).then((data) => {
             return data.json();
-        }).then((json) => {
-            this.setState({ data: json });
+        }).then(json => {
+            if (this.state.mounted) {
+                this.setState({ data: json });
+            }
         });
 
     }
@@ -45,7 +46,7 @@ export default class Article extends React.Component {
             let article = data.article;
             let contentHtml = { __html: formatArticleContent(article.Content) };
             let linkTo = "/post/" + article.ID;
-            document.title = article.Title + " - " + Config.title;
+            document.title = article.Title + " - " + window.config.title;
             childContext = <div>
                 <Container>
                     <Well bsSize="large" key={article.ID}>

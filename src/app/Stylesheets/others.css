@@ -1,0 +1,85 @@
+.navbar-brand {
+    padding-top: 15px;
+}
+
+nav a {
+    color: #eeeeee;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+nav a:focus {
+    color: #ffffff;
+}
+
+.articleTitle span {
+    color: #000000;
+    display: block;
+    overflow: hidden;
+}
+
+.articleTitle a:hover {
+    color: #000000;
+}
+
+.fade-enter {
+    opacity: 0.01;
+    transition: opacity .5s ease-in;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+}
+
+.fade-leave {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.fade-leave.fade-leave-active {
+    opacity: 0;
+}
+
+a {
+    color: #428bca;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #42abca
+}
+
+html {
+    font-family: 'Roboto', sans-serif
+}
+
+body {
+    font-size: 15px;
+    line-height: 24px;
+    background-color: #ffffff;
+}
+
+html,
+body,
+#app {
+    height: 100%;
+}
+
+.ds-share-icons-32 {
+    margin-left: 20%!important;
+    margin-right: 20%!important
+}
+
+.ds-share-icons-32 li {
+    float: left!important;
+    margin-left: 10px!important
+}
+
+@media screen and (max-width: 800px) and (max-height: 600px) {
+    .mainContent .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

@@ -111,32 +111,44 @@
         </div>
     </div>
     <script>
-    window.doRemain = function() {
-        console.log("Component did update!");
-        var removeOldDom = function(className) {
-            var dom = document.querySelector("." + className);
-            if (typeof dom != "undefined" && dom !== null && dom !== undefined && 'remove' in dom) {
-                dom.remove();
-            }
+(function() {
+    var removeOldDom = function(className) {
+        var dom = document.querySelector("." + className);
+        if (typeof dom != "undefined" && dom !== null && dom !== undefined && 'remove' in dom) {
+            dom.remove();
+        }
+    };
+    var baiduTongji = function() {
+        var _hmt = _hmt || [];
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e676290db1a063d7eabcc30211f4000b";
+        hm.className = "old-baidu";
+        hm.onload = function() {
+            // 清除百度统计的加载标识
+            delete window._bdhm_loaded_e676290db1a063d7eabcc30211f4000b;
         };
-        Prism.highlightAll();
-        (function() { // 加载百度统计
-            var _hmt = _hmt || [];
-            (function() {
-                var hm = document.createElement("script");
-                hm.src = "//hm.baidu.com/hm.js?e676290db1a063d7eabcc30211f4000b";
-                hm.className = "old-baidu";
-                hm.onload = function() {
-                    // 清除百度统计的加载标识
-                    delete window._bdhm_loaded_e676290db1a063d7eabcc30211f4000b;
-                };
-                var s = document.getElementById('s-insert-tag');
-                s.parentNode.insertBefore(hm, s);
-                removeOldDom("old-baidu");
-            })();
-        })();
+        var s = document.getElementById('s-insert-tag');
+        s.parentNode.insertBefore(hm, s);
+        removeOldDom("old-baidu");
+
     }
-    var duoshuoQuery = {
+
+    window.config = {
+        apiUrl: "/api",
+        backgroundUrl: "http://static-file.zsxsoft.com/blog/images/00017.m2ts_snapshot_00.46.jpg",
+        bridgeUrl: "/api/bridge.php", 
+        title: "zsx's Blog", 
+    };
+    if (location.port !== "80" && location.port !== "") { // Debug Mode
+        window.config.apiUrl = "http://192.168.1.2:8080/api";
+        window.config.bridgeUrl = "http://192.168.1.2:8080/api/bridge.php";
+    }
+
+    window.doRemain = function() {
+        Prism.highlightAll();
+        baiduTongji();
+    }
+    window.duoshuoQuery = {
         short_name: "zsx-blog",
         myIds: [592176],
         getUAString: function(local) {
@@ -144,6 +156,8 @@
             return [(local.webmaster ? '&nbsp;<span class="ds-webmaster text-info">[ADMIN]</span>' : ''), '<span class="ds-os" title="' + userAgent.ua.replace(/"|'|\<|\>/g, "") + '">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/' + userAgent.platform.dir + '/' + userAgent.platform.image + '.png" alt="' + userAgent.platform.name + '" /></span>', userAgent.platform.full, '</span>' + '&nbsp;<span class="ds-br">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/browser/' + userAgent.browser.image + '.png" alt="' + userAgent.browser.name + '" /></span>', userAgent.browser.full, '</span>'].join("");
         }
     };
+})();
+
     </script>
     <script type="text/template" id="footer-template">
 	    <footer style="color: #ffffff; text-align: center; z-index: 0;">

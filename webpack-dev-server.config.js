@@ -3,6 +3,7 @@ let path = require('path');
 let buildPath = path.resolve(__dirname, 'build');
 let nodeModulesPath = path.resolve(__dirname, 'node_modules');
 let TransferWebpackPlugin = require('transfer-webpack-plugin');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 let config = {
   //Entry points to the project
@@ -33,6 +34,7 @@ let config = {
   plugins: [
     //Enables Hot Modules Replacement
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin("style.css"),
     //Allows error warnings but does not stop compiling. Will remove when eslint is added
     new webpack.NoErrorsPlugin(),
     //Moves files
@@ -58,6 +60,8 @@ let config = {
         loaders: ['react-hot','babel'], //react-hot is like browser sync and babel loads jsx and es6-7
         exclude: [nodeModulesPath],
       }, 
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+        
     ], 
   },
   //eslint config options. Part of the eslint-loader package

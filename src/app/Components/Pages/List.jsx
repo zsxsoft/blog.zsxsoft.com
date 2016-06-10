@@ -84,7 +84,7 @@ export default class List extends React.Component {
                 let reg = /<a(.*?)href="(.*?)"(.*?)>([\w\W]*?)<\/a>/gi;
                 if ((result = reg.exec(htmlContent)) !== null) {
                     ret.html = result[4];
-                    ret.attr.onClick = that.sidebarListClick.bind(that, result[2]);
+                    ret.attr.href = result[2];
                 } else {
                     ret.html = <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
                 }
@@ -106,15 +106,15 @@ export default class List extends React.Component {
                     {data.articles.map(article => {
                         let introHtml = { __html: article.Intro };
                         let linkTo = "/post/" + article.ID;
-                        return (<Well bsSize="large" key={article.ID}>
-                            <Button style={{ width: "100%", fontSize: 20 }}><Link to={linkTo}>{article.Title}<Ink/></Link></Button>
-                            <div><div dangerouslySetInnerHTML={introHtml}></div></div>
-                            <div>
+                        return (<Well bsSize="large" key={article.ID} style={{padding: 0}}>
+                            <Button style={{ width: "100%", fontSize: 24, margin: 0}} className="articleTitle"><Link to={linkTo}><span>{article.Title}</span><Ink/></Link></Button>
+                            <div style={{backgroundColor: "#F5F5F5", padding: 16}}><div dangerouslySetInnerHTML={introHtml}></div></div>
+                            <div style={{padding: 15}}>
                                 <Col md={2} xs={5}>
                                     <Image circle src={article.Author.Avatar} style={{ verticalAlign: "middle", marginRight: 5, height: 32 }}/>{article.Author.StaticName}
                                 </Col>
                                 <Col style={{ textAlign: "right" }}>
-                                    <span style={{ color: "rgba(0, 0, 0, 0.54)", fontSize: isMobile ? 10 : 14, marginTop: 7 }}>
+                                    <span style={{ color: "rgba(0, 0, 0, 0.54)", fontSize: isMobile ? 10 : 14}}>
                                         {formatDate(article.PostTime) } in <Link to={getNewListUri(this.props.location.pathname, { cate: article.Category.ID }) }>{article.Category.Name}</Link>
                                         <span> / </span><ExtensionDuoshuo type="thread-count" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro) } />
                                         <span> / </span>{article.ViewNums}
@@ -134,11 +134,11 @@ export default class List extends React.Component {
                 </Col>
 
                 <div style={{ position: "fixed", top: "90%", right: "2%", width: "120px", zIndex: 100000 }}>
-                    <Link to={this.pageTo(-1) }><Button bsStyle="primary" className="btn-fab" style={{ float: "left" }}>
-                        <span style={{ color: "white" }}>&lt; </span><Ink/>
+                    <Link to={this.pageTo(-1) }><Button className="btn-fab" style={{ float: "left", backgroundColor: "#2e8bcc" }}>
+                        <span style={{ color: "white" }}><i className="material-icons">keyboard_arrow_left</i></span><Ink/>
                     </Button></Link>
-                    <Link to={this.pageTo(1) }><Button bsStyle="primary" className="btn-fab" style={{ float: "right" }}>
-                        <span style={{ color: "white" }}>&gt; </span><Ink/>
+                    <Link to={this.pageTo(1) }><Button className="btn-fab" style={{ float: "right", backgroundColor: "#2e8bcc" }}>
+                        <span style={{ color: "white" }}><i className="material-icons">keyboard_arrow_right</i></span><Ink/>
                     </Button></Link>
                 </div>
             </div>);

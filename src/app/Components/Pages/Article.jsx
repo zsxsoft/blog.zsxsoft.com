@@ -50,7 +50,7 @@ export default class Article extends React.Component {
                 <Container>
 
                     <Well bsSize="large" key={article.ID}>
-                        <Button style={{ width: "100%", fontSize: 20 }}><Link to={linkTo}>{article.Title}<Ink/></Link></Button>
+                        <Button style={{ width: "100%", fontSize: 20 }}><Link to={linkTo}><span className="articleTitle">{article.Title}<Ink/></span></Link></Button>
                         <Row>
                             <Col md={2} xs={5}>
                                 <Image circle src={article.Author.Avatar} style={{ verticalAlign: "middle", marginRight: 5, height: 32 }}/>{article.Author.StaticName}

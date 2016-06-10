@@ -2302,6 +2302,11 @@ legend {
 .navbar .navbar-form {
   border-color: rgba(0, 0, 0, 0.1);
 }
+.navbar .navbar-collapse {
+  background: black;
+  border: none;
+  box-shadow: none;
+}
 .navbar .navbar-nav > .open > a,
 .navbar .navbar-nav > .open > a:hover,
 .navbar .navbar-nav > .open > a:focus {
@@ -2341,6 +2346,9 @@ legend {
   .navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
     color: inherit;
     background-color: transparent;
+  }
+  .navbar-header {
+    height: 40px;
   }
 }
 .navbar .navbar-link {
@@ -2651,19 +2659,6 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 .navbar-inverse {
   background-color: #3f51b5;
-}
-@media (max-width: 1199px) {
-  .navbar .navbar-brand {
-    height: 50px;
-    padding: 10px 15px;
-  }
-  .navbar .navbar-form {
-    margin-top: 10px;
-  }
-  .navbar .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-  }
 }
 .dropdown-menu {
   border: 0;

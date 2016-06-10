@@ -42,7 +42,7 @@ export default class Master extends React.Component {
     render() {
 
         return (
-            <div style={{backgroundImage: "url(images/00017.m2ts_snapshot_00.46.jpg)", backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "50%, 50%"}}>
+            <div style={{backgroundImage: "url(images/00017.m2ts_snapshot_00.46.jpg)", backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "50%, 50%", minHeight: "100%"}}>
             <div>
                 <Navbar style={{background: "#000000", zIndex: 10000, opacity: 0.5}}>
                     <Navbar.Header>
@@ -63,7 +63,7 @@ export default class Master extends React.Component {
                     </Navbar.Collapse>
                 </Navbar>
                 </div>
-                <Container className="mainContent" style={{wordBreak: "break-all", wordWrap: "break-word", overflow: "hidden", paddingTop: 10, opacity: 0.9}}>
+                <Container className="mainContent" style={{wordBreak: "break-all", wordWrap: "break-word", paddingTop: 10, opacity: 0.9}}>
                     <ReactCSSTransitionGroup
                         component="div"
                         transitionName="fade"
@@ -76,13 +76,7 @@ export default class Master extends React.Component {
                     </ReactCSSTransitionGroup>
                 </Container>
                 
-                <Container>
-                <footer style={{textAlign: "center"}}>
-                        <p>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议</a>，转载本站内容即代表同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎</a>。</p>
-                        <p>API由 <a href="http://www.zblogcn.com/" target="_blank">Z-BlogPHP</a> 最新版本强力驱动；前端基于<a href="https://facebook.github.io/react/" target="_blank" rel="nofollow">React</a> + <a href="http://fezvrasta.github.io/bootstrap-material-design/" target="_blank" rel="nofollow">Material Design for Bootstrap</a>。</p>
-                        <p><a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15006942号</a> &nbsp; <a href="/feed.php" target="_blank">[RSS]</a> </p>
-                    </footer>
-                </Container>
+                <Container dangerouslySetInnerHTML={{__html: document.getElementById("footer-template").innerHTML}} />
             </div>
         );
     }

@@ -39,25 +39,24 @@
             color: #000000;
         }
         
+        .fade-enter {
+            opacity: 0.01;
+            transition: opacity .5s ease-in;
+        }
         
-    .fade-enter {
-    opacity: 0.01;
-    transition: opacity .5s ease-in;
-    }
-
-    .fade-enter.fade-enter-active {
-    opacity: 1;
-    }
-
-    .fade-leave {
-    opacity: 1;
-    transition: opacity .5s ease-in;
-    }
-
-    .fade-leave.fade-leave-active {
-    opacity: 0;
-    }
-
+        .fade-enter.fade-enter-active {
+            opacity: 1;
+        }
+        
+        .fade-leave {
+            opacity: 1;
+            transition: opacity .5s ease-in;
+        }
+        
+        .fade-leave.fade-leave-active {
+            opacity: 0;
+        }
+        
         a {
             color: #428bca;
             text-decoration: none !important;
@@ -75,6 +74,12 @@
             font-size: 15px;
             line-height: 24px;
             background-color: #ffffff;
+        }
+        
+        html,
+        body,
+        #app {
+            height: 100%;
         }
         
         .ds-share-icons-32 {
@@ -131,21 +136,6 @@
             })();
         })();
     }
-    window.resizeQueue = {
-        queue: [],
-        add: function(func) {
-            this.queue.push(func);
-            return this.queue.length - 1;
-        },
-        remove: function(id) {
-            delete this.queue[id];
-        }
-    };
-    window.onresize = function() {
-        window.resizeQueue.queue.map(function(value) {
-            value();
-        });
-    }
     var duoshuoQuery = {
         short_name: "zsx-blog",
         myIds: [592176],
@@ -154,6 +144,13 @@
             return [(local.webmaster ? '&nbsp;<span class="ds-webmaster text-info">[ADMIN]</span>' : ''), '<span class="ds-os" title="' + userAgent.ua.replace(/"|'|\<|\>/g, "") + '">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/' + userAgent.platform.dir + '/' + userAgent.platform.image + '.png" alt="' + userAgent.platform.name + '" /></span>', userAgent.platform.full, '</span>' + '&nbsp;<span class="ds-br">', '<span class="ds-ua-img"><img src="http://static-file.zsxsoft.com/useragent.js/img/16/browser/' + userAgent.browser.image + '.png" alt="' + userAgent.browser.name + '" /></span>', userAgent.browser.full, '</span>'].join("");
         }
     };
+    </script>
+    <script type="text/template" id="footer-template">
+	    <footer style="color: #ffffff; text-align: center; z-index: 0;">
+            <p>本站采用<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" rel="nofollow" title="查看普通文本">创作共用版权协议</a>，转载本站内容即代表同意了本协议，必须<a href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/legalcode" title="查看法律文本" rel="nofollow" target="_blank">署名-非商业使用-禁止演绎</a>。</p>
+            <p>API由 <a href="http://www.zblogcn.com/" target="_blank">Z-BlogPHP</a> 最新版本强力驱动；前端基于<a href="https://facebook.github.io/react/" target="_blank" rel="nofollow">React</a> + <a href="http://fezvrasta.github.io/bootstrap-material-design/" target="_blank" rel="nofollow">Material Design for Bootstrap</a>。</p>
+            <p><a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">闽ICP备15006942号</a> &nbsp; <a href="/feed.php" target="_blank">[RSS]</a> </p>
+        </footer>
     </script>
     <script src="//static.duoshuo.com/embed.js"></script>
     <script src="http://static-file.zsxsoft.com/prism-151114/prism.js" type="text/javascript"></script>

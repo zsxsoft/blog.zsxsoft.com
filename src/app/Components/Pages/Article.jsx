@@ -48,9 +48,8 @@ export default class Article extends React.Component {
             document.title = article.Title + " - " + Config.title;
             childContext = <div>
                 <Container>
-
                     <Well bsSize="large" key={article.ID}>
-                        <Button style={{ width: "100%", fontSize: 20 }}><Link to={linkTo}><span className="articleTitle">{article.Title}<Ink/></span></Link></Button>
+                        <h1 style={{ width: "100%", fontSize: 20 }} className="articleTitle">{article.Title}</h1>
                         <Row>
                             <Col md={2} xs={5}>
                                 <Image circle src={article.Author.Avatar} style={{ verticalAlign: "middle", marginRight: 5, height: 32 }}/>{article.Author.StaticName}
@@ -64,9 +63,9 @@ export default class Article extends React.Component {
                             </Col>
                         </Row>
                         <Row><br/></Row>
-                        <Row><article dangerouslySetInnerHTML={contentHtml}></article></Row>
-                        <Row><Container><Col mdOffset={2}><ShareDuoshuo type="share" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} /></Col></Container></Row>
-                        <Row><EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} /></Row>
+                        <Row><Col md={12}><article dangerouslySetInnerHTML={contentHtml}></article></Col></Row>
+                        <Row><Col md={12}><Container><Col mdOffset={2}><ShareDuoshuo type="share" duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} /></Col></Container></Col></Row>
+                        <Row><Col md={12}><EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} /></Col></Row>
                     </Well>
                 </Container>
             </div>

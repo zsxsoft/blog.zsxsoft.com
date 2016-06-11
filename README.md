@@ -5,4 +5,10 @@ blog.zsxsoft.com
 
 The source code of blog.zsxsoft.com
 
+## Run
+``npm start``
+
+## Build
+``npm run build``
+
 MIT License

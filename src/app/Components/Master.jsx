@@ -43,8 +43,8 @@ export default class Master extends React.Component {
     render() {
 
         return (
-            <div style={{backgroundImage: `url(${window.config.backgroundUrl})`, backgroundAttachment: "fixed", backgroundSize: "cover", backgroundPosition: "50%, 50%", minHeight: "100%"}}>
-            <div>
+            <div className="appContainer">
+                <div className="mobileBackground"></div>
                 <Navbar style={{background: "#000000", zIndex: 10000, opacity: 0.5}}>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -63,7 +63,6 @@ export default class Master extends React.Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                </div>
                 <Container className="mainContent" style={{wordBreak: "break-all", wordWrap: "break-word", paddingTop: 10, opacity: 0.9}}>
                     {this.props.children}
                 </Container>

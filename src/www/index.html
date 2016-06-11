@@ -13,6 +13,29 @@
     <link href="css/others.css" rel="stylesheet" />
     <link href="//fonts.useso.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="http://static-file.zsxsoft.com/prism-151114/prism.css" />
+    <style type="text/css">.mobileBackground {
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 125%;
+        background: url("images/00017.m2ts_snapshot_00.46.jpg") fixed no-repeat;
+        background-size: 282% 100%;
+        background-position: 64%;
+    }
+    @media (min-width: 600px) {
+        .appContainer {
+            min-height: 100%;
+            height: auto;
+            background: url("images/00017.m2ts_snapshot_00.46.jpg") fixed no-repeat center center;
+            background-size: cover;
+        }
+        .mobileBackground {
+            display: none;
+        }
+    }
+    </style>
 </head>
 
 <body>
@@ -49,7 +72,6 @@
 
     window.config = {
         apiUrl: "/api",
-        backgroundUrl: "http://static-file.zsxsoft.com/blog/images/00017.m2ts_snapshot_00.46.jpg",
         bridgeUrl: "/api/bridge.php", 
         title: "zsx's Blog", 
     };

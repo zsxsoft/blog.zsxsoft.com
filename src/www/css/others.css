@@ -77,9 +77,13 @@ body,
     margin-left: 10px!important
 }
 
-@media screen and (max-width: 800px) and (max-height: 600px) {
+@media screen and (max-width: 800px) {
     .mainContent .container {
         padding-left: 0;
         padding-right: 0;
+    }
+    .mainContent {
+        padding-top: 0;
+        margin-top: -20px;
     }
 }

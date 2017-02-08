@@ -2,8 +2,19 @@ import React from 'react'
 import Extension from './Extensions'
 export default class Share extends Extension {
   render () {
+    const { element, type, id, duoshuoKey, url, title, content, ...other } = this.props // eslint-disable-line
+    const duoshuoType = 'ds-share'
+    const props = {
+      className: duoshuoType,
+      'data-thread-id': id,
+      'data-thread-key': duoshuoKey,
+      'data-title': title,
+      'data-content': content,
+      'data-url': url,
+      ...other
+    }
     return (
-      <div {...this.props}>
+      <div {...props}>
         <div id='ds-reset'>
           <ul className='ds-share-icons-32'>
             <li style={{ top: 8, position: 'relative' }}>分享到：</li>

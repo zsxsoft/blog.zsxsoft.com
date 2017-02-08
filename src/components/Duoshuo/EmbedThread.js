@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 export default class EmbedThread extends React.Component {
   static propTypes = {
-    duoshuoKey: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    duoshuoKey: PropTypes.string,
+    id: PropTypes.string,
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
   };
   componentDidMount () {
-    window.DUOSHUO.EmbedThread('.ds-thread')
+    if (window.DUOSHUO) window.DUOSHUO.EmbedThread('.ds-thread')
   }
   render () {
     const { id, duoshuoKey, url, title, ...other } = this.props

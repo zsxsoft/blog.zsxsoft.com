@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react'
 export default class Extensions extends React.PureComponent {
   static propTypes = {
     type: PropTypes.string.isRequired,
-    element: PropTypes.string.isRequired,
-    duoshuoKey: PropTypes.string.isRequired,
+    element: PropTypes.string,
+    duoshuoKey: PropTypes.string,
     content: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
   };

@@ -13,7 +13,6 @@ import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
 import ShareDuoshuo from '../components/Duoshuo/Share'
 import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
 
-
 export default class Article extends Page {
 
   componentDidUpdate (prevProps, prevState) {
@@ -47,10 +46,17 @@ export default class Article extends Page {
           <div>
             <CardMedia
               expandable
-              overlay={<CardTitle title={article.Title} />}
+              overlay={<CardTitle title={article.Title} style={{
+                textShadow: '1px 1px 8px #444'
+              }} className='cardTitle' />}
               overlayContentStyle={{background: 'none'}}
             >
-              <canvas className='canvas-triangles' data-color={color} />
+              <canvas
+                className={`canvas-triangles canvas-triangle-${article.ID}`}
+                data-color={color}
+                style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}
+                height='150'
+              />
             </CardMedia>
           </div>
           <CardText>

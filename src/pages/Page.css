@@ -1,0 +1,13 @@
+
+.cardTitle > span {
+    font-size: 28px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box !important;
+    overflow: hidden;
+}
+@media only screen and (max-width: 250px) {
+    .cardTitle > span:nth-of-type(1) {
+        height: 108px;
+    }
+}

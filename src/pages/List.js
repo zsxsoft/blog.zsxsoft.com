@@ -69,9 +69,8 @@ export default class List extends Page {
                     <CardMedia
                       expandable
                       overlay={<CardTitle title={article.Title} style={{
-                        textShadow: '1px 1px 8px #444',
-                        fontSize: '28px'
-                      }} />}
+                        textShadow: '1px 1px 8px #444'
+                      }} className='cardTitle' />}
                       overlayContentStyle={{background: 'none'}}
                     >
                       <canvas

@@ -10,7 +10,6 @@ const styles = {
   large: {
     width: 32,
     height: 32,
-    margin: '0 0 0 1pc',
     position: 'fixed',
     zIndex: 8
   },

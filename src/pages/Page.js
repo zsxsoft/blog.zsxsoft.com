@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import Trianglify from 'trianglify'
 import chroma from 'chroma-js'
+import './Page.css'
 
 export default class Page extends PureComponent {
   static propTypes = {

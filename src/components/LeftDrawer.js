@@ -49,7 +49,7 @@ class LeftDrawer extends PureComponent {
       <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100}}
         onRequestChange={this.props.onRequestChange}>
         <div style={styles.logo} onClick={this.onLogoClicked}>
-          zsx's Blog
+          {window.config.title}
         </div>
         <SelectableList
           value={this.props.location.pathname}

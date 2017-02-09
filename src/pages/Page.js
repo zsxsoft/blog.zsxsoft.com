@@ -63,7 +63,11 @@ export default class Page extends PureComponent {
   }
 
   initState (props) {
-    fetch(window.config.apiUrl + props.location.pathname)
+    fetch(window.config.apiUrl + props.location.pathname, {
+      headers: {
+        'x-webp': window.isSupportWebp ? 1 : 0
+      }
+    })
       .then(data => data.json())
       .then(json => {
         if (this.state.mounted) {

@@ -1,5 +1,4 @@
 export const filterHtml = html => html.replace(/<.+>/g, '')
-export const isMobile = _ => document.body.clientWidth <= 800
 
 export function getNewListUri (originalUri, object) {
   const keys = Object.keys(object)
@@ -17,7 +16,7 @@ export function getNewListUri (originalUri, object) {
 }
 
 export function formatDate (timeString) {
-  const d = new Date(parseInt(timeString) * 1000)
+  const d = new Date(parseInt(timeString, 10) * 1000)
   return `${d.getFullYear()}/${(d.getMonth() + 1)}/${d.getDate()}`
 }
 
@@ -27,17 +26,4 @@ export function formatArticleContent (articleString) {
     return `<pre><code class="language-${newLanguage}">${code}</code></pre>`
   }).replace(/(class=".*?)prism-highlight(.+?)>([\W\w]*?)<\/pre>/ig, `$1$2><code class="$2>$3</code></pre>`)
   return content
-}
-
-export function jsonConcat () {
-  const returnJson = {}
-  Array.from(arguments).forEach((value) => {
-    Object.keys(value).forEach((key) => {
-      if (returnJson[key] === value[key]) {
-        return
-      }
-      returnJson[key] = value[key]
-    })
-  })
-  return returnJson
 }

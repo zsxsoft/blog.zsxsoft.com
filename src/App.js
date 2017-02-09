@@ -3,8 +3,6 @@ import { withRouter } from 'react-router'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import ExtensionDuoshuo from './components/Duoshuo/Extensions'
-import RaisedButton from 'material-ui/RaisedButton'
 import LeftDrawer from './components/LeftDrawer'
 import IconButton from 'material-ui/IconButton'
 import Menu from 'material-ui/svg-icons/navigation/menu'
@@ -17,7 +15,7 @@ const styles = {
     zIndex: 8
   },
   largeIcon: {
-    color: '#000000'
+    color: '#ffffff'
   },
   mainContent: {
     width: '100%',
@@ -27,7 +25,9 @@ const styles = {
     lineHeight: '2em'
   },
   main: {
-    paddingTop: 130
+    paddingTop: 100,
+    paddingLeft: '2em',
+    paddingRight: '2em'
   }
 }
 
@@ -49,7 +49,7 @@ class App extends Component {
     let result
     let reg = /<a href="([^"]*?)".*?>(.*?)<\/a>/gi
     let liContainer = []
-    while ((result = reg.exec(html)) !== null) {
+    while ((result = reg.exec(html)) !== null) { // eslint-disable-line no-cond-assign
       liContainer.push({
         text: result[2],
         url: result[1]
@@ -62,7 +62,6 @@ class App extends Component {
     const partBottom = []
     const sidebarData = {}
     data.sidebar.forEach(d => {
-      console.log(d)
       if (d.FileName === 'catalog') {
         sidebarData.categories = this.formatHtmlToData(d.Content)
       } else if (d.FileName === 'archives') {
@@ -77,11 +76,11 @@ class App extends Component {
   }
 
   handleToggle = () => {
-    this.setState({open: !this.state.open})
+    this.setState({openSidebar: !this.state.open})
   }
 
   handleLogoClicked = () => {
-      
+    location.href = 'https://www.zsxsoft.com'
   }
 
   handleListChanged = (event, value) => {
@@ -90,7 +89,7 @@ class App extends Component {
     } else {
       this.props.router.push(value)
     }
-    this.setState({open: false})
+    this.setState({openSidebar: false})
   }
 
   render () {
@@ -100,7 +99,7 @@ class App extends Component {
           <header>
             <LeftDrawer
               location={this.props.location}
-              open={this.state.open}
+              open={this.state.openSidebar}
               onLogoClicked={this.handleLogoClicked}
               onListChanged={this.handleListChanged}
               data={this.state.sidebarData}

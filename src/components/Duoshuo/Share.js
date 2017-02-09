@@ -1,5 +1,6 @@
 import React from 'react'
 import Extension from './Extensions'
+import './Share.css'
 export default class Share extends Extension {
   render () {
     const { element, type, id, duoshuoKey, url, title, content, ...other } = this.props // eslint-disable-line
@@ -13,11 +14,12 @@ export default class Share extends Extension {
       'data-url': url,
       ...other
     }
+    /* eslint-disable */
     return (
       <div {...props}>
         <div id='ds-reset'>
           <ul className='ds-share-icons-32'>
-            <li style={{ top: 8, position: 'relative' }}>分享到：</li>
+            <li style={{ top: -10, position: 'relative' }}>分享到：</li>
             <li> <a className='ds-weibo' href='javascript:void(0);' data-service='weibo' /> </li>
             <li> <a className='ds-qzone' href='javascript:void(0);' data-service='qzone' /> </li>
             <li> <a className='ds-qq' href='javascript:void(0);' data-service='qq' /> </li>
@@ -28,5 +30,6 @@ export default class Share extends Extension {
           </ul></div>
       </div>
     )
+    /* eslint-enable */
   }
 };

@@ -75,8 +75,8 @@ class App extends Component {
     })
   }
 
-  handleToggle = () => {
-    this.setState({openSidebar: !this.state.open})
+  handleRequestChange = () => {
+    this.setState({openSidebar: !this.state.openSidebar})
   }
 
   handleLogoClicked = () => {
@@ -102,11 +102,12 @@ class App extends Component {
               open={this.state.openSidebar}
               onLogoClicked={this.handleLogoClicked}
               onListChanged={this.handleListChanged}
+              onRequestChange={this.handleRequestChange}
               data={this.state.sidebarData}
             />
             <IconButton
               label='Toggle Drawer'
-              onClick={this.handleToggle}
+              onClick={this.handleRequestChange}
               style={styles.large}
               iconStyle={styles.largeIcon}
             >

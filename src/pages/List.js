@@ -85,15 +85,19 @@ export default class List extends Page {
                 </Link>
                 <CardText dangerouslySetInnerHTML={introHtml} />
                 <CardText>
-                  <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5}} />
-                  <span>{article.Author.StaticName}</span>
-                  <span style={{float: 'right', marginTop: 7}}>
-                    {formatDate(article.PostTime)} <span>in </span>
-                    <Link to={getNewListUri(this.props.location.pathname, {cate: article.Category.ID})}>{article.Category.Name}</Link>
-                    <span> / </span>
-                    <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
-                    <span> / </span>{article.ViewNums}
-                  </span>
+                  <div style={{overflow: 'hidden'}}>
+                    <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5, marginTop: -2, float: 'left'}} />
+                    <span>
+                      <span style={{float: 'left'}}>{article.Author.StaticName}</span>
+                      <span style={{float: 'right'}}>
+                        {formatDate(article.PostTime)} <span>in </span>
+                        <Link to={getNewListUri(this.props.location.pathname, {cate: article.Category.ID})}>{article.Category.Name}</Link>
+                        <span> / </span>
+                        <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
+                        <span> / </span>{article.ViewNums}
+                      </span>
+                    </span>
+                  </div>
                 </CardText>
               </Card>
             </article>

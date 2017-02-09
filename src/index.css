@@ -19,6 +19,7 @@ code, kbd {
 }
 code, kbd, pre, samp {
     font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+    overflow: auto;
 }
 .canvas-triangles {
   border-radius: 0.5em 0.5em 0 0;

@@ -48,20 +48,25 @@ export default class Article extends Page {
             <CardMedia
               expandable
               overlay={<CardTitle title={article.Title} />}
-                      >
+              overlayContentStyle={{background: 'none'}}
+            >
               <canvas className='canvas-triangles' data-color={color} />
             </CardMedia>
           </div>
           <CardText>
-            <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5}} />
-            <span>{article.Author.StaticName}</span>
-            <span style={{float: 'right', marginTop: 7}}>
-              {formatDate(article.PostTime)} <span>in </span>
-              <span>{article.Category.Name}</span>
-              <span> / </span>
-              <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
-              <span> / </span>{article.ViewNums}
-            </span>
+            <div style={{overflow: 'hidden'}}>
+              <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5, marginTop: -2, float: 'left'}} />
+              <span>
+                <span style={{float: 'left'}}>{article.Author.StaticName}</span>
+                <span style={{float: 'right'}}>
+                  {formatDate(article.PostTime)} <span>in </span>
+                  <span>{article.Category.Name}</span>
+                  <span> / </span>
+                  <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
+                  <span> / </span>{article.ViewNums}
+                </span>
+              </span>
+            </div>
           </CardText>
           <CardText>
             <article dangerouslySetInnerHTML={contentHtml} />

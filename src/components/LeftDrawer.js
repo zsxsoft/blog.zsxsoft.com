@@ -26,6 +26,7 @@ class LeftDrawer extends PureComponent {
     open: PropTypes.bool.isRequired,
     onLogoClicked: PropTypes.func.isRequired,
     onListChanged: PropTypes.func.isRequired,
+    onRequestChange: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
   }
@@ -46,7 +47,7 @@ class LeftDrawer extends PureComponent {
     const categories = !this.props.data || !this.props.data.categories ? [] : this.props.data.categories
     return (
       <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100}}
-        onRequestChange={open => this.setState({open})}>
+        onRequestChange={this.props.onRequestChange}>
         <div style={styles.logo} onClick={this.onLogoClicked}>
           zsx's Blog
         </div>
@@ -58,20 +59,18 @@ class LeftDrawer extends PureComponent {
           <ListItem primaryText='GitHub' value='https://github.com/zsxsoft' />
           <ListItem primaryText='About' value='/post/9' />
           <Divider />
-          <ListItem primaryText='Archives'
+          <ListItem primaryText={`Archives (${archives.length})`}
             primaryTogglesNestedList
             nestedItems={archives.map(archive =>
               <ListItem primaryText={archive.text} value={archive.url} />
             )}
           />
-          <ListItem primaryText='Categories'
+          <ListItem primaryText={`Categories (${categories.length})`}
             primaryTogglesNestedList
             nestedItems={categories.map(category =>
               <ListItem primaryText={category.text} value={category.url} />
             )}
           />
-          <Divider />
-          <ListItem primaryText='CC' />
         </SelectableList>
       </Drawer>
     )

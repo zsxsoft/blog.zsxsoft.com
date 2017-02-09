@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/zsxsoft/blog.zsxsoft.com/issues"
   },
-  "homepage": "https://github.com/zsxsoft/blog.zsxsoft.com#readme",
+  "homepage": "/",
   "dependencies": {
     "animated-scrollto": "^1.1.0",
     "bezier-easing": "^2.0.3",

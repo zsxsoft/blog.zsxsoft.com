@@ -25,37 +25,49 @@ class LeftDrawer extends PureComponent {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     onLogoClicked: PropTypes.func.isRequired,
-    data: PropTypes.object.isRequired
+    onListChanged: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
   }
 
-  onListChanged = () => {
+  constructor (props) {
+    super(props)
+    this.state = {open: props.open}
+  }
 
+  componentWillReceiveProps (nextProps) {
+    this.setState({
+      open: nextProps.open
+    })
   }
 
   render () {
     const archives = !this.props.data || !this.props.data.archives ? [] : this.props.data.archives
     const categories = !this.props.data || !this.props.data.categories ? [] : this.props.data.categories
     return (
-      <Drawer open={this.props.open} containerStyle={{zIndex: zIndex.drawer - 100}}>
+      <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100}}
+        onRequestChange={open => this.setState({open})}>
         <div style={styles.logo} onClick={this.onLogoClicked}>
           zsx's Blog
         </div>
         <SelectableList
-          value={location.pathname}
-          onChange={this.onListChanged}
+          value={this.props.location.pathname}
+          onChange={this.props.onListChanged}
         >
-          <ListItem primaryText='Index' />
-          <ListItem primaryText='GitHub' />
-          <ListItem primaryText='About' />
+          <ListItem primaryText='Index' value='/' />
+          <ListItem primaryText='GitHub' value='https://github.com/zsxsoft' />
+          <ListItem primaryText='About' value='/post/9' />
           <Divider />
           <ListItem primaryText='Archives'
+            primaryTogglesNestedList
             nestedItems={archives.map(archive =>
-              <ListItem primaryText={archive.text} />
+              <ListItem primaryText={archive.text} value={archive.url} />
             )}
           />
           <ListItem primaryText='Categories'
+            primaryTogglesNestedList
             nestedItems={categories.map(category =>
-              <ListItem primaryText={category.text} />
+              <ListItem primaryText={category.text} value={category.url} />
             )}
           />
           <Divider />

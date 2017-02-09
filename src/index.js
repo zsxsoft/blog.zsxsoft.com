@@ -6,5 +6,5 @@ import './index.css'
 injectTapEventPlugin()
 ReactDOM.render(
   Router,
-  document.getElementById('root')
+  document.getElementById('app--root')
 )

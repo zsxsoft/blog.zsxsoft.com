@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { Link } from 'react-router'
 import {formatDate, isMobile, filterHtml, getNewListUri, jsonConcat, formatArticleContent} from '../utils'
+import Page from './Page'
 import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
 import ShareDuoshuo from '../components/Duoshuo/Share'
 import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
@@ -9,65 +10,45 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import Avatar from 'material-ui/Avatar'
 import FlatButton from 'material-ui/FlatButton'
 import TouchRipple from 'material-ui/internal/TouchRipple'
-import Trianglify from 'trianglify'
+import Style from 'style-it'
+import chroma from 'chroma-js'
 
-export default class Article extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      data: {},
-      mounted: false
-    }
-    this.initState(props)
-  }
-  componentWillMount () {
-    this.setState({ mounted: true })
-  }
-  componentDidMount () {
-    document.title = '文章列表 - ' + window.config.title
-  }
+export default class Article extends Page {
 
-  componentDidUpdate () {
-    Array.from(document.querySelectorAll('.canvas-triangles')).forEach(e => {
-      const pattern = Trianglify({width: 900, height: 200})
-      pattern.canvas(e)
-    })
-
+  componentDidUpdate (prevProps, prevState) {
+    super.componentDidUpdate(prevProps, prevState)
       /* window.doListLoaded()
       window.doGlobal() */
-  }
-  componentWillUnmount () {
-    this.setState({ mounted: false })
-  }
-  componentWillReceiveProps (props) {
-    this.initState(props)
-  }
-  initState (props) {
-    fetch(window.config.apiUrl + props.location.pathname).then((data) => {
-      return data.json()
-    }).then(json => {
-      if (this.state.mounted) {
-        this.setState({ data: json })
-      }
-    })
   }
 
   render () {
     const data = this.state.data
+    const color = this.colors[parseInt(Math.random() * this.colors.length)]
     const article = data.article
+    const brewer = chroma.brewer[color]
     if (!article) return (<section>Please wait...</section>)
     const contentHtml = {__html: formatArticleContent(article.Content)}
-    const linkTo = '/post/' + article.ID
-
-    return (<div>
-      <Card style={{marginBottom: '1em'}}>
+    document.title = article.Title + ' - zsx\'s Blog'
+    return (<Style>
+      {`
+        .card-${article.ID} a {
+          color: ${brewer[brewer.length - 1]};
+        }
+        .card-${article.ID} a:hover {
+          color: ${brewer[brewer.length - 2]};
+        }
+        .card-${article.ID} a:active {
+          color: ${brewer[brewer.length - 3]};
+        }
+      `}
+      <Card style={{marginBottom: '1em', borderRadius: '0.5em'}} className={`card-${article.ID}`}>
         <div>
-            <CardMedia
+          <CardMedia
             expandable
             overlay={<CardTitle title={article.Title} />}
                     >
-            <canvas className='canvas-triangles' />
-            </CardMedia>
+            <canvas className='canvas-triangles' data-color={color} />
+          </CardMedia>
         </div>
         <CardText>
           <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5}} />
@@ -88,7 +69,7 @@ export default class Article extends PureComponent {
           <EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} />
         </CardText>
       </Card>
-    </div>)
+    </Style>)
   }
 
 }

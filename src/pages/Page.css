@@ -6,6 +6,10 @@
     display: -webkit-box !important;
     overflow: hidden;
 }
+.canvas-triangles {
+    opacity: 0;
+    transition: opacity 3s;
+}
 @media only screen and (max-width: 250px) {
     .cardTitle > span:nth-of-type(1) {
         height: 108px;

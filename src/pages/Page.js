@@ -60,6 +60,7 @@ export default class Page extends PureComponent {
   trianglify (e) {
     const pattern = Trianglify({width: 900, height: 150, x_colors: e.getAttribute('data-color')})
     pattern.canvas(e)
+    e.style.opacity = 1
   }
 
   initState (props) {

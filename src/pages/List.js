@@ -73,12 +73,13 @@ export default class List extends Page {
                       }} className='cardTitle' />}
                       overlayContentStyle={{background: 'none'}}
                     >
-                      <canvas
-                        className={`canvas-triangles canvas-triangle-${article.ID}`}
-                        data-color={color}
-                        style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}
-                        height='150'
-                      />
+                      <div className='canvas-background' style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}>
+                        <canvas
+                          className={`canvas-triangles canvas-triangle-${article.ID}`}
+                          data-color={color}
+                          height='150'
+                        />
+                      </div>
                     </CardMedia>
                   </TouchRipple>
                 </Link>

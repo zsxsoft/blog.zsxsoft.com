@@ -128,7 +128,7 @@ class App extends Component {
               })}
             </section>
           </section>
-          <FloatingActionButton style={{position: 'absolute', right: '3em'}} onClick={animateToTop}>
+          <FloatingActionButton style={{position: 'fixed', right: '3em', bottom: '3em'}} onClick={animateToTop}>
             <Top />
           </FloatingActionButton>
         </main>

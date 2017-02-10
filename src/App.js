@@ -1,11 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { withRouter } from 'react-router'
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
+
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import LeftDrawer from './components/LeftDrawer'
 import IconButton from 'material-ui/IconButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Menu from 'material-ui/svg-icons/navigation/menu'
+import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
+
+import LeftDrawer from './components/LeftDrawer'
+import { animateToTop } from './utils/scroll'
+import Theme from './Theme'
+
 const styles = {
   large: {
     width: 32,
@@ -94,7 +100,7 @@ class App extends Component {
 
   render () {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <MuiThemeProvider muiTheme={getMuiTheme(Theme)}>
         <main>
           <header>
             <LeftDrawer
@@ -122,6 +128,9 @@ class App extends Component {
               })}
             </section>
           </section>
+          <FloatingActionButton style={{position: 'absolute', right: '3em'}} onClick={animateToTop}>
+            <Top />
+          </FloatingActionButton>
         </main>
       </MuiThemeProvider>
     )

@@ -4,10 +4,10 @@ export default class Extensions extends React.PureComponent {
     type: PropTypes.string.isRequired,
     element: PropTypes.string,
     duoshuoKey: PropTypes.string,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.string,
     id: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    url: PropTypes.string,
+    title: PropTypes.string
   };
   componentDidMount () {
     const duoshuoType = `ds-${this.props.type}`

@@ -4,7 +4,7 @@ import { List, ListItem, makeSelectable } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import {spacing, typography, zIndex} from 'material-ui/styles'
 import ExtensionDuoshuo from './Duoshuo/Extensions'
-import {grey800} from 'material-ui/styles/colors'
+import { grey800 } from 'material-ui/styles/colors'
 
 const SelectableList = makeSelectable(List)
 
@@ -76,6 +76,7 @@ class LeftDrawer extends PureComponent {
           <Divider />
           {Object.keys(others).map(k => (
             <ListItem primaryText={others[k].Name}
+              key={k}
               primaryTogglesNestedList
               initiallyOpen
               nestedItems={[

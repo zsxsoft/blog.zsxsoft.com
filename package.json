@@ -21,7 +21,7 @@
   "homepage": "/",
   "dependencies": {
     "animated-scrollto": "^1.1.0",
-    "bezier-easing": "^2.0.3",
+    "dynamics.js": "^1.1.5",
     "material-ui": "^0.16.7",
     "rc-queue-anim": "^0.13.0",
     "rc-scroll-anim": "^0.6.2",

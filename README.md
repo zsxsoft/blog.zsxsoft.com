@@ -7,7 +7,7 @@ blog.zsxsoft.com
 The source code of blog.zsxsoft.com
 
 ## Run
-``npm run dev``
+``npm start``
 
 ## Build
 ``npm run build``

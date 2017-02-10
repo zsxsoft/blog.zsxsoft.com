@@ -58,15 +58,16 @@ class App extends Component {
   }
 
   handleDataUpdate = (data) => {
-    const partBottom = []
-    const sidebarData = {}
+    const sidebarData = {
+      others: {}
+    }
     data.sidebar.forEach(d => {
       if (d.FileName === 'catalog') {
         sidebarData.categories = this.formatHtmlToData(d.Content)
       } else if (d.FileName === 'archives') {
         sidebarData.archives = this.formatHtmlToData(d.Content)
       } else {
-        partBottom.push(d)
+        sidebarData.others[d.FileName] = d
       }
     })
     this.setState({

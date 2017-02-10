@@ -3,6 +3,7 @@ import Drawer from 'material-ui/Drawer'
 import { List, ListItem, makeSelectable } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import {spacing, typography, zIndex} from 'material-ui/styles'
+import ExtensionDuoshuo from './Duoshuo/Extensions'
 import {grey800} from 'material-ui/styles/colors'
 
 const SelectableList = makeSelectable(List)
@@ -45,6 +46,7 @@ class LeftDrawer extends PureComponent {
   render () {
     const archives = !this.props.data || !this.props.data.archives ? [] : this.props.data.archives
     const categories = !this.props.data || !this.props.data.categories ? [] : this.props.data.categories
+    const others = !this.props.data || !this.props.data.others ? {} : this.props.data.others
     return (
       <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100}}
         onRequestChange={this.props.onRequestChange}>
@@ -62,15 +64,30 @@ class LeftDrawer extends PureComponent {
           <ListItem primaryText={`Archives (${archives.length})`}
             primaryTogglesNestedList
             nestedItems={archives.map(archive =>
-              <ListItem primaryText={archive.text} value={archive.url} />
+              <ListItem key={archive.text} primaryText={archive.text} value={archive.url} />
             )}
           />
           <ListItem primaryText={`Categories (${categories.length})`}
             primaryTogglesNestedList
             nestedItems={categories.map(category =>
-              <ListItem primaryText={category.text} value={category.url} />
+              <ListItem key={category.text} primaryText={category.text} value={category.url} />
             )}
           />
+          <Divider />
+          {Object.keys(others).map(k => (
+            <ListItem primaryText={others[k].Name}
+              primaryTogglesNestedList
+              initiallyOpen
+              nestedItems={[
+                <div key={k} style={{marginLeft: '1em', marginRight: '1em'}}>
+                  {others[k].HtmlID.slice(0, 3) === 'ds-'
+                    ? <ExtensionDuoshuo type={others[k].HtmlID.slice(3)} data-num-items={others[k].MaxLi} />
+                    : <div dangerouslySetInnerHTML={{__html: others[k].Content}} />
+                  }
+                </div>
+              ]}
+            />
+          ))}
         </SelectableList>
       </Drawer>
     )

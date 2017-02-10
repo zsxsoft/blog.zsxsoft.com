@@ -12,6 +12,7 @@ import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
 import TouchRipple from 'material-ui/internal/TouchRipple'
 import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
+import Waiting from '../components/Waiting'
 
 import './List.css'
 
@@ -42,9 +43,9 @@ export default class List extends Page {
 
   render () {
     const data = this.state.data
-    if (!data) return (<section>Please wait...</section>)
+    if (!data) return (<Waiting />)
     return (<div>
-      {!data.articles ? 'Please wait...' : <div><QueueAnim onEnd={this.handleAnimationEnd}>
+      {!data.articles ? <Waiting /> : <div><QueueAnim onEnd={this.handleAnimationEnd}>
         {data.articles.map((article) => {
           const introHtml = {__html: article.Intro}
           const linkTo = '/post/' + article.ID

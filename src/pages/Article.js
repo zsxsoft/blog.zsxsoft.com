@@ -12,6 +12,7 @@ import Avatar from 'material-ui/Avatar'
 import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
 import ShareDuoshuo from '../components/Duoshuo/Share'
 import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
+import Waiting from '../components/Waiting'
 
 export default class Article extends Page {
 
@@ -26,7 +27,7 @@ export default class Article extends Page {
     const color = this.colors[parseInt(Math.random() * this.colors.length, 10)]
     const article = data.article
     const brewer = chroma.brewer[color]
-    if (!article) return (<section>Please wait...</section>)
+    if (!article) return <Waiting />
     const contentHtml = {__html: formatArticleContent(article.Content)}
     document.title = article.Title + ' - zsx\'s Blog'
     return (<Style>

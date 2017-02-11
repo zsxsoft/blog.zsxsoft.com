@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import Style from 'style-it'
 import chroma from 'chroma-js'
-// import QueueAnim from 'rc-queue-anim'
+import QueueAnim from 'rc-queue-anim'
 
 import {formatDate, filterHtml, getNewListUri} from '../utils'
 import Page from './Page'
@@ -22,7 +22,7 @@ export default class List extends Page {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    super.componentDidUpdate(prevProps, prevState)
+    // super.componentDidUpdate(prevProps, prevState)
     window.doListLoaded()
     window.doGlobal()
   }
@@ -45,7 +45,7 @@ export default class List extends Page {
     const data = this.state.data
     if (!data) return (<Waiting />)
     return (<div>
-      {!data.articles ? <Waiting /> : <div>{/* <QueueAnim onEnd={this.handleAnimationEnd}> */}
+      {!data.articles ? <Waiting /> : <div><QueueAnim onEnd={this.handleAnimationEnd}>
         {data.articles.map((article) => {
           const introHtml = {__html: article.Intro}
           const linkTo = '/post/' + article.ID
@@ -75,7 +75,7 @@ export default class List extends Page {
                       overlayContentStyle={{background: 'none'}}
                     >
                       <div className='canvas-background' style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}>
-                        <canvas
+                        <div
                           className={`canvas-triangles canvas-triangle-${article.ID}`}
                           data-color={color}
                           height='150'
@@ -104,7 +104,7 @@ export default class List extends Page {
             </article>
           </Style>
         })
-      }{/* </QueueAnim> */}
+      }</QueueAnim>
         <div>
           <Link to={this.pageTo(-1)}><FlatButton primary label='Prev' /></Link>
           <Link to={this.pageTo(1)}><FlatButton primary label='Next' style={{float: 'right'}} /></Link>

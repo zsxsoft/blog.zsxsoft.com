@@ -1,6 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-import Trianglify from 'trianglify'
-import chroma from 'chroma-js'
+// import Trianglify from 'trianglify'
 import './Page.css'
 
 export default class Page extends PureComponent {
@@ -15,7 +14,7 @@ export default class Page extends PureComponent {
       dataLoaded: false,
       mounted: false
     }
-    this.colors = Object.keys(chroma.brewer).filter(p => p !== 'Pastel1')
+    this.colors = ['Blues', 'BrBG', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PiYG', 'PRGn', 'PuBuGn', 'Purples', 'PuRd', 'RdPu', 'RdYlBu', 'RdYlGn', 'Reds', 'Set3', 'Spectral', 'YlGn', 'YlGnBu', 'YlOrBr']
     this.initState(props)
   }
 
@@ -58,9 +57,13 @@ export default class Page extends PureComponent {
   }
 
   trianglify (e) {
+    e.style.opacity = 1
+    e.style.backgroundImage = `url(//static-up.zsxsoft.com/blog/triangles/${e.getAttribute('data-color')}.png)`
+    /*
     const pattern = Trianglify({width: 900, height: 150, x_colors: e.getAttribute('data-color')})
     pattern.canvas(e)
     e.style.opacity = 1
+    */
   }
 
   initState (props) {

@@ -52,7 +52,7 @@ export default class Article extends Page {
               }} className='cardTitle' />}
               overlayContentStyle={{background: 'none'}}
             >
-              <canvas
+              <div
                 className={`canvas-triangles canvas-triangle-${article.ID}`}
                 data-color={color}
                 style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}

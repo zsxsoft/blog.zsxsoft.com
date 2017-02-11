@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-// import Trianglify from 'trianglify'
+import Trianglify from 'trianglify'
 import './Page.css'
 
 export default class Page extends PureComponent {
@@ -57,13 +57,11 @@ export default class Page extends PureComponent {
   }
 
   trianglify (e) {
-    e.style.opacity = 1
-    e.style.backgroundImage = `url(//static-up.zsxsoft.com/blog/triangles/${e.getAttribute('data-color')}.png)`
-    /*
+    // e.style.opacity = 1
+    // e.style.backgroundImage = `url(//static-up.zsxsoft.com/blog/triangles/${e.getAttribute('data-color')}.png)`
     const pattern = Trianglify({width: 900, height: 150, x_colors: e.getAttribute('data-color')})
-    pattern.canvas(e)
+    e.style.backgroundImage = `url(${pattern.png()})`
     e.style.opacity = 1
-    */
   }
 
   initState (props) {

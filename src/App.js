@@ -24,7 +24,7 @@ const styles = {
   },
   mainContent: {
     width: '100%',
-    maxWidth: '900px',
+    maxWidth: 1024,
     margin: '0 auto',
     opacity: '0.9',
     lineHeight: '2em'

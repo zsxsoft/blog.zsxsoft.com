@@ -58,6 +58,7 @@ class LeftDrawer extends PureComponent {
           onChange={this.props.onListChanged}
         >
           <ListItem primaryText='Index' value='/' />
+          <ListItem primaryText='GuestBook' value='/post/2' />
           <ListItem primaryText='GitHub' value='https://github.com/zsxsoft' />
           <ListItem primaryText='About' value='/post/9' />
           <Divider />

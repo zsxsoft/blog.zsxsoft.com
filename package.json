@@ -22,23 +22,23 @@
   "dependencies": {
     "animated-scrollto": "^1.1.0",
     "dynamics.js": "^1.1.5",
-    "material-ui": "^0.16.7",
-    "rc-queue-anim": "^0.13.0",
-    "rc-scroll-anim": "^0.6.2",
+    "material-ui": "^0.17.1",
+    "rc-queue-anim": "^0.13.2",
+    "rc-scroll-anim": "^0.6.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
     "react-tap-event-plugin": "^2.0.1",
-    "style-it": "^1.5.5",
+    "style-it": "^1.6.7",
     "trianglify": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
-    "eslint": "^3.15.0",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-config-standard-react": "^4.2.0",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "react-scripts": "0.8.5"
+    "eslint": "^3.18.0",
+    "eslint-config-standard": "^7.1.0",
+    "eslint-config-standard-react": "^4.3.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^2.1.1",
+    "react-scripts": "0.9.5"
   }
 }

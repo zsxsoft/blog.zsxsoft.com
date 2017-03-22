@@ -49,7 +49,7 @@ export default class List extends Page {
         {data.articles.map((article) => {
           const introHtml = {__html: article.Intro}
           const linkTo = '/post/' + article.ID
-          const color = this.colors[parseInt(Math.random() * this.colors.length, 10)]
+          const color = this.colors[parseInt(article.ID, 10) % this.colors.length]
           const brewer = chroma.brewer[color]
           const lastBrewer = brewer[brewer.length - 1]
           const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`

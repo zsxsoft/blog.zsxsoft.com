@@ -23,8 +23,8 @@ export default class Article extends Page {
 
   render () {
     const data = this.state.data
-    const color = this.colors[parseInt(Math.random() * this.colors.length, 10)]
     const article = data.article
+    const color = this.colors[parseInt(article.ID, 10) % this.colors.length]
     const brewer = chroma.brewer[color]
     const lastBrewer = brewer[brewer.length - 1]
     const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`

@@ -14,7 +14,7 @@ export default class Page extends PureComponent {
       dataLoaded: false,
       mounted: false
     }
-    this.colors = ['Blues', 'BrBG', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PiYG', 'PuBuGn', 'Purples', 'PuRd', 'RdPu', 'Reds', 'Set3', 'Spectral', 'YlGn', 'YlGnBu', 'YlOrBr']
+    this.colors = ['Blues', 'BrBG', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PuBuGn', 'Purples', 'PuRd', 'RdPu', 'Reds', 'Set3', 'YlGn', 'YlGnBu', 'YlOrBr']
     this.initState(props)
   }
 

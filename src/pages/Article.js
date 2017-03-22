@@ -24,11 +24,11 @@ export default class Article extends Page {
   render () {
     const data = this.state.data
     const article = data.article
+    if (!article) return <Waiting />
     const color = this.colors[parseInt(article.ID, 10) % this.colors.length]
     const brewer = chroma.brewer[color]
     const lastBrewer = brewer[brewer.length - 1]
     const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`
-    if (!article) return <Waiting />
     const contentHtml = {__html: formatArticleContent(article.Content)}
     document.title = article.Title + ' - zsx\'s Blog'
     return (<Style>

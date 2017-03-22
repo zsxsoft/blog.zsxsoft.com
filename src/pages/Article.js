@@ -12,6 +12,7 @@ import Avatar from 'material-ui/Avatar'
 import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
 import ShareDuoshuo from '../components/Duoshuo/Share'
 import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
+import Comment from '../components/Comment'
 import Waiting from '../components/Waiting'
 
 export default class Article extends Page {
@@ -81,7 +82,7 @@ export default class Article extends Page {
             <ShareDuoshuo type='share' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
           </CardText>
           <CardText>
-            <EmbedDuoshuo duoshuoKey={article.ID} title={article.Title} url={article.Url} />
+            <Comment comments={article.Comments} />
           </CardText>
         </Card>
         <div>

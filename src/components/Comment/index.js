@@ -3,6 +3,7 @@ import { Card, CardHeader, CardText } from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar'
 import Post from './Post'
 import {formatDate} from '../../utils'
+import {animateToPosition, getElementPosition} from '../../utils/scroll'
 
 export default class Comments extends React.Component {
   static propTypes = {
@@ -19,7 +20,11 @@ export default class Comments extends React.Component {
     }
   }
 
-  handleRevertClicked = (comment) => () => this.setState({revertComment: comment})
+  handleRevertClicked = (comment) => () => {
+    const elementPosition = getElementPosition(document.getElementById('comment-post'))
+    animateToPosition(elementPosition.y)
+    this.setState({revertComment: comment})
+  }
 
   makeComments = (comments, isChild = false) => comments.map(comment =>
     <Card className='comment' key={comment.ID} style={{

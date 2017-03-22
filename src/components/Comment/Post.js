@@ -120,7 +120,7 @@ export default class CommentPost extends PureComponent {
 
   render () {
     return (<Card style={{backgroundColor: 'auto'}}>
-      <form>
+      <form id='comment-post'>
         {this.props.revertComment
         ? <CardText style={{paddingBottom: 0}}>
           正在回复：{this.props.revertComment.Name} 说的 “{this.props.revertComment.Content.substr(0, 10)}...”。

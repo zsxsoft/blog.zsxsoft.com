@@ -1,5 +1,11 @@
 import dynamics from 'dynamics.js'
-window.dynamics = dynamics
+
+export const getElementPosition = (element) => {
+  let el = element
+  for (var lx = 0, ly = 0; el !== null; lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+  return {x: lx, y: ly}
+}
+
 export const animateToPosition = (to = 0, elementArgument = null, time = 1000) => {
   let element = null
   if (elementArgument === null) {

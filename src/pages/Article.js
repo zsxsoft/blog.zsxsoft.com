@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import { Card, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 
 import {formatDate, filterHtml, formatArticleContent} from '../utils'
@@ -16,6 +16,15 @@ export default class Article extends Page {
     super.componentDidUpdate(prevProps, prevState)
     window.doArticleLoaded()
     window.doGlobal()
+  }
+
+  handleCommentPosted = () => {
+    this.initState(this.props).then(() => {
+      // Have to do there
+      // Because PureCompoennt's shouldComponentUpdate only compare shallow
+      // Too lazy to build a new scu function
+      this.forceUpdate()
+    })
   }
 
   render () {
@@ -57,7 +66,7 @@ export default class Article extends Page {
             }} />
           </CardText>
           <CardText>
-            <Comment comments={article.Comments} />
+            <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} onRevertClicked={this.handleRevertClicked} postArea article={article} />
           </CardText>
         </CardWithHeader>
         <div>

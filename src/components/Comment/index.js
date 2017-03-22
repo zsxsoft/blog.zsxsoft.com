@@ -1,38 +1,28 @@
 import React, { PropTypes } from 'react'
-import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
+import { Card, CardHeader, CardText } from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar'
-import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors'
+import Post from './Post'
 import {formatDate} from '../../utils'
 
-const iconButtonElement = (
-  <IconButton
-    touch
-    tooltip='more'
-    tooltipPosition='bottom-left'
-  >
-    <MoreVertIcon color={grey400} />
-  </IconButton>
-)
-
-const rightIconMenu = (
-  <IconMenu iconButtonElement={iconButtonElement}>
-    <MenuItem>Reply</MenuItem>
-    <MenuItem>Forward</MenuItem>
-    <MenuItem>Delete</MenuItem>
-  </IconMenu>
-)
-
-export default class Comments extends React.PureComponent {
+export default class Comments extends React.Component {
   static propTypes = {
-    comments: PropTypes.array.isRequired
+    article: PropTypes.object.isRequired,
+    comments: PropTypes.array.isRequired,
+    onCommentPosted: PropTypes.func.isRequired,
+    postArea: PropTypes.bool.isRequired
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      revertComment: null
+    }
+  }
+
+  handleRevertClicked = (comment) => () => this.setState({revertComment: comment})
+
   makeComments = (comments, isChild = false) => comments.map(comment =>
-    <Card className='comment' style={{
+    <Card className='comment' key={comment.ID} style={{
       backgroundColor: 'auto',
       width: isChild ? '90%' : '100%',
       marginLeft: isChild ? '3rem' : 'auto',
@@ -42,11 +32,11 @@ export default class Comments extends React.PureComponent {
       <CardHeader title={
         <span>
           <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
-          <a style={{marginLeft: '1rem'}}href='javascript:;'>[回复]</a>
+          <a style={{marginLeft: '1rem'}} href={'ja' + 'vascript:;'} onClick={this.handleRevertClicked(comment)}>[回复]</a>
         </span>
       }
         subtitle={
-          <span className='useragent-js' data-useragent={comment.Agent } />
+          <span className='useragent-js' data-useragent={comment.Agent} />
         }
         style={{
           paddingBottom: 0
@@ -58,13 +48,15 @@ export default class Comments extends React.PureComponent {
         color: '#ffffff'
       }} dangerouslySetInnerHTML={{__html: comment.Content}} />
       {this.makeComments(comment.Comments, true)}
-      <footer />
     </Card>
       )
 
   render () {
     return (<div>
       {this.makeComments(this.props.comments)}
+      {this.props.postArea
+        ? <Post article={this.props.article} onPosted={this.props.onCommentPosted} revertComment={this.state.revertComment} onRevertClicked={this.handleRevertClicked(null)} />
+        : null}
     </div>)
   }
   /*

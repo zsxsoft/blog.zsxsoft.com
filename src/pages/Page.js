@@ -64,7 +64,7 @@ export default class Page extends PureComponent {
   }
 
   initState (props) {
-    fetch(window.config.apiUrl + props.location.pathname, {
+    return fetch(window.config.apiUrl + props.location.pathname, {
       headers: {
         'x-webp': window.isSupportWebp ? 1 : 0
       }
@@ -77,6 +77,7 @@ export default class Page extends PureComponent {
             dataLoaded: true
           })
           this.props.onDataUpdate(json)
+          return json
         }
       })
   }

@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 import QueueAnim from 'rc-queue-anim'
 
-import {formatDate, filterHtml, getNewListUri} from '../utils'
+import {formatDate, getNewListUri} from '../utils'
 import Page from './Page'
 
 import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
-import TouchRipple from 'material-ui/internal/TouchRipple'
 import Waiting from '../components/Waiting'
 
 import './List.css'
@@ -47,7 +46,7 @@ export default class List extends Page {
         <QueueAnim onEnd={this.handleAnimationEnd}>
           {data.articles.map((article) => (
             <article key={article.ID} className={`card-${article.ID}`}>
-              <CardWithHeader id={parseInt(article.ID)} link={'/post/' + article.ID} title={article.Title}>
+              <CardWithHeader id={parseInt(article.ID, 10)} link={'/post/' + article.ID} title={article.Title}>
                 <CardText style={{color: '#ffffff'}} dangerouslySetInnerHTML={{__html: article.Intro}} />
                 <CardText>
                   <div style={{overflow: 'hidden'}}>

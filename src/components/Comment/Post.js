@@ -1,7 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { Card, CardActions, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
-import Snackbar from 'material-ui/Snackbar'
 import TextField from 'material-ui/TextField'
 
 const textFieldStyle = {
@@ -69,6 +68,9 @@ export default class CommentPost extends PureComponent {
     const {name, email, url} = this.state
     const content = this.state[`content-${article.ID}`]
     const revertCommentId = revertComment === null ? 0 : revertComment.ID
+    if (!content) {
+      return this.setButtonText('评论内容不能为空')
+    }
     if (!/^[._A-Za-z0-9\u4e00-\u9fa5ぁ-んァ-ヶ]+$/ig.test(this.state.name)) {
       return this.setButtonText('名字只允许数字、英文字母、汉字、日文')
     }
@@ -122,7 +124,9 @@ export default class CommentPost extends PureComponent {
         {this.props.revertComment
         ? <CardText style={{paddingBottom: 0}}>
           正在回复：{this.props.revertComment.Name} 说的 “{this.props.revertComment.Content.substr(0, 10)}...”。
-          <a href={'ja' + 'vascript:;'} onClick={this.handleCancel}>[取消]</a>
+          <a
+            href={'ja' + 'vascript:;'} // eslint-disable-line
+            onClick={this.handleCancel}>[取消]</a>
         </CardText>
         : null
       }
@@ -140,11 +144,4 @@ export default class CommentPost extends PureComponent {
       </form>
     </Card>)
   }
-  /*
-        <div>
-        <span className='comment--name'></span>
-
-        <span className='comment--revert'>回复</span>
-      </div>
-       */
 }

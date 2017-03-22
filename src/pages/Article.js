@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Card, CardMedia, CardTitle, CardText, CardActions } from 'material-ui/Card'
+import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 
-import {formatDate, filterHtml, formatArticleContent} from '../utils'
+import {formatDate, formatArticleContent} from '../utils'
 import Page from './Page'
 
 import FlatButton from 'material-ui/FlatButton'

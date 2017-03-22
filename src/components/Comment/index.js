@@ -32,7 +32,10 @@ export default class Comments extends React.Component {
       <CardHeader title={
         <span>
           <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
-          <a style={{marginLeft: '1rem'}} href={'ja' + 'vascript:;'} onClick={this.handleRevertClicked(comment)}>[回复]</a>
+          <a
+            style={{marginLeft: '1rem'}}
+            href={'ja' + 'vascript:;'} // eslint-disable-line
+            onClick={this.handleRevertClicked(comment)}>[回复]</a>
         </span>
       }
         subtitle={

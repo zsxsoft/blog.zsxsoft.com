@@ -47,7 +47,10 @@ export default class Article extends Page {
           </CardText>
           <CardText>
             <article style={{color: '#ffffff'}} dangerouslySetInnerHTML={contentHtml} />
-            <ShareDuoshuo type='share' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
+            <div className='social-share' style={{
+              margin: '0 auto',
+              textAlign: 'center'
+            }} />
           </CardText>
           <CardText>
             <Comment comments={article.Comments} />

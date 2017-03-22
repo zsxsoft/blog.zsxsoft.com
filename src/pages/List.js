@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
-import Style from 'style-it'
-import chroma from 'chroma-js'
+import CardWithHeader from '../components/CardWithHeader'
 import QueueAnim from 'rc-queue-anim'
 
 import {formatDate, filterHtml, getNewListUri} from '../utils'
@@ -44,48 +43,12 @@ export default class List extends Page {
     const data = this.state.data
     if (!data) return (<Waiting />)
     return (<div>
-      {!data.articles ? <Waiting /> : <div><QueueAnim onEnd={this.handleAnimationEnd}>
-        {data.articles.map((article) => {
-          const introHtml = {__html: article.Intro}
-          const linkTo = '/post/' + article.ID
-          const color = this.colors[parseInt(article.ID, 10) % this.colors.length]
-          const brewer = chroma.brewer[color]
-          const lastBrewer = brewer[brewer.length - 1]
-          const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`
-          return <Style key={article.ID}>
-            {`
-              .card-${article.ID} a {
-                color: ${brewer[1]};
-              }
-              .card-${article.ID} a:hover {
-                color: ${brewer[2]};
-              }
-              .card-${article.ID} a:active {
-                color: ${brewer[3]};
-              }
-            `}
+      {!data.articles ? <Waiting /> : <div>
+        <QueueAnim onEnd={this.handleAnimationEnd}>
+          {data.articles.map((article) => (
             <article key={article.ID} className={`card-${article.ID}`}>
-              <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.5)`}}>
-                <Link to={linkTo} style={{display: 'block', position: 'relative'}} className='titleWrapper'>
-                  <TouchRipple style={{zIndex: 1000}}>
-                    <CardMedia
-                      expandable
-                      overlay={<CardTitle title={article.Title} style={{
-                        textShadow: '1px 1px 8px #444'
-                      }} className='cardTitle' />}
-                      overlayContentStyle={{background: 'none'}}
-                    >
-                      <div className='canvas-background' style={{opacity: 0.5, height: 150, backgroundColor: brewer[brewer.length - 1]}}>
-                        <div
-                          className={`canvas-triangles canvas-triangle-${article.ID}`}
-                          data-color={color}
-                          height='150'
-                        />
-                      </div>
-                    </CardMedia>
-                  </TouchRipple>
-                </Link>
-                <CardText style={{color: '#ffffff'}} dangerouslySetInnerHTML={introHtml} />
+              <CardWithHeader id={parseInt(article.ID)} link={'/post/' + article.ID} title={article.Title}>
+                <CardText style={{color: '#ffffff'}} dangerouslySetInnerHTML={{__html: article.Intro}} />
                 <CardText>
                   <div style={{overflow: 'hidden'}}>
                     <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5, marginTop: -2, float: 'left'}} />
@@ -101,11 +64,11 @@ export default class List extends Page {
                     </span>
                   </div>
                 </CardText>
-              </Card>
+              </CardWithHeader>
             </article>
-          </Style>
-        })
-      }</QueueAnim>
+            )
+          )}
+        </QueueAnim>
         <div>
           <Link to={this.pageTo(-1)}><FlatButton primary label='Prev' /></Link>
           <Link to={this.pageTo(1)}><FlatButton primary label='Next' style={{float: 'right'}} /></Link>
@@ -114,5 +77,4 @@ export default class List extends Page {
     }
     </div>)
   }
-
 }

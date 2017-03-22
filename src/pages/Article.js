@@ -71,7 +71,7 @@ export default class Article extends Page {
                   {formatDate(article.PostTime)} <span>in </span>
                   <span>{article.Category.Name}</span>
                   <span> / </span>
-                  <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
+                  <span>{article.CommNums}</span>
                   <span> / </span>{article.ViewNums}
                 </span>
               </span>

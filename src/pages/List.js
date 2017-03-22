@@ -11,7 +11,6 @@ import Page from './Page'
 import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
 import TouchRipple from 'material-ui/internal/TouchRipple'
-import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
 import Waiting from '../components/Waiting'
 
 import './List.css'
@@ -96,7 +95,7 @@ export default class List extends Page {
                         {formatDate(article.PostTime)} <span>in </span>
                         <Link to={getNewListUri(this.props.location.pathname, {cate: article.Category.ID})}>{article.Category.Name}</Link>
                         <span> / </span>
-                        <ExtensionDuoshuo type='thread-count' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={filterHtml(article.Intro)} />
+                        <span>{article.CommNums}</span>
                         <span> / </span>{article.ViewNums}
                       </span>
                     </span>

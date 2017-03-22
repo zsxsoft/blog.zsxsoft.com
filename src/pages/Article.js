@@ -92,5 +92,4 @@ export default class Article extends Page {
       </div>
     </Style>)
   }
-
 }

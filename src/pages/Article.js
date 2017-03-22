@@ -15,7 +15,6 @@ import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
 import Waiting from '../components/Waiting'
 
 export default class Article extends Page {
-
   componentDidUpdate (prevProps, prevState) {
     super.componentDidUpdate(prevProps, prevState)
     window.doArticleLoaded()
@@ -27,23 +26,25 @@ export default class Article extends Page {
     const color = this.colors[parseInt(Math.random() * this.colors.length, 10)]
     const article = data.article
     const brewer = chroma.brewer[color]
+    const lastBrewer = brewer[brewer.length - 1]
+    const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`
     if (!article) return <Waiting />
     const contentHtml = {__html: formatArticleContent(article.Content)}
     document.title = article.Title + ' - zsx\'s Blog'
     return (<Style>
       {`
         .card-${article.ID} a {
-          color: ${brewer[brewer.length - 1]};
+          color: ${brewer[1]};
         }
         .card-${article.ID} a:hover {
-          color: ${brewer[brewer.length - 2]};
+          color: ${brewer[2]};
         }
         .card-${article.ID} a:active {
-          color: ${brewer[brewer.length - 3]};
+          color: ${brewer[3]};
         }
       `}
       <div>
-        <Card style={{marginBottom: '1em', borderRadius: '0.5em'}} className={`card-${article.ID}`}>
+        <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.5)`}} className={`card-${article.ID}`}>
           <div>
             <CardMedia
               expandable
@@ -55,7 +56,7 @@ export default class Article extends Page {
               <div
                 className={`canvas-triangles canvas-triangle-${article.ID}`}
                 data-color={color}
-                style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}
+                style={{opacity: 0.5, height: 150, backgroundColor: brewer[brewer.length - 1]}}
                 height='150'
               />
             </CardMedia>
@@ -76,7 +77,7 @@ export default class Article extends Page {
             </div>
           </CardText>
           <CardText>
-            <article dangerouslySetInnerHTML={contentHtml} />
+            <article style={{color: '#ffffff'}} dangerouslySetInnerHTML={contentHtml} />
             <ShareDuoshuo type='share' duoshuoKey={article.ID} title={article.Title} url={article.Url} content={article.Intro} />
           </CardText>
           <CardText>

@@ -51,20 +51,22 @@ export default class List extends Page {
           const linkTo = '/post/' + article.ID
           const color = this.colors[parseInt(Math.random() * this.colors.length, 10)]
           const brewer = chroma.brewer[color]
+          const lastBrewer = brewer[brewer.length - 1]
+          const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`
           return <Style key={article.ID}>
             {`
               .card-${article.ID} a {
-                color: ${brewer[brewer.length - 1]};
+                color: ${brewer[1]};
               }
               .card-${article.ID} a:hover {
-                color: ${brewer[brewer.length - 2]};
+                color: ${brewer[2]};
               }
               .card-${article.ID} a:active {
-                color: ${brewer[brewer.length - 3]};
+                color: ${brewer[3]};
               }
             `}
             <article key={article.ID} className={`card-${article.ID}`}>
-              <Card style={{marginBottom: '1em', borderRadius: '0.5em'}}>
+              <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.5)`}}>
                 <Link to={linkTo} style={{display: 'block', position: 'relative'}} className='titleWrapper'>
                   <TouchRipple style={{zIndex: 1000}}>
                     <CardMedia
@@ -74,7 +76,7 @@ export default class List extends Page {
                       }} className='cardTitle' />}
                       overlayContentStyle={{background: 'none'}}
                     >
-                      <div className='canvas-background' style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}>
+                      <div className='canvas-background' style={{opacity: 0.5, height: 150, backgroundColor: brewer[brewer.length - 1]}}>
                         <div
                           className={`canvas-triangles canvas-triangle-${article.ID}`}
                           data-color={color}
@@ -84,7 +86,7 @@ export default class List extends Page {
                     </CardMedia>
                   </TouchRipple>
                 </Link>
-                <CardText dangerouslySetInnerHTML={introHtml} />
+                <CardText style={{color: '#ffffff'}} dangerouslySetInnerHTML={introHtml} />
                 <CardText>
                   <div style={{overflow: 'hidden'}}>
                     <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5, marginTop: -2, float: 'left'}} />

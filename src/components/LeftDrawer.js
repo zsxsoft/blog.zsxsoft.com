@@ -22,10 +22,8 @@ const styles = {
 }
 
 class LeftDrawer extends PureComponent {
-
   static propTypes = {
     open: PropTypes.bool.isRequired,
-    onLogoClicked: PropTypes.func.isRequired,
     onListChanged: PropTypes.func.isRequired,
     onRequestChange: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired,
@@ -48,7 +46,7 @@ class LeftDrawer extends PureComponent {
     const categories = !this.props.data || !this.props.data.categories ? [] : this.props.data.categories
     const others = !this.props.data || !this.props.data.others ? {} : this.props.data.others
     return (
-      <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100}}
+      <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100, backgroundColor: 'auto'}}
         onRequestChange={this.props.onRequestChange}>
         <div style={styles.logo} onClick={this.onLogoClicked}>
           {window.config.title}

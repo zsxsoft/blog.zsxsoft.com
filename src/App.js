@@ -72,6 +72,8 @@ class App extends Component {
         sidebarData.categories = this.formatHtmlToData(d.Content)
       } else if (d.FileName === 'archives') {
         sidebarData.archives = this.formatHtmlToData(d.Content)
+      } else if (d.FileName === 'comments') {
+        sidebarData.comments = this.formatHtmlToData(d.Content)
       } else {
         sidebarData.others[d.FileName] = d
       }

@@ -3,7 +3,6 @@ import Drawer from 'material-ui/Drawer'
 import { List, ListItem, makeSelectable } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import {spacing, typography, zIndex} from 'material-ui/styles'
-import ExtensionDuoshuo from './Duoshuo/Extensions'
 import { grey800 } from 'material-ui/styles/colors'
 
 const SelectableList = makeSelectable(List)
@@ -44,6 +43,7 @@ class LeftDrawer extends PureComponent {
   render () {
     const archives = !this.props.data || !this.props.data.archives ? [] : this.props.data.archives
     const categories = !this.props.data || !this.props.data.categories ? [] : this.props.data.categories
+    const comments = !this.props.data || !this.props.data.comments ? [] : this.props.data.comments
     const others = !this.props.data || !this.props.data.others ? {} : this.props.data.others
     return (
       <Drawer docked={false} open={this.state.open} containerStyle={{zIndex: zIndex.drawer - 100, backgroundColor: 'auto'}}
@@ -73,6 +73,12 @@ class LeftDrawer extends PureComponent {
             )}
           />
           <Divider />
+          <ListItem primaryText={`Comments`}
+            primaryTogglesNestedList
+            nestedItems={comments.map(comment =>
+              <ListItem key={comment.text} primaryText={comment.text} value={comment.url} />
+            )}
+          />
           {Object.keys(others).map(k => (
             <ListItem primaryText={others[k].Name}
               key={k}
@@ -80,10 +86,7 @@ class LeftDrawer extends PureComponent {
               initiallyOpen
               nestedItems={[
                 <div key={k} style={{marginLeft: '1em', marginRight: '1em'}}>
-                  {others[k].HtmlID.slice(0, 3) === 'ds-'
-                    ? <ExtensionDuoshuo type={others[k].HtmlID.slice(3)} data-num-items={others[k].MaxLi} />
-                    : <div dangerouslySetInnerHTML={{__html: others[k].Content}} />
-                  }
+                  <div dangerouslySetInnerHTML={{__html: others[k].Content}} />
                 </div>
               ]}
             />

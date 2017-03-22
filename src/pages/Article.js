@@ -8,9 +8,6 @@ import Page from './Page'
 
 import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
-import ExtensionDuoshuo from '../components/Duoshuo/Extensions'
-import ShareDuoshuo from '../components/Duoshuo/Share'
-import EmbedDuoshuo from '../components/Duoshuo/EmbedThread'
 import Comment from '../components/Comment'
 import Waiting from '../components/Waiting'
 

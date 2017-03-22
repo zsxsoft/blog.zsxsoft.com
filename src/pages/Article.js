@@ -27,9 +27,16 @@ export default class Article extends Page {
     return (
       <div>
         <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
-          <CardText>
+          <CardText style={{height: 32}}>
             <div style={{overflow: 'hidden'}}>
-              <Avatar src={article.Author.Avatar} style={{verticalAlign: 'middle', marginRight: 5, marginTop: -2, float: 'left'}} />
+              <Avatar src={article.Author.Avatar} style={{
+                verticalAlign: 'middle',
+                marginRight: 7,
+                marginTop: 3,
+                marginLeft: 3,
+                height: 27,
+                width: 27,
+                float: 'left'}} />
               <span>
                 <span style={{float: 'left'}}>{article.Author.StaticName}</span>
                 <span style={{float: 'right'}}>

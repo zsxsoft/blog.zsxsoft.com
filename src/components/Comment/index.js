@@ -46,24 +46,12 @@ export default class Comments extends React.PureComponent {
         </span>
       }
         subtitle={
-          <span>
-            <span className='comment--device'>
-              <span className='comment--useragent-img'>
-                <img src='https://static-up.zsxsoft.com/useragent.js/img/16/os/linux.png-webp' alt='GNU\/Linux' />
-              </span>GNU/Linux x64
-          </span>
-            <span className='comment--browser'>
-              <span className='comment--useragent-img'>
-                <img src='https://static-up.zsxsoft.com/useragent.js/img/16/os/linux.png-webp' alt='GNU\/Linux' />
-              </span>GNU/Linux x64
-          </span>
-          </span>
-
+          <span className='useragent-js' data-useragent={comment.Agent } />
         }
         style={{
           paddingBottom: 0
         }}
-        avatar={comment.Avatar} />
+        avatar={<Avatar style={{marginTop: 8}} src={comment.Avatar} />} />
       <CardText style={{
         paddingTop: 0,
         paddingBottom: 0,

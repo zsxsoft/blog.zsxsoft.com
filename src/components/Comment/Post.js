@@ -132,7 +132,7 @@ export default class CommentPost extends PureComponent {
     return (<Card style={{backgroundColor: 'auto'}}>
       <form id='comment-post'>
         {this.props.revertComment
-        ? <CardText style={{paddingBottom: 0}}>
+        ? <CardText style={{paddingBottom: 0, color: '#000000'}}>
           正在回复：{this.props.revertComment.Name} 说的 “{this.props.revertComment.Content.substr(0, 10)}...”。
           <a
             href={'ja' + 'vascript:;'} // eslint-disable-line

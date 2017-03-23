@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 import QueueAnim from 'rc-queue-anim'

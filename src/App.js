@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { withRouter } from 'react-router'
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -7,10 +6,14 @@ import IconButton from 'material-ui/IconButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Menu from 'material-ui/svg-icons/navigation/menu'
 import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
+import {Route as OriginalRoute, Redirect} from 'react-router-dom'
 
 import LeftDrawer from './components/LeftDrawer'
 import { animateToTop } from './utils/scroll'
 import Theme from './Theme'
+
+import List from './pages/List'
+import Article from './pages/Article'
 
 const styles = {
   large: {
@@ -38,8 +41,7 @@ const styles = {
 
 class App extends Component {
   static propTypes = {
-    children: PropTypes.object,
-    router: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
   }
   constructor (props) {
@@ -95,12 +97,25 @@ class App extends Component {
     if (/^http/.test(value)) {
       window.open(value)
     } else {
-      this.props.router.push(value)
+      this.props.history.push(value)
     }
     this.setState({openSidebar: false})
   }
 
+  Route = ({ component: Component, ...rest }) => ( // eslint-disable-line react/prop-types
+    <OriginalRoute {...rest} render={props => (
+      <Component
+        onDataUpdate={this.handleDataUpdate}
+        {...props}
+      />
+    )} />
+  )
+
   render () {
+    const Route = this.Route
+    if (this.props.location.pathname === '/') {
+      return <Redirect to='/list/cate/0/auth/0/date/0-0/tags/0/page/1' />
+    }
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(Theme)}>
         <main>
@@ -124,10 +139,8 @@ class App extends Component {
           </header>
           <section style={styles.main}>
             <section style={styles.mainContent}>
-              {React.cloneElement(this.props.children, {
-                location: this.props.location,
-                onDataUpdate: this.handleDataUpdate
-              })}
+              <Route path='/list' component={List} />
+              <Route path='/post' component={Article} />
             </section>
           </section>
           <FloatingActionButton style={{position: 'fixed', right: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={animateToTop}>
@@ -139,4 +152,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default App

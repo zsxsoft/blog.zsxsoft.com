@@ -35,7 +35,7 @@ export default class Comments extends React.Component {
       paddingBottom: '1rem'
     }}>
       <CardHeader title={
-        <span>
+        <span style={{color: '#000000'}}>
           <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
           <a
             style={{marginLeft: '1rem'}}
@@ -44,7 +44,7 @@ export default class Comments extends React.Component {
         </span>
       }
         subtitle={
-          <span className='useragent-js' data-useragent={comment.Agent} />
+          <span className='useragent-js' data-useragent={comment.Agent} style={{color: '#000000'}} />
         }
         style={{
           paddingBottom: 0
@@ -53,7 +53,7 @@ export default class Comments extends React.Component {
       <CardText style={{
         paddingTop: 0,
         paddingBottom: 0,
-        color: '#ffffff'
+        color: '#000000'
       }} dangerouslySetInnerHTML={{__html: comment.Content}} />
       {this.makeComments(comment.Comments, true)}
     </Card>

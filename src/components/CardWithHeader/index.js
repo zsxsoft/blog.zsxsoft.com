@@ -1,5 +1,5 @@
 import React, {PureComponent, PropTypes} from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Card, CardMedia, CardTitle } from 'material-ui/Card'
 import Style from 'style-it'
 import chroma from 'chroma-js'

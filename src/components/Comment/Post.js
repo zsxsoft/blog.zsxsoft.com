@@ -8,6 +8,15 @@ const textFieldStyle = {
   marginLeft: '1rem',
   marginRight: '1rem'
 }
+const hintStyle = {
+  color: '#000000'
+}
+const floatingLabelStyle = {
+  color: '#222222'
+}
+const floatingLabelFocusStyle = {
+  color: '#0ea2e5'
+}
 
 export default class CommentPost extends PureComponent {
   static propTypes = {
@@ -31,6 +40,7 @@ export default class CommentPost extends PureComponent {
       name: savedState.name || '',
       email: savedState.email || '',
       url: savedState.url || '',
+      [`content-${this.props.article.ID}`]: savedState[`content-${this.props.article.ID}`] || '',
       buttonText: 'COMMENT NOW'
     }
   }
@@ -57,8 +67,8 @@ export default class CommentPost extends PureComponent {
     this.setState({[`content-${this.props.article.ID}`]: ''})
   }
 
-  handleChange = state => target => {
-    this.setState({[state]: target.currentTarget.value}, () => {
+  handleChange = state => event => {
+    this.setState({[state]: event.target.value}, () => {
       this.saveDataToLocalStorage()
     })
   }
@@ -131,11 +141,23 @@ export default class CommentPost extends PureComponent {
         : null
       }
         <CardText style={{paddingTop: 0}}>
-          <TextField style={textFieldStyle} onKeyDown={this.handleKeyDown} floatingLabelText='Name' onChange={this.handleChange('name')} value={this.state.name} />
-          <TextField style={textFieldStyle} type='email' onKeyDown={this.handleKeyDown} floatingLabelText='Email' onChange={this.handleChange('email')} value={this.state.email} />
-          <TextField style={textFieldStyle} onKeyDown={this.handleKeyDown} floatingLabelText='Website' onChange={this.handleChange('url')} value={this.state.url} />
+          <TextField
+            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            onKeyDown={this.handleKeyDown}
+            floatingLabelText='Name' onChange={this.handleChange('name')} value={this.state.name} />
+          <TextField
+            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            onKeyDown={this.handleKeyDown}
+            type='email' floatingLabelText='Email' onChange={this.handleChange('email')} value={this.state.email} />
+          <TextField
+            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            onKeyDown={this.handleKeyDown}
+            floatingLabelText='Website' onChange={this.handleChange('url')} value={this.state.url} />
           <TextField style={Object.assign({}, textFieldStyle, {width: 'calc(100% - 5rem)'})}
             hintText='发表“好厉害”“好屌”“支持”“顶”等无意义评论，或是发广告，一律封IP :)'
+            inputStyle={hintStyle}
+            hintStyle={{color: '#555555'}}
+            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
             floatingLabelText='Content' onChange={this.handleChange(`content-${this.props.article.ID}`)} value={this.state[`content-${this.props.article.ID}`]} />
         </CardText>
         <CardActions>

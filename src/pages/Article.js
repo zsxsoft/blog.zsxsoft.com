@@ -46,7 +46,7 @@ export default class Article extends Page {
                 height: 27,
                 width: 27,
                 float: 'left'}} />
-              <span>
+              <span style={{color: '#000000'}}>
                 <span style={{float: 'left'}}>{article.Author.StaticName}</span>
                 <span style={{float: 'right'}}>
                   {formatDate(article.PostTime)} <span>in </span>

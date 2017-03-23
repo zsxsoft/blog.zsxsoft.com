@@ -1,93 +1,121 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
+const browserList = [
+  ">1%",
+  "last 4 versions",
+  "Firefox ESR",
+  "not ie < 11"
+]
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
-const DashboardPlugin = require('webpack-dashboard/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const nodeEnv = process.env.NODE_ENV || 'development'
+const isProduction = nodeEnv === 'production'
 
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProduction = nodeEnv === 'production';
-
-const srcPath = path.join(__dirname, './src');
-const buildPath = path.join(__dirname, './build');
-const publicPath = path.join(__dirname, './public');
+const srcPath = path.join(__dirname, './src')
+const buildPath = path.join(__dirname, './build')
+const publicPath = path.join(__dirname, './public')
 
 // Common plugins
 const plugins = [
+  new DuplicatePackageCheckerPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
+    name: ['libui', 'vendor'],
     minChunks: Infinity,
-    filename: 'vendor-[hash].js',
+    filename: '[name]-[hash].js'
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify(nodeEnv),
-    },
+      NODE_ENV: JSON.stringify(nodeEnv)
+    }
   }),
   new webpack.NamedModulesPlugin(),
   new HtmlWebpackPlugin({
     template: path.join(publicPath, 'index.html'),
     path: buildPath,
     filename: 'index.html',
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true
+    }
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
       postcss: [
         autoprefixer({
-          browsers: [
-            'last 3 version',
-            'ie >= 11',
-          ],
-        }),
+          browsers: browserList
+        })
       ],
-      context: publicPath,
-    },
-  }),
-];
+      context: publicPath
+    }
+  })
+]
 
 // Common rules
 const rules = [
   {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use: [
-      'babel-loader',
-    ],
+    loader: 'babel-loader',
+    query: {
+      babelrc: false,
+      presets: [
+            // A Babel preset that can automatically determine the Babel plugins and polyfills
+            // https://github.com/babel/babel-preset-env
+        ['env', {
+          targets: {
+            browsers: browserList
+          },
+          modules: false,
+          useBuiltIns: false,
+          debug: false
+        }],
+        'stage-0',
+        'react',
+        ...!isProduction ? [] : ['react-optimize']
+      ]
+    }
   },
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: publicPath,
-    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
-  },
-];
+    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
+  }
+]
 
 if (isProduction) {
   // Production plugins
   plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false,
+      debug: false
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false,
         screw_ie8: true,
-        conditionals: true,
+        warnings: false,
         unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
+        dead_code: true
       },
       output: {
-        comments: false,
-      },
+        comments: false
+      }
     }),
     new ExtractTextPlugin('style-[hash].css')
-  );
+  )
 
   // Production rules
   rules.push(
@@ -95,16 +123,16 @@ if (isProduction) {
       test: /(\.scss|\.css)$/,
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: 'css-loader!postcss-loader!sass-loader',
-      }),
+        use: 'css-loader!postcss-loader!sass-loader'
+      })
     }
-  );
+  )
 } else {
   // Development plugins
   plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new DashboardPlugin()
-  );
+  )
 
   // Development rules
   rules.push(
@@ -120,36 +148,54 @@ if (isProduction) {
         // 'css-loader?sourceMap',
         'css-loader',
         'postcss-loader',
-        'sass-loader?sourceMap',
-      ],
+        'sass-loader?sourceMap'
+      ]
     }
-  );
+  )
 }
 
+/*
+const aliases = isProduction ? {
+  'react': 'react-lite',
+  'react-dom': 'react-lite',
+  'react-tap-event-plugin': 'react-lite/lib/react-tap-event-plugin'
+} : {}
+*/
+
 module.exports = {
-  devtool: isProduction ? 'eval' : 'source-map',
+  devtool: !isProduction ? 'eval' : 'source-map',
   context: srcPath,
   entry: {
-    js: './index.js',
     vendor: [
-      'react-router-dom',
-      'react'
+      'react', 'react-dom',
+      'react-router-dom' // 'react-lite',
     ],
+    libui: [
+      'material-ui/List', 'material-ui/Drawer', 'material-ui/Divider',
+      'material-ui/Card', 'material-ui/FlatButton', 'material-ui/FloatingActionButton', 'material-ui/Avatar',
+      'material-ui/RaisedButton', 'material-ui/TextField',
+      'material-ui/styles', 'material-ui/utils/colorManipulator',
+      'material-ui/internal/TouchRipple', 'react-tap-event-plugin',
+      'style-it', 'chroma-js', 'dynamics.js', 'rc-queue-anim', 'trianglify'
+//      'fastclick'
+    ],
+    js: './index.js'
   },
   output: {
     path: buildPath,
-    publicPath: '/',
-    filename: 'app-[hash].js',
+    publicPath: isProduction ? '//static-up.zsxsoft.com/blog/' : '/',
+    filename: 'app-[hash].js'
   },
   module: {
-    rules,
+    rules
   },
   resolve: {
+    // alias: aliases,
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
     modules: [
       path.resolve(__dirname, 'node_modules'),
-      srcPath,
-    ],
+      srcPath
+    ]
   },
   plugins,
   devServer: {
@@ -171,8 +217,17 @@ module.exports = {
       version: false,
       warnings: true,
       colors: {
-        green: '\u001b[32m',
-      },
-    },
+        green: '\u001b[32m'
+      }
+    }
   },
-};
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    setImmediate: false,
+    process: false,
+    Buffer: false,
+    crypto: false
+  }
+}

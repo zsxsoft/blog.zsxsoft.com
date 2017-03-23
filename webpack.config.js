@@ -1,11 +1,12 @@
 const webpack = require('webpack')
 const path = require('path')
 const browserList = [
-  ">1%",
-  "last 4 versions",
-  "Firefox ESR",
-  "not ie < 11"
+  '>1%',
+  'last 4 versions',
+  'Firefox ESR',
+  'not ie < 11'
 ]
+const OfflinePlugin = require('offline-plugin')
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -114,7 +115,26 @@ if (isProduction) {
         comments: false
       }
     }),
-    new ExtractTextPlugin('style-[hash].css')
+    new ExtractTextPlugin('style-[hash].css'),
+    new OfflinePlugin({
+      externals: [
+        'https://blog.zsxsoft.com/favicon.ico',
+        'https://static-up.zsxsoft.com/prism-151114/prism.css',
+        'https://static-up.zsxsoft.com/blog/css/share.min.css',
+        'https://static-up.zsxsoft.com/prism-151114/prism.js',
+        'https://static-up.zsxsoft.com/useragent.js/useragent.min.js',
+        'https://static-up.zsxsoft.com/blog/player-161116.js',
+        'https://static-up.zsxsoft.com/blog/js/social-share.min.js'
+      ],
+      ServiceWorker: {
+        publicPath: 'https://blog.zsxsoft.com/sw.js'
+      },
+      excludes: [
+        '**/.*',
+        '/',
+        ''
+      ]
+    })
   )
 
   // Production rules
@@ -167,7 +187,7 @@ module.exports = {
   context: srcPath,
   entry: {
     vendor: [
-      'react', 'react-dom',
+      'react', 'react-dom', 'offline-plugin/runtime',
       'react-router-dom' // 'react-lite',
     ],
     libui: [
@@ -183,7 +203,7 @@ module.exports = {
   },
   output: {
     path: buildPath,
-    publicPath: isProduction ? '//static-up.zsxsoft.com/blog/' : '/',
+    publicPath: isProduction ? 'https://static-up.zsxsoft.com/blog/' : '/',
     filename: 'app-[hash].js'
   },
   module: {
@@ -225,8 +245,6 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    setImmediate: false,
-    process: false,
     Buffer: false,
     crypto: false
   }

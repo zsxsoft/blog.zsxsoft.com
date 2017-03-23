@@ -4,10 +4,15 @@
   "description": "blog.zsxsoft.com",
   "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dashboard -t 'React-Redux Boilerplate' -- webpack-dev-server --colors --no-info",
+    "dev": "webpack-dev-server --colors",
+    "build": "rm -rf ./build && NODE_ENV=\"production\" webpack",
+    "lint-break-on-errors": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx",
+    "lint": "eslint ./source/js ./webpack.config.js -f table --ext .js --ext .jsx || true",
+    "preview": "NODE_ENV=\"production\" ./node_modules/webpack-dashboard/bin/webpack-dashboard.js -t 'Preview Mode - React-Redux Boilerplate' -- ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "hook-add": "prepush install",
+    "hook-remove": "prepush remove"
   },
   "repository": {
     "type": "git",
@@ -34,12 +39,26 @@
     "trianglify": "^1.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^6.5.3",
     "babel-eslint": "^7.2.0",
+    "babel-loader": "^6.2.4",
+    "css-loader": "0.14.5",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-config-standard-react": "^4.3.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^2.1.1",
-    "react-scripts": "0.9.5"
+    "extract-text-webpack-plugin": "^2.0.0",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "node-sass": "^3.13.0",
+    "postcss-loader": "^1.1.1",
+    "prepush": "^3.1.11",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.2.1",
+    "webpack-dashboard": "^0.2.0",
+    "webpack-dev-server": "^2.2.1"
   }
 }

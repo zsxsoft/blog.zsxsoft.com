@@ -23,8 +23,8 @@
     "animated-scrollto": "^1.1.0",
     "dynamics.js": "^1.1.5",
     "material-ui": "^0.17.1",
-    "rc-queue-anim": "^0.13.2",
-    "rc-scroll-anim": "^0.6.5",
+    "rc-queue-anim": "^0.13.3",
+    "rc-scroll-anim": "^1.0.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.0.0",
@@ -34,7 +34,7 @@
     "trianglify": "^1.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "^7.2.0",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
     "eslint-config-standard-react": "^4.3.0",

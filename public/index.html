@@ -19,15 +19,14 @@
       height: auto;
     }
     #app--background--image {
-      z-index: 0;
-      position: fixed; 
-      top: -50%; 
-      left: -50%; 
-      width: 200%; 
-      height: 200%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
     }
     #app--background--mask {
-      z-index: 0;
       position: absolute;
       top: 0;
       left: 0;
@@ -36,43 +35,26 @@
       height: 100%;
       width: 100%;
     }
-    .app--background--image-img {
-      z-index: 0;
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0; 
-      margin: auto; 
-      min-width: 50%;
-      min-height: 50%;
-      overflow-x: hidden;
-      opacity: 0;
-    }
     
     #app--root {
-      z-index: 1;
       word-break: break-all;
       word-wrap: break-word;
       padding-bottom: 4rem;
     }
     
     #footer {
-      z-index: 1;
       display: flex;
       flex-flow: row wrap;
       -webkit-box-pack: justify;
       -moz-box-pack: justify;
       justify-content: space-between;
       align-items: center;
-      padding-top: 1pc;
+      margin-top: 1pc;
       padding: 20px;
       font-size: 14px;
       text-align: left;
       color: #777777;
       line-height: 20px;
-      position: relative;
-      background: #ffffff;
     }
     
     .footer-right {
@@ -128,7 +110,7 @@
   </footer>
 
   <script>
-'use strict';window.isSupportWebp=!1,function(){var b=new Image;b.onload=function(){var c=document.querySelector('#app--background--image');c.appendChild(b)},b.style.opacity='1',b.style.transition='opacity 3s',b.src='//oneanime.zsxsoft.com/acg',b.classList.add('app--background--image-img')}(),'use strict',!function(){var b,c,d;!function(){var e=new Image;e.src='data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACyAgCdASoBAAEALmk0mk0iIiIiIgBoSygABc6zbAAA/v56QAAAAA==',e.onload=function(){isSupportWebp=!0}}(),b=function(e){var g=document.querySelector('.'+e);void 0!==g&&null!==g&&void 0!==g&&'remove'in g&&g.remove()},c=function(){var e,g=document.createElement('script');g.src='//hm.baidu.com/hm.js?e676290db1a063d7eabcc30211f4000b',g.className='old-baidu',g.onload=function(){delete window._bdhm_loaded_e676290db1a063d7eabcc30211f4000b},e=document.getElementById('s-insert-tag'),e.parentNode.insertBefore(g,e),b('old-baidu')},d=function(){var e,g=document.createElement('script');g.src='//tajs.qq.com/stats?sId=21682966',g.className='old-qq',g.onload=function(){setTimeout(function(){try{delete window.Ta}catch(h){console.log('delete tencent analysis failed')}},1e3)},e=document.getElementById('s-insert-tag'),e.parentNode.insertBefore(g,e),b('old-qq')},window.config={apiUrl:'/api',backgroundUrl:'//oneanime.zsxsoft.com/acg',title:'zsx\'s Blog'},'80'!==location.port&&''!==location.port&&(window.config.apiUrl='https://blog.zsxsoft.com/api'),window.doPageFinished=function(){c(),d()},window.doGlobal=function(){socialShare('.social-share, .share-component')},window.doArticleLoaded=function(){Prism.highlightAll(),window.doUserAgent()},window.doListLoaded=function(){}}(),window.doUserAgent=function(){Array.from(document.querySelectorAll('.useragent-js')).forEach(function(b){function c(g){return'<span><img src="https://static-up.zsxsoft.com/useragent.js/img/16/'+e[g].dir+'/'+e[g].image+'.png'+(isSupportWebp?'-webp':'')+'" alt="'+e[g].name+'" />'}var d=b.getAttribute('data-useragent'),e=USERAGENT.analyze(d);b.innerHTML=['<span class="useragent-img">'+c('platform')+e.platform.full+'</span>','&nbsp;','<span class="useragent-img">'+c('browser')+e.browser.full+'</span>'].join('')})};
+'use strict';window.isSupportWebp=!1,function(){var b=new Image;b.onload=function(){var c=document.querySelector('#app--background--image');c.style.opacity='1',c.style.background='url('+b.src+') fixed no-repeat center center',c.style.backgroundSize='cover',c.style.transition='opacity 3s'},b.src='//oneanime.zsxsoft.com/acg'}(),'use strict',!function(){var b,c,d;!function(){var e=new Image;e.src='data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACyAgCdASoBAAEALmk0mk0iIiIiIgBoSygABc6zbAAA/v56QAAAAA==',e.onload=function(){isSupportWebp=!0}}(),b=function(e){var g=document.querySelector('.'+e);void 0!==g&&null!==g&&void 0!==g&&'remove'in g&&g.remove()},c=function(){var e,g=document.createElement('script');g.src='//hm.baidu.com/hm.js?e676290db1a063d7eabcc30211f4000b',g.className='old-baidu',g.onload=function(){delete window._bdhm_loaded_e676290db1a063d7eabcc30211f4000b},e=document.getElementById('s-insert-tag'),e.parentNode.insertBefore(g,e),b('old-baidu')},d=function(){var e,g=document.createElement('script');g.src='//tajs.qq.com/stats?sId=21682966',g.className='old-qq',g.onload=function(){setTimeout(function(){try{delete window.Ta}catch(h){console.log('delete tencent analysis failed')}},1e3)},e=document.getElementById('s-insert-tag'),e.parentNode.insertBefore(g,e),b('old-qq')},window.config={apiUrl:'/api',backgroundUrl:'//oneanime.zsxsoft.com/acg',title:'zsx\'s Blog'},'80'!==location.port&&''!==location.port&&(window.config.apiUrl='https://blog.zsxsoft.com/api'),window.doPageFinished=function(){c(),d()},window.doGlobal=function(){socialShare('.social-share, .share-component')},window.doArticleLoaded=function(){Prism.highlightAll(),window.doUserAgent()},window.doListLoaded=function(){}}(),window.doUserAgent=function(){Array.from(document.querySelectorAll('.useragent-js')).forEach(function(b){function c(g){return'<span><img src="https://static-up.zsxsoft.com/useragent.js/img/16/'+e[g].dir+'/'+e[g].image+'.png'+(isSupportWebp?'-webp':'')+'" alt="'+e[g].name+'" />'}var d=b.getAttribute('data-useragent'),e=USERAGENT.analyze(d);b.innerHTML=['<span class="useragent-img">'+c('platform')+e.platform.full+'</span>','&nbsp;','<span class="useragent-img">'+c('browser')+e.browser.full+'</span>'].join('')})};
   </script>
   <script src="//static-up.zsxsoft.com/prism-151114/prism.js" async></script>
   <script src="//static-up.zsxsoft.com/useragent.js/useragent.min.js" async></script>

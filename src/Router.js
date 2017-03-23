@@ -1,13 +1,6 @@
 import React from 'react'
 import App from './App'
-import List from './pages/List'
-import Article from './pages/Article'
-import {
-  BrowserRouter,
-  HashRouter,
-  Route,
-  withRouter
-} from 'react-router-dom'
+import { BrowserRouter, HashRouter, Route, withRouter } from 'react-router-dom'
 import { animateToTop } from './utils/scroll'
 
 class Router extends React.PureComponent {

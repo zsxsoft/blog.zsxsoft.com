@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 
-import {formatDate, formatArticleContent} from '../utils'
+import { formatDate, formatArticleContent } from '../utils'
 import Page from './Page'
 
 import FlatButton from 'material-ui/FlatButton'

@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
+import {Route as OriginalRoute, Redirect} from 'react-router-dom'
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import IconButton from 'material-ui/IconButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Menu from 'material-ui/svg-icons/navigation/menu'
+import Extension from 'material-ui/svg-icons/action/extension'
 import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
-import {Route as OriginalRoute, Redirect} from 'react-router-dom'
 
 import LeftDrawer from './components/LeftDrawer'
 import { animateToTop } from './utils/scroll'
@@ -29,8 +30,8 @@ const styles = {
     width: '100%',
     maxWidth: 1024,
     margin: '0 auto',
-    opacity: '0.9',
-    lineHeight: '2em'
+    lineHeight: '2em',
+    transition: 'opacity 2s'
   },
   main: {
     paddingTop: 100,
@@ -48,7 +49,9 @@ class App extends Component {
     super(props)
     this.state = {
       openSidebar: false,
-      sidebarData: {}
+      sidebarData: {},
+      mainOpacity: 0.9,
+      opacityDirection: 1
     }
   }
 
@@ -102,6 +105,24 @@ class App extends Component {
     this.setState({openSidebar: false})
   }
 
+  updateOpacity = () => {
+    const opacity = this.state.mainOpacity
+    let newDirection = this.state.opacityDirection
+    let newOpacity = opacity
+    if (this.state.opacityDirection === 1) {
+      newOpacity += 0.1
+      if (newOpacity >= 1) newDirection = 0
+    } else {
+      newOpacity -= 0.1
+      if (newOpacity <= 0.0) newDirection = 1
+    }
+
+    this.setState({
+      mainOpacity: newOpacity,
+      opacityDirection: newDirection
+    })
+  }
+
   Route = ({ component: Component, ...rest }) => ( // eslint-disable-line react/prop-types
     <OriginalRoute {...rest} render={props => (
       <Component
@@ -138,11 +159,14 @@ class App extends Component {
             </IconButton>
           </header>
           <section style={styles.main}>
-            <section style={styles.mainContent}>
+            <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
               <Route path='/list' component={List} />
               <Route path='/post' component={Article} />
             </section>
           </section>
+          <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>
+            <Extension />
+          </FloatingActionButton>
           <FloatingActionButton style={{position: 'fixed', right: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={animateToTop}>
             <Top />
           </FloatingActionButton>

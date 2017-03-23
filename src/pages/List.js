@@ -47,8 +47,8 @@ export default class List extends Page {
           {data.articles.map((article) => (
             <article key={article.ID} className={`card-${article.ID}`}>
               <CardWithHeader id={parseInt(article.ID, 10)} link={'/post/' + article.ID} title={article.Title}>
-                <CardText style={{color: '#ffffff'}} dangerouslySetInnerHTML={{__html: article.Intro}} />
-                <CardText>
+                <CardText style={{color: '#000000'}} dangerouslySetInnerHTML={{__html: article.Intro}} />
+                <CardText style={{color: '#000000'}}>
                   <div style={{overflow: 'hidden'}}>
                     <Avatar src={article.Author.Avatar} style={{
                       verticalAlign: 'middle',

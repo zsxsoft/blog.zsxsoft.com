@@ -15,7 +15,7 @@ export default class List extends PureComponent {
 
   constructor () {
     super()
-    this.colors = ['Blues', 'BrBG', 'BuGn', 'BuPu', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PuBuGn', 'Purples', 'PuRd', 'RdPu', 'Reds', 'Set3', 'YlGn', 'YlGnBu', 'YlOrBr']
+    this.colors = ['Blues', 'BrBG', 'BuGn', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PuBuGn', 'PuRd', 'RdPu', 'Reds', 'Set3', 'YlGn', 'YlGnBu', 'YlOrBr', 'Spectral']
   }
 
   handleAnimationEnd = (data) => {
@@ -24,12 +24,20 @@ export default class List extends PureComponent {
     }
   }
 
+  getLighterColor = (...originalColors) => {
+    const colors = originalColors.map(p => parseInt(p, 16))
+    while (colors.filter(p => p >= 243).length < 3) {
+      for (let i = 0; i < colors.length; i++) colors[i] += (255 - colors[i]) * 0.1
+    }
+    return colors.map(p => Math.floor(p))
+  }
+
   render () {
     const {id, link, title, children} = this.props
     const color = this.colors[id % this.colors.length]
     const brewer = chroma.brewer[color]
-    const lastBrewer = brewer[brewer.length - 1]
-    const rgb = `${parseInt(lastBrewer.substr(1, 2), 16)}, ${parseInt(lastBrewer.substr(3, 2), 16)}, ${parseInt(lastBrewer.substr(5, 2), 16)}`
+    const lastBrewer = brewer[0] // brewer[brewer.length - 1]
+    const rgb = this.getLighterColor(lastBrewer.substr(1, 2), lastBrewer.substr(3, 2), lastBrewer.substr(5, 2)).join(',')
     const titleContent = (
       <CardMedia
         overlay={<CardTitle title={title} style={{
@@ -37,7 +45,7 @@ export default class List extends PureComponent {
         }} className='cardTitle' />}
         overlayContentStyle={{background: 'none'}}
               >
-        <div className='canvas-background' style={{opacity: 0.5, height: 150, backgroundColor: brewer[brewer.length - 1]}}>
+        <div className='canvas-background' style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}>
           <div
             className={`canvas-triangles canvas-triangle-${id}`}
             data-color={color}
@@ -49,17 +57,21 @@ export default class List extends PureComponent {
     return <Style key={id}>
       {`
         .card-${id} a {
-          color: ${brewer[1]};
+          color: ${brewer[brewer.length - 1]};
         }
         .card-${id} a:hover {
-          color: ${brewer[2]};
+          color: ${brewer[brewer.length - 2]};
         }
         .card-${id} a:active {
-          color: ${brewer[3]};
+          color: ${brewer[brewer.length - 3]};
+        }
+        .card-${id} *::selection {
+          background-color: ${brewer[brewer.length - 4]};
+          color: #ffffff;
         }
       `}
       <article key={id} className={`card-${id}`}>
-        <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.5)`}}>
+        <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
           {link === '' ? titleContent
           : <Link to={link} style={{display: 'block', position: 'relative'}} className='titleWrapper'>
             <TouchRipple style={{zIndex: 1000}}>

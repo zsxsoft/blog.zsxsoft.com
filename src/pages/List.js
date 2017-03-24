@@ -12,8 +12,6 @@ import FlatButton from 'material-ui/FlatButton'
 import Avatar from 'material-ui/Avatar'
 import Waiting from '../components/Waiting'
 
-import './List.css'
-
 export default class List extends Page {
   componentDidMount () {
     document.title = '文章列表 - ' + window.config.title

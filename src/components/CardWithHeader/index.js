@@ -5,6 +5,8 @@ import Style from 'style-it'
 import chroma from 'chroma-js'
 import TouchRipple from 'material-ui/internal/TouchRipple'
 
+import './header.scss'
+
 export default class CardWithHeader extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
@@ -37,7 +39,7 @@ export default class CardWithHeader extends PureComponent {
   render () {
     const {id, link, title, children, titleOnly, secondaryTitle} = this.props
     const height = titleOnly ? 50 : 150
-    const color = this.colors[id % this.colors.length]
+    const color = this.colors[Math.floor(Math.random() * this.colors.length)] // id % this.colors.length]
     const brewer = chroma.brewer[color]
     const lastBrewer = brewer[0] // brewer[brewer.length - 1]
     const rgb = this.getLighterColor(lastBrewer.substr(1, 2), lastBrewer.substr(3, 2), lastBrewer.substr(5, 2)).join(',')
@@ -85,7 +87,7 @@ export default class CardWithHeader extends PureComponent {
       <article key={id} className={`article-card-${id}`}>
         <Card className={`article-card article-card-${id}`} style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
           {link === '' ? titleContent
-          : <Link to={link} style={{display: 'block', position: 'relative'}} className='titleWrapper'>
+          : <Link to={link} style={{display: 'block', position: 'relative'}} className='title-wrapper'>
             <TouchRipple style={{zIndex: 1000}}>
               {titleContent}
             </TouchRipple>

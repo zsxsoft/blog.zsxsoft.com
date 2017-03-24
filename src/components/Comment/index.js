@@ -4,13 +4,15 @@ import Avatar from 'material-ui/Avatar'
 import Post from './Post'
 import {formatDate} from '../../utils'
 import {animateToPosition, getElementPosition} from '../../utils/scroll'
+import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
-export default class Comments extends React.Component {
+class Comments extends React.Component {
   static propTypes = {
     article: PropTypes.object.isRequired,
     comments: PropTypes.array.isRequired,
     onCommentPosted: PropTypes.func.isRequired,
-    postArea: PropTypes.bool.isRequired
+    postArea: PropTypes.bool.isRequired,
+    width: PropTypes.number.isRequired
   }
 
   constructor (props) {
@@ -30,8 +32,7 @@ export default class Comments extends React.Component {
     <Card className='comment' key={comment.ID} style={{
       backgroundColor: 'auto',
       width: isChild ? '90%' : '100%',
-      marginLeft: isChild ? '3rem' : 'auto',
-      marginTop: isChild ? '0.2rem' : '1rem',
+      margin: this.props.width === SMALL ? '1em auto' : (isChild ? '0.2rem 0 0 3rem' : '1rem 0 0 auto'),
       paddingBottom: '1rem'
     }}>
       <CardHeader title={
@@ -67,11 +68,6 @@ export default class Comments extends React.Component {
         : null}
     </div>)
   }
-  /*
-        <div>
-        <span className='comment--name'></span>
-
-        <span className='comment--revert'>回复</span>
-      </div>
-       */
 }
+
+export default withWidth()(Comments)

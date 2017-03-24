@@ -2,11 +2,15 @@ import React, { PureComponent, PropTypes } from 'react'
 import { Card, CardActions, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
-const textFieldStyle = {
+const textFieldFullStyle = {
   width: 'calc(33.333333% - 3rem)',
   marginLeft: '1rem',
   marginRight: '1rem'
+}
+const textFieldSmallStyle = {
+  width: '100%'
 }
 const hintStyle = {
   color: '#000000'
@@ -18,12 +22,13 @@ const floatingLabelFocusStyle = {
   color: '#0ea2e5'
 }
 
-export default class CommentPost extends PureComponent {
+class CommentPost extends PureComponent {
   static propTypes = {
     onPosted: PropTypes.func.isRequired,
     article: PropTypes.object.isRequired,
     revertComment: PropTypes.object,
-    onRevertClicked: PropTypes.func.isRequired
+    onRevertClicked: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired
   }
 
   constructor (props) {
@@ -129,6 +134,7 @@ export default class CommentPost extends PureComponent {
   }
 
   render () {
+    const textFieldStyle = this.props.width === SMALL ? textFieldSmallStyle : textFieldFullStyle
     return (<Card style={{backgroundColor: 'auto'}}>
       <form id='comment-post'>
         {this.props.revertComment
@@ -153,7 +159,10 @@ export default class CommentPost extends PureComponent {
             style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
             onKeyDown={this.handleKeyDown}
             floatingLabelText='Website' onChange={this.handleChange('url')} value={this.state.url} />
-          <TextField style={Object.assign({}, textFieldStyle, {width: 'calc(100% - 5rem)'})}
+          <TextField
+            style={
+              this.props.width === SMALL ? textFieldStyle : Object.assign({}, textFieldStyle, {width: 'calc(100% - 5rem)'})
+            }
             hintText='发表“好厉害”“好屌”“支持”“顶”等无意义评论，或是发广告，一律封IP :)'
             inputStyle={hintStyle}
             hintStyle={{color: '#555555'}}
@@ -167,3 +176,5 @@ export default class CommentPost extends PureComponent {
     </Card>)
   }
 }
+
+export default withWidth()(CommentPost)

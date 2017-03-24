@@ -8,6 +8,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import Menu from 'material-ui/svg-icons/navigation/menu'
 import Extension from 'material-ui/svg-icons/action/extension'
 import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
+import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 import LeftDrawer from './components/LeftDrawer'
 import { animateToTop } from './utils/scroll'
@@ -37,13 +38,19 @@ const styles = {
     paddingTop: 100,
     paddingLeft: '2em',
     paddingRight: '2em'
+  },
+  mainSmall: {
+    paddingTop: '3em',
+    paddingLeft: '0.5em',
+    paddingRight: '0.5em'
   }
 }
 
 class App extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    width: PropTypes.number.isRequired
   }
   constructor (props) {
     super(props)
@@ -158,15 +165,17 @@ class App extends Component {
               <Menu />
             </IconButton>
           </header>
-          <section style={styles.main}>
+          <section style={this.props.width === SMALL ? styles.mainSmall : styles.main}>
             <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
               <Route path='/list' component={List} />
               <Route path='/post' component={Article} />
             </section>
           </section>
-          <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>
+          {this.props.width === SMALL ? null
+          : <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>
             <Extension />
           </FloatingActionButton>
+          }
           <FloatingActionButton style={{position: 'fixed', right: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={animateToTop}>
             <Top />
           </FloatingActionButton>
@@ -176,4 +185,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withWidth()(App)

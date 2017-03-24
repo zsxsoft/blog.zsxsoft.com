@@ -26,8 +26,10 @@
   "homepage": "/",
   "dependencies": {
     "animated-scrollto": "^1.1.0",
+    "classnames": "^2.2.5",
     "dynamics.js": "^1.1.5",
     "fastclick": "^1.0.6",
+    "lodash": "^4.17.4",
     "material-ui": "^0.17.1",
     "rc-queue-anim": "^0.13.3",
     "rc-scroll-anim": "^1.0.3",
@@ -60,6 +62,7 @@
     "offline-plugin": "^4.6.2",
     "postcss-loader": "^1.1.1",
     "prepush": "^3.1.11",
+    "react-hot-loader": "^3.0.0-beta.6",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",

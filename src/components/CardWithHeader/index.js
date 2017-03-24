@@ -5,11 +5,13 @@ import Style from 'style-it'
 import chroma from 'chroma-js'
 import TouchRipple from 'material-ui/internal/TouchRipple'
 
-export default class List extends PureComponent {
+export default class CardWithHeader extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     link: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    secondaryTitle: PropTypes.string,
+    titleOnly: PropTypes.bool.isRequired,
     children: PropTypes.any
   }
 
@@ -33,45 +35,55 @@ export default class List extends PureComponent {
   }
 
   render () {
-    const {id, link, title, children} = this.props
+    const {id, link, title, children, titleOnly, secondaryTitle} = this.props
+    const height = titleOnly ? 50 : 150
     const color = this.colors[id % this.colors.length]
     const brewer = chroma.brewer[color]
     const lastBrewer = brewer[0] // brewer[brewer.length - 1]
     const rgb = this.getLighterColor(lastBrewer.substr(1, 2), lastBrewer.substr(3, 2), lastBrewer.substr(5, 2)).join(',')
     const titleContent = (
       <CardMedia
-        overlay={<CardTitle title={title} style={{
-          textShadow: '1px 1px 8px #444'
-        }} className='cardTitle' />}
-        overlayContentStyle={{background: 'none'}}
-              >
-        <div className='canvas-background' style={{height: 150, backgroundColor: brewer[brewer.length - 1]}}>
+        className='card-media'
+        overlay={<CardTitle title={
+            !titleOnly
+            ? title
+            : <span>
+              <span style={{display: 'inline-block', width: '75%', overflow: 'hidden', height: 36}}>{title}</span>
+              <span style={{fontSize: 12, float: 'right'}}>{secondaryTitle}</span>
+            </span>
+          } className='card-title' />
+        }
+        overlayContentStyle={{
+          background: 'none',
+          top: titleOnly ? '-1em' : 'auto'
+        }}>
+        <div className='canvas-background' style={{height, backgroundColor: brewer[brewer.length - 1]}}>
           <div
             className={`canvas-triangles canvas-triangle-${id}`}
             data-color={color}
-            height='150'
+            height={height}
         />
         </div>
       </CardMedia>)
 
     return <Style key={id}>
       {`
-        .card-${id} a {
+        .article-card-${id} a {
           color: ${brewer[brewer.length - 1]};
         }
-        .card-${id} a:hover {
+        .article-card-${id} a:hover {
           color: ${brewer[brewer.length - 2]};
         }
-        .card-${id} a:active {
+        .article-card-${id} a:active {
           color: ${brewer[brewer.length - 3]};
         }
-        .card-${id} *::selection {
+        .article-card-${id} *::selection {
           background-color: ${brewer[brewer.length - 4]};
           color: #ffffff;
         }
       `}
-      <article key={id} className={`card-${id}`}>
-        <Card style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
+      <article key={id} className={`article-card-${id}`}>
+        <Card className={`article-card article-card-${id}`} style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
           {link === '' ? titleContent
           : <Link to={link} style={{display: 'block', position: 'relative'}} className='titleWrapper'>
             <TouchRipple style={{zIndex: 1000}}>

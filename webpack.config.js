@@ -181,6 +181,11 @@ const aliases = isProduction ? {
   'react-tap-event-plugin': 'react-lite/lib/react-tap-event-plugin'
 } : {}
 */
+const app = []
+if (!isProduction) {
+  app.push('react-hot-loader/patch')
+}
+app.push('./index.js')
 
 module.exports = {
   devtool: !isProduction ? 'eval' : 'source-map',
@@ -199,7 +204,7 @@ module.exports = {
       'style-it', 'chroma-js', 'dynamics.js', 'rc-queue-anim', 'trianglify'
 //      'fastclick'
     ],
-    js: './index.js'
+    js: app
   },
   output: {
     path: buildPath,

@@ -26,7 +26,7 @@ const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: ['libui', 'vendor'],
     minChunks: Infinity,
-    filename: '[name]-[hash].js'
+    filename: '[name].[chunkhash].js'
   }),
   new webpack.DefinePlugin({
     'process.env': {
@@ -92,7 +92,7 @@ const rules = [
   {
     test: /\.(png|gif|jpg|svg)$/,
     include: publicPath,
-    use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]'
+    use: 'url-loader?limit=20480&name=assets/[name].[hash].[ext]'
   }
 ]
 
@@ -127,7 +127,9 @@ if (isProduction) {
         'https://static-up.zsxsoft.com/blog/js/social-share.min.js'
       ],
       ServiceWorker: {
-        publicPath: 'https://blog.zsxsoft.com/sw.js'
+        publicPath: 'https://blog.zsxsoft.com/sw.js',
+        navigateFallbackURL: 'https://blog.zsxsoft.com/',
+        minify: true
       },
       excludes: [
         '**/.*',
@@ -209,7 +211,7 @@ module.exports = {
   output: {
     path: buildPath,
     publicPath: isProduction ? 'https://static-up.zsxsoft.com/blog/' : '/',
-    filename: 'app-[hash].js'
+    filename: 'app.[chunkhash].js'
   },
   module: {
     rules

@@ -127,11 +127,11 @@ if (isProduction) {
         'https://static-up.zsxsoft.com/prism-151114/prism.js',
         'https://static-up.zsxsoft.com/useragent.js/useragent.min.js',
         'https://static-up.zsxsoft.com/blog/player-161116.js',
-        'https://static-up.zsxsoft.com/blog/js/social-share.min.js'
+        'https://static-up.zsxsoft.com/blog/js/social-share.min.js',
+        'https://blog.zsxsoft.com/'
       ],
       ServiceWorker: {
         publicPath: 'https://blog.zsxsoft.com/sw.js',
-        navigateFallbackURL: 'https://blog.zsxsoft.com/',
         minify: true
       },
       excludes: [

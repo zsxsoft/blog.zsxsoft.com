@@ -15,6 +15,14 @@ class Comments extends React.Component {
     width: PropTypes.number.isRequired
   }
 
+  componentDidMount () {
+    window.doCommentLoaded()
+  }
+
+  componentDidUpdate () {
+    window.doCommentLoaded()
+  }
+
   constructor (props) {
     super(props)
     this.state = {

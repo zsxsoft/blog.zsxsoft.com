@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
+import classnames from 'classnames'
 
 import { formatDate, formatArticleContent } from '../utils'
 import Page from './Page'
@@ -34,7 +35,13 @@ export default class Article extends Page {
     const contentHtml = {__html: formatArticleContent(article.Content)}
     document.title = article.Title + ' - zsx\'s Blog'
     return (
-      <div>
+      <div className={
+          classnames({
+            [`article-${article.ID}`]: true,
+            'article-titleonly': false,
+            'article-canvas-radius-top': true,
+            'article-canvas-radius-bottom': true
+          })}>
         <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
           <CardText style={{height: 32}}>
             <div style={{overflow: 'hidden'}}>

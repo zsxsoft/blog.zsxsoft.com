@@ -26,7 +26,7 @@ const plugins = [
   new webpack.optimize.CommonsChunkPlugin({
     name: ['libui', 'vendor'],
     minChunks: Infinity,
-    filename: '[name].[chunkhash].js'
+    filename: isProduction ? '[name].[chunkhash].js' : '[name].[hash].js'
   }),
   new webpack.DefinePlugin({
     'process.env': {
@@ -64,6 +64,23 @@ const plugins = [
   })
 ]
 
+const babelPresets = [
+  ['env', {
+    targets: {
+      browsers: browserList
+    },
+    modules: false,
+    useBuiltIns: false,
+    debug: false
+  }],
+  'stage-0',
+  'react'
+]
+
+if (isProduction) {
+  babelPresets.push('react-optimize')
+}
+
 // Common rules
 const rules = [
   {
@@ -72,21 +89,7 @@ const rules = [
     loader: 'babel-loader',
     query: {
       babelrc: false,
-      presets: [
-            // A Babel preset that can automatically determine the Babel plugins and polyfills
-            // https://github.com/babel/babel-preset-env
-        ['env', {
-          targets: {
-            browsers: browserList
-          },
-          modules: false,
-          useBuiltIns: false,
-          debug: false
-        }],
-        'stage-0',
-        'react',
-        ...!isProduction ? [] : ['react-optimize']
-      ]
+      presets: babelPresets
     }
   },
   {

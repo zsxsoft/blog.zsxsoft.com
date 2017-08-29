@@ -1,19 +1,17 @@
-.fade-appear,
 .fade-enter {
   opacity: 0;
 }
 
-.fade-appear-active,
 .fade-enter-active {
-  transition: opacity .3s linear;
+  transition: opacity 1s ease-in-out;
   opacity: 1;
 }
 
-.fade-exit {
-  transition: opacity .2s linear;
+.fade-leave {
+  transition: opacity 1s ease-in-out;
   opacity: 1;
 }
 
-.fade-exit-active {
+.fade-leave-active {
   opacity: 0;
 }

@@ -37,7 +37,7 @@
     "react-lite": "^0.15.38",
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^2.0.1",
-    "react-transition-group": "^2.2.0",
+    "react-transition-group": "^1.2.0",
     "social-share.js": "^1.0.16",
     "style-it": "^1.6.13",
     "trianglify": "^1.1.0"

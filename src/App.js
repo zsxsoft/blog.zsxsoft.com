@@ -5,7 +5,7 @@ import React, { Component, PropTypes } from 'react'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 import Article from './pages/Article'
-import CSSTransition from 'react-transition-group/CSSTransition'
+import { CSSTransitionGroup } from 'react-transition-group'
 import Extension from 'material-ui/svg-icons/action/extension'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import IconButton from 'material-ui/IconButton'
@@ -15,7 +15,6 @@ import Menu from 'material-ui/svg-icons/navigation/menu'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Theme from './Theme'
 import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
-import TransitionGroup from 'react-transition-group/TransitionGroup'
 import { animateToTop } from './utils/scroll'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
@@ -169,14 +168,16 @@ class App extends Component {
           </header>
           <section style={this.props.width === SMALL ? styles.mainSmall : styles.main}>
             <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
-              <TransitionGroup>
-                <CSSTransition key={this.props.location.pathname.split('/')[0]} timeout={500} classNames='fade' appear>
-                  <Switch location={this.props.location}>
-                    <Route path='/list' component={List} />
-                    <Route path='/post' component={Article} />
-                  </Switch>
-                </CSSTransition>
-              </TransitionGroup>
+              <CSSTransitionGroup
+                transitionName='fade'
+                transitionEnterTimeout={1000}
+                transitionLeaveTimeout={1000}
+              >
+                <Switch location={this.props.location} key={this.props.location.pathname.split('/')[1]}>
+                  <Route path='/list' component={List} />
+                  <Route path='/post' component={Article} />
+                </Switch>
+              </CSSTransitionGroup>
             </section>
           </section>
           {this.props.width === SMALL ? null

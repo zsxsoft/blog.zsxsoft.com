@@ -40,7 +40,7 @@ export default class Article extends Page {
             [`article-${article.ID}`]: true,
             'article-titleonly': false,
             'article-canvas-radius-top': true,
-            'article-canvas-radius-bottom': true
+            'article-canvas-radius-bottom': false
           })}>
         <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
           <CardText style={{height: 32}}>

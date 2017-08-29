@@ -1,6 +1,7 @@
 import { formatArticleContent, formatDate } from '../utils'
 
 import Avatar from 'material-ui/Avatar'
+import { CSSTransitionGroup } from 'react-transition-group'
 import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
 import Comment from '../components/Comment'
@@ -30,55 +31,65 @@ export default class Article extends Page {
   render () {
     const data = this.state.data
     const { article } = data
-    if (!article) return <Waiting />
-    const contentHtml = {__html: formatArticleContent(article.Content)}
-    document.title = article.Title + ' - zsx\'s Blog'
+    const contentHtml = article ? {__html: formatArticleContent(article.Content)} : null
+    if (article) {
+      document.title = article.Title + ' - zsx\'s Blog'
+    }
     return (
-      <div className={
-        classnames({
-          [`article-${article.ID}`]: true,
-          'article-titleonly': false,
-          'article-canvas-radius-top': true,
-          'article-canvas-radius-bottom': false
-        })}>
-        <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
-          <CardText style={{height: 32}}>
-            <div style={{overflow: 'hidden'}}>
-              <Avatar src={article.Author.Avatar} style={{
-                verticalAlign: 'middle',
-                marginRight: 7,
-                marginTop: 3,
-                marginLeft: 3,
-                height: 27,
-                width: 27,
-                float: 'left'}} />
-              <span style={{color: '#000000'}}>
-                <span style={{float: 'left'}}>{article.Author.StaticName}</span>
-                <span style={{float: 'right'}}>
-                  {formatDate(article.PostTime)} <span>in </span>
-                  <span>{article.Category.Name}</span>
-                  <span> / </span>
-                  <span>{article.CommNums}</span>
-                  <span> / </span>{article.ViewNums}
-                </span>
-              </span>
+      <CSSTransitionGroup
+        transitionName='fade'
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}
+      >
+        {!article
+          ? <Waiting key='waiting' />
+          : <div key='article' className={
+            classnames({
+              [`article-${article.ID}`]: true,
+              'article-titleonly': false,
+              'article-canvas-radius-top': true,
+              'article-canvas-radius-bottom': false
+            })}>
+            <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
+              <CardText style={{height: 32}}>
+                <div style={{overflow: 'hidden'}}>
+                  <Avatar src={article.Author.Avatar} style={{
+                    verticalAlign: 'middle',
+                    marginRight: 7,
+                    marginTop: 3,
+                    marginLeft: 3,
+                    height: 27,
+                    width: 27,
+                    float: 'left'}} />
+                  <span style={{color: '#000000'}}>
+                    <span style={{float: 'left'}}>{article.Author.StaticName}</span>
+                    <span style={{float: 'right'}}>
+                      {formatDate(article.PostTime)} <span>in </span>
+                      <span>{article.Category.Name}</span>
+                      <span> / </span>
+                      <span>{article.CommNums}</span>
+                      <span> / </span>{article.ViewNums}
+                    </span>
+                  </span>
+                </div>
+              </CardText>
+              <CardText>
+                <article style={{color: '#000000'}} dangerouslySetInnerHTML={contentHtml} />
+                <div className='social-share' style={{
+                  margin: '0 auto',
+                  textAlign: 'center'
+                }} />
+              </CardText>
+              <CardText>
+                <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} onRevertClicked={this.handleRevertClicked} postArea article={article} />
+              </CardText>
+            </CardWithHeader>
+            <div>
+              {article.Prev === null ? null : <Link to={article.Prev.Url}><FlatButton primary label={`← ${article.Prev.Title}`} /></Link>}
+              {article.Next === null ? null : <Link to={article.Next.Url}><FlatButton primary label={`${article.Next.Title} →`} style={{float: 'right'}} /></Link>}
             </div>
-          </CardText>
-          <CardText>
-            <article style={{color: '#000000'}} dangerouslySetInnerHTML={contentHtml} />
-            <div className='social-share' style={{
-              margin: '0 auto',
-              textAlign: 'center'
-            }} />
-          </CardText>
-          <CardText>
-            <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} onRevertClicked={this.handleRevertClicked} postArea article={article} />
-          </CardText>
-        </CardWithHeader>
-        <div>
-          {article.Prev === null ? null : <Link to={article.Prev.Url}><FlatButton primary label={`← ${article.Prev.Title}`} /></Link>}
-          {article.Next === null ? null : <Link to={article.Next.Url}><FlatButton primary label={`${article.Next.Title} →`} style={{float: 'right'}} /></Link>}
-        </div>
-      </div>)
+          </div>
+        }
+      </CSSTransitionGroup>)
   }
 }

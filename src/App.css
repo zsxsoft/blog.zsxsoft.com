@@ -9,9 +9,9 @@
 
 .fade-leave {
   transition: opacity 1s ease-in-out;
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .fade-leave-active {
-  opacity: 0;
+  opacity: 0 !important;
 }

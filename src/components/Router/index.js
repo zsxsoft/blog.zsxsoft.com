@@ -1,5 +1,6 @@
-import React from 'react'
 import { BrowserRouter, HashRouter } from 'react-router-dom'
+
+import React from 'react'
 
 class Router extends React.PureComponent {
   static propTypes = {

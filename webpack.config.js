@@ -197,7 +197,7 @@ module.exports = {
       'material-ui/styles', 'material-ui/utils/colorManipulator',
       'material-ui/internal/TouchRipple', 'react-tap-event-plugin',
       'style-it', 'chroma-js', 'dynamics.js', 'rc-queue-anim', 'trianglify'
-//      'fastclick'
+      //      'fastclick'
     ],
     js: app
   },

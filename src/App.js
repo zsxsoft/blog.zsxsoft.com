@@ -172,9 +172,9 @@ class App extends Component {
             </section>
           </section>
           {this.props.width === SMALL ? null
-          : <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>
-            <Extension />
-          </FloatingActionButton>
+            : <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>
+              <Extension />
+            </FloatingActionButton>
           }
           <FloatingActionButton style={{position: 'fixed', right: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={animateToTop}>
             <Top />

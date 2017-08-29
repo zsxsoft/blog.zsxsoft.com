@@ -1,10 +1,11 @@
-import React, { PropTypes } from 'react'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
+import React, { PropTypes } from 'react'
+import {animateToPosition, getElementPosition} from '../../utils/scroll'
+import withWidth, {SMALL} from 'material-ui/utils/withWidth'
+
 import Avatar from 'material-ui/Avatar'
 import Post from './Post'
 import {formatDate} from '../../utils'
-import {animateToPosition, getElementPosition} from '../../utils/scroll'
-import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 class Comments extends React.Component {
   static propTypes = {
@@ -43,15 +44,16 @@ class Comments extends React.Component {
       margin: this.props.width === SMALL ? '1em auto' : (isChild ? '0.2rem 0 0 3rem' : '1rem 0 0 auto'),
       paddingBottom: '1rem'
     }}>
-      <CardHeader title={
-        <span style={{color: '#000000'}}>
-          <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
-          <a
-            style={{marginLeft: '1rem'}}
-            href={'ja' + 'vascript:;'} // eslint-disable-line
-            onClick={this.handleRevertClicked(comment)}>[回复]</a>
-        </span>
-      }
+      <CardHeader
+        title={
+          <span style={{color: '#000000'}}>
+            <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
+            <a
+              style={{marginLeft: '1rem'}}
+              href={'ja' + 'vascript:;'} // eslint-disable-line
+              onClick={this.handleRevertClicked(comment)}>[回复]</a>
+          </span>
+        }
         subtitle={
           <span className='useragent-js' data-useragent={comment.Agent} style={{color: '#000000'}} />
         }
@@ -66,7 +68,7 @@ class Comments extends React.Component {
       }} dangerouslySetInnerHTML={{__html: comment.Content}} />
       {this.makeComments(comment.Comments, true)}
     </Card>
-      )
+  )
 
   render () {
     return (<div>

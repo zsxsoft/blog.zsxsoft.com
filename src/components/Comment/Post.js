@@ -1,8 +1,9 @@
-import React, { PureComponent, PropTypes } from 'react'
 import { Card, CardActions, CardText } from 'material-ui/Card'
+import React, { PropTypes, PureComponent } from 'react'
+import withWidth, {SMALL} from 'material-ui/utils/withWidth'
+
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
-import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 const textFieldFullStyle = {
   width: 'calc(33.333333% - 3rem)',
@@ -113,18 +114,18 @@ class CommentPost extends PureComponent {
       credentials: 'include',
       body: formData
     })
-    .then(p => p.json())
-    .then(data => {
-      if (data.err.code !== 0) {
-        throw new Error(data.err.msg)
-      }
-      this.setButtonText('提交成功')
-      this.handlePost()
-    })
-    .catch(e => {
-      console.error(e)
-      this.setButtonText(e.message)
-    })
+      .then(p => p.json())
+      .then(data => {
+        if (data.err.code !== 0) {
+          throw new Error(data.err.msg)
+        }
+        this.setButtonText('提交成功')
+        this.handlePost()
+      })
+      .catch(e => {
+        console.error(e)
+        this.setButtonText(e.message)
+      })
   }
 
   handleCancel = () => this.props.onRevertClicked(null)
@@ -138,14 +139,14 @@ class CommentPost extends PureComponent {
     return (<Card style={{backgroundColor: 'auto'}}>
       <form id='comment-post'>
         {this.props.revertComment
-        ? <CardText style={{paddingBottom: 0, color: '#000000'}}>
+          ? <CardText style={{paddingBottom: 0, color: '#000000'}}>
           正在回复：{this.props.revertComment.Name} 说的 “{this.props.revertComment.Content.substr(0, 10)}...”。
-          <a
+            <a
             href={'ja' + 'vascript:;'} // eslint-disable-line
-            onClick={this.handleCancel}>[取消]</a>
-        </CardText>
-        : null
-      }
+              onClick={this.handleCancel}>[取消]</a>
+          </CardText>
+          : null
+        }
         <CardText style={{paddingTop: 0}}>
           <TextField
             style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}

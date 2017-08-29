@@ -1,11 +1,12 @@
-import React, { PureComponent, PropTypes } from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardMedia, CardTitle } from 'material-ui/Card'
-import Style from 'style-it'
-import chroma from 'chroma-js'
-import TouchRipple from 'material-ui/internal/TouchRipple'
-
 import './header.scss'
+
+import { Card, CardMedia, CardTitle } from 'material-ui/Card'
+import React, { PropTypes, PureComponent } from 'react'
+
+import { Link } from 'react-router-dom'
+import Style from 'style-it'
+import TouchRipple from 'material-ui/internal/TouchRipple'
+import chroma from 'chroma-js'
 
 export default class CardWithHeader extends PureComponent {
   static propTypes = {
@@ -47,14 +48,13 @@ export default class CardWithHeader extends PureComponent {
       <CardMedia
         className='card-media'
         overlay={<CardTitle title={
-            !titleOnly
+          !titleOnly
             ? title
             : <span>
               <span style={{display: 'inline-block', width: '75%', overflow: 'hidden', height: 36}}>{title}</span>
               <span style={{fontSize: 12, float: 'right'}}>{secondaryTitle}</span>
             </span>
-          } className='card-title' />
-        }
+        } className='card-title' />}
         overlayContentStyle={{
           background: 'none',
           top: titleOnly ? '-1em' : 'auto'
@@ -64,7 +64,7 @@ export default class CardWithHeader extends PureComponent {
             className={`canvas-triangles canvas-triangle-${id}`}
             data-color={color}
             height={height}
-        />
+          />
         </div>
       </CardMedia>)
 
@@ -87,11 +87,11 @@ export default class CardWithHeader extends PureComponent {
       <article key={id} className={`article-card-${id}`}>
         <Card className={`article-card article-card-${id}`} style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
           {link === '' ? titleContent
-          : <Link to={link} style={{display: 'block', position: 'relative'}} className='title-wrapper'>
-            <TouchRipple style={{zIndex: 1000}}>
-              {titleContent}
-            </TouchRipple>
-          </Link>
+            : <Link to={link} style={{display: 'block', position: 'relative'}} className='title-wrapper'>
+              <TouchRipple style={{zIndex: 1000}}>
+                {titleContent}
+              </TouchRipple>
+            </Link>
           }
           {children}
         </Card>

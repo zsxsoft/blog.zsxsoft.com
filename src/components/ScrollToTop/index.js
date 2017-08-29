@@ -1,6 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { animateToTop } from '../../utils/scroll'
+import { withRouter } from 'react-router-dom'
 
 class ScrollToTop extends React.Component {
   componentDidUpdate (prevProps) {
@@ -14,4 +14,3 @@ class ScrollToTop extends React.Component {
   }
 }
 export default withRouter(ScrollToTop)
-

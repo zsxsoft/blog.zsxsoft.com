@@ -36,12 +36,12 @@ export default class Article extends Page {
     document.title = article.Title + ' - zsx\'s Blog'
     return (
       <div className={
-          classnames({
-            [`article-${article.ID}`]: true,
-            'article-titleonly': false,
-            'article-canvas-radius-top': true,
-            'article-canvas-radius-bottom': false
-          })}>
+        classnames({
+          [`article-${article.ID}`]: true,
+          'article-titleonly': false,
+          'article-canvas-radius-top': true,
+          'article-canvas-radius-bottom': false
+        })}>
         <CardWithHeader id={parseInt(article.ID, 10)} title={article.Title} link=''>
           <CardText style={{height: 32}}>
             <div style={{overflow: 'hidden'}}>

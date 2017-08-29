@@ -193,10 +193,10 @@ module.exports = {
     libui: [
       'material-ui/List', 'material-ui/Drawer', 'material-ui/Divider',
       'material-ui/Card', 'material-ui/FlatButton', 'material-ui/FloatingActionButton', 'material-ui/Avatar',
-      'material-ui/RaisedButton', 'material-ui/TextField',
+      'material-ui/RaisedButton', 'material-ui/TextField', 'material-ui/RefreshIndicator',
       'material-ui/styles', 'material-ui/utils/colorManipulator',
       'material-ui/internal/TouchRipple', 'react-tap-event-plugin',
-      'style-it', 'chroma-js', 'dynamics.js', 'rc-queue-anim', 'trianglify'
+      'style-it', 'chroma-js', 'dynamics.js', 'react-flip-move', 'trianglify'
       //      'fastclick'
     ],
     js: app

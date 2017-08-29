@@ -1,16 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { formatArticleContent, formatDate } from '../utils'
+
+import Avatar from 'material-ui/Avatar'
 import { CardText } from 'material-ui/Card'
 import CardWithHeader from '../components/CardWithHeader'
-import classnames from 'classnames'
-
-import { formatDate, formatArticleContent } from '../utils'
-import Page from './Page'
-
-import FlatButton from 'material-ui/FlatButton'
-import Avatar from 'material-ui/Avatar'
 import Comment from '../components/Comment'
+import FlatButton from 'material-ui/FlatButton'
+import { Link } from 'react-router-dom'
+import Page from './Page'
+import React from 'react'
 import Waiting from '../components/Waiting'
+import classnames from 'classnames'
 
 export default class Article extends Page {
   componentDidUpdate (prevProps, prevState) {
@@ -30,7 +29,7 @@ export default class Article extends Page {
 
   render () {
     const data = this.state.data
-    const article = data.article
+    const { article } = data
     if (!article) return <Waiting />
     const contentHtml = {__html: formatArticleContent(article.Content)}
     document.title = article.Title + ' - zsx\'s Blog'

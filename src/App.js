@@ -1,21 +1,23 @@
-import React, { Component, PropTypes } from 'react'
-import {Route as OriginalRoute, Redirect} from 'react-router-dom'
+import './App.css'
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import IconButton from 'material-ui/IconButton'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import Menu from 'material-ui/svg-icons/navigation/menu'
-import Extension from 'material-ui/svg-icons/action/extension'
-import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
+import {Route as OriginalRoute, Redirect, Switch} from 'react-router-dom'
+import React, { Component, PropTypes } from 'react'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
-import LeftDrawer from './components/LeftDrawer'
-import { animateToTop } from './utils/scroll'
-import Theme from './Theme'
-
-import List from './pages/List'
 import Article from './pages/Article'
+import CSSTransition from 'react-transition-group/CSSTransition'
+import Extension from 'material-ui/svg-icons/action/extension'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import IconButton from 'material-ui/IconButton'
+import LeftDrawer from './components/LeftDrawer'
+import List from './pages/List'
+import Menu from 'material-ui/svg-icons/navigation/menu'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import Theme from './Theme'
+import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
+import TransitionGroup from 'react-transition-group/TransitionGroup'
+import { animateToTop } from './utils/scroll'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 
 const styles = {
   large: {
@@ -167,8 +169,14 @@ class App extends Component {
           </header>
           <section style={this.props.width === SMALL ? styles.mainSmall : styles.main}>
             <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
-              <Route path='/list' component={List} />
-              <Route path='/post' component={Article} />
+              <TransitionGroup>
+                <CSSTransition key={this.props.location.pathname.split('/')[0]} timeout={500} classNames='fade' appear>
+                  <Switch location={this.props.location}>
+                    <Route path='/list' component={List} />
+                    <Route path='/post' component={Article} />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
             </section>
           </section>
           {this.props.width === SMALL ? null

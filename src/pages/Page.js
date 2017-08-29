@@ -59,11 +59,13 @@ export default class Page extends PureComponent {
 
   trianglify (e) {
     if (e === null) return
+    if (e.getAttribute('data-trianglified') === 'true') return
     // e.style.opacity = 1
     // e.style.backgroundImage = `url(//static-up.zsxsoft.com/blog/triangles/${e.getAttribute('data-color')}.png)`
     const pattern = Trianglify({ width: 1024, height: Math.floor(e.getAttribute('height')), x_colors: e.getAttribute('data-color') })
     e.style.backgroundImage = `url(${pattern.png()})`
     e.style.opacity = 1
+    e.setAttribute('data-trianglified', 'true')
   }
 
   initState (props) {

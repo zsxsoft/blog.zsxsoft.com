@@ -6,6 +6,11 @@ blog.zsxsoft.com
 
 The source code of blog.zsxsoft.com
 
+## After installion
+Edit ``material-ui/internal/TouchRipple.js``, L260, remove ``if (hasRipples)`` to prevent the bug.
+
+See: https://github.com/Lucifier129/react-lite/issues/124
+
 ## Run
 ``npm start``
 

@@ -22,10 +22,7 @@ export default class List extends Page {
     window.doGlobal()
   }
 
-  handleAnimationEnd = (childElement) => {
-    console.log(childElement)
-    this.trianglify(document.querySelector(`.canvas-triangle-${childElement.props['data-id']}`))
-  }
+  handleAnimationEnd = (childElement) => this.trianglify(document.querySelector(`.canvas-triangle-${childElement.props['data-id']}`))
 
   pageTo = pageForward => {
     const { data } = this.state

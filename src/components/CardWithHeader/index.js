@@ -47,14 +47,14 @@ export default class CardWithHeader extends PureComponent {
     const titleContent = (
       <CardMedia
         className='card-media'
-        overlay={<CardTitle title={
+        overlay={[<CardTitle title={
           !titleOnly
             ? title
             : <span>
               <span style={{display: 'inline-block', width: '75%', overflow: 'hidden', height: 36}}>{title}</span>
               <span style={{fontSize: 12, float: 'right'}}>{secondaryTitle}</span>
             </span>
-        } className='card-title' />}
+        } className='card-title' />]}
         overlayContentStyle={{
           background: 'none',
           top: titleOnly ? '-1em' : 'auto'

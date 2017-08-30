@@ -1,8 +1,9 @@
-import React, { PropTypes, PureComponent } from 'react'
-import Drawer from 'material-ui/Drawer'
 import { List, ListItem, makeSelectable } from 'material-ui/List'
-import Divider from 'material-ui/Divider'
+import React, { PropTypes, PureComponent } from 'react'
 import { spacing, typography, zIndex } from 'material-ui/styles'
+
+import Divider from 'material-ui/Divider'
+import Drawer from 'material-ui/Drawer'
 import { grey800 } from 'material-ui/styles/colors'
 
 const SelectableList = makeSelectable(List)

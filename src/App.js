@@ -105,6 +105,7 @@ class App extends Component {
   }
 
   handleListChanged = (event, value) => {
+    if (!value) return
     if (/^http/.test(value)) {
       window.open(value)
     } else {

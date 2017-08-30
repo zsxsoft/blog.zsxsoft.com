@@ -195,9 +195,9 @@ module.exports = {
       'material-ui/Card', 'material-ui/FlatButton', 'material-ui/FloatingActionButton', 'material-ui/Avatar',
       'material-ui/RaisedButton', 'material-ui/TextField', 'material-ui/RefreshIndicator',
       'material-ui/styles', 'material-ui/utils/colorManipulator',
-      'material-ui/internal/TouchRipple', 'react-tap-event-plugin',
-      'style-it', 'chroma-js', 'dynamics.js', 'react-flip-move', 'trianglify'
-      //      'fastclick'
+      'material-ui/internal/TouchRipple',
+      'style-it', 'chroma-js', 'dynamics.js', 'react-flip-move', 'trianglify',
+      'fastclick'
     ],
     js: app
   },
@@ -215,7 +215,11 @@ module.exports = {
     modules: [
       path.resolve(__dirname, 'node_modules'),
       srcPath
-    ]
+    ],
+    alias: {
+      'react': 'react-lite',
+      'react-dom': 'react-lite'
+    }
   },
   plugins,
   devServer: {

@@ -20,7 +20,7 @@ export default class CardWithHeader extends PureComponent {
 
   constructor () {
     super()
-    this.colors = ['Blues', 'BrBG', 'BuGn', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PuBuGn', 'PuRd', 'RdPu', 'Reds', 'Set3', 'YlGn', 'YlGnBu', 'YlOrBr', 'Spectral']
+    this.colors = ['Blues', 'BrBG', 'BuGn', 'GnBu', 'Greens', 'Greys', 'Oranges', 'OrRd', 'PuBuGn', 'PuRd', 'RdPu', 'Reds', 'YlGn', 'YlGnBu', 'YlOrBr', 'Spectral']
   }
 
   handleAnimationEnd = (data) => {

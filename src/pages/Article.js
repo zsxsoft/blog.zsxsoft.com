@@ -1,5 +1,6 @@
 import { formatArticleContent, formatDate } from '../utils'
 
+import Alipay from '../components/Alipay'
 import Avatar from 'material-ui/Avatar'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { CardText } from 'material-ui/Card'
@@ -74,12 +75,16 @@ export default class Article extends Page {
                   </span>
                 </div>
               </CardText>
-              <CardText style={{padding: 30, fontSize: 16}}>
+              <CardText style={{padding: 30, paddingBottom: 0, fontSize: 16}}>
                 <article style={{color: '#000000'}} dangerouslySetInnerHTML={contentHtml} />
                 <div className='social-share' style={{
                   margin: '0 auto',
                   textAlign: 'center'
                 }} />
+              </CardText>
+              <CardText style={{textAlign: 'center', color: '#000000'}}>
+                <p>如果本文对你有帮助，你可以用支付宝支持一下：</p>
+                {Alipay}
               </CardText>
               <CardText>
                 <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} onRevertClicked={this.handleRevertClicked} postArea article={article} />

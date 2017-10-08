@@ -17,29 +17,10 @@
       position: relative;
       min-height: 90%;
       height: auto;
-    }
-    #app--background--image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      opacity: 0;
-    }
-    #app--background--mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0.6;
-      background: #222222;
-      height: 100%;
-      width: 100%;
-    }
-
-    #app--root {
       word-break: break-all;
       word-wrap: break-word;
       padding-bottom: 4rem;
+      overflow: hidden;
     }
 
     #footer {
@@ -55,6 +36,7 @@
       text-align: left;
       color: #777777;
       line-height: 20px;
+      background: white;
     }
 
     .footer-right {
@@ -79,13 +61,7 @@
 </head>
 
 <body>
-  <div id="app">
-    <div id="app--background">
-      <div id="app--background--image"></div>
-      <div id="app--background--mask"></div>
-    </div>
-    <div id="app--root"></div>
-  </div>
+  <div id="app"></div>
 
   <div id="player">
     <div id="player-iframe"></div>

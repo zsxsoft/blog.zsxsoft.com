@@ -13,5 +13,5 @@ import Router from './Router'
 OfflinePluginRuntime.install()
 ReactDOM.render(
   Router,
-  document.getElementById('app--root')
+  document.getElementById('app')
 )

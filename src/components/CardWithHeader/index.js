@@ -1,9 +1,10 @@
 import './header.scss'
 
 import { Card, CardMedia, CardTitle } from 'material-ui/Card'
-import React, { PropTypes, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Style from 'style-it'
 import TouchRipple from 'material-ui/internal/TouchRipple'
 import chroma from 'chroma-js'

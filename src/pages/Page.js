@@ -1,7 +1,8 @@
 import './Page.scss'
 
-import React, { PropTypes, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 
+import PropTypes from 'prop-types'
 import Trianglify from 'trianglify'
 
 export default class Page extends PureComponent {

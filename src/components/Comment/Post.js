@@ -1,7 +1,8 @@
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import React, { PropTypes, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
+import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 

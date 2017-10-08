@@ -197,7 +197,7 @@ module.exports = {
       'material-ui/styles', 'material-ui/utils/colorManipulator',
       'material-ui/internal/TouchRipple',
       'style-it', 'chroma-js', 'dynamics.js', 'react-flip-move', 'trianglify',
-      'fastclick'
+      'classnames'
     ],
     js: app
   },
@@ -215,11 +215,7 @@ module.exports = {
     modules: [
       path.resolve(__dirname, 'node_modules'),
       srcPath
-    ],
-    alias: {
-      'react': 'react-lite',
-      'react-dom': 'react-lite'
-    }
+    ]
   },
   plugins,
   devServer: {

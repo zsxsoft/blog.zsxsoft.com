@@ -1,7 +1,7 @@
 import './App.css'
 
 import {Route as OriginalRoute, Redirect, Switch} from 'react-router-dom'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 import Article from './pages/Article'
@@ -13,6 +13,7 @@ import LeftDrawer from './components/LeftDrawer'
 import List from './pages/List'
 import Menu from 'material-ui/svg-icons/navigation/menu'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import PropTypes from 'prop-types'
 import Theme from './Theme'
 import Top from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
 import { animateToTop } from './utils/scroll'

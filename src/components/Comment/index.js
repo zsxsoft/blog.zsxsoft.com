@@ -1,10 +1,11 @@
 import { Card, CardHeader, CardText } from 'material-ui/Card'
-import React, { PropTypes } from 'react'
 import {animateToPosition, getElementPosition} from '../../utils/scroll'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 import Avatar from 'material-ui/Avatar'
 import Post from './Post'
+import PropTypes from 'prop-types'
+import React from 'react'
 import {formatDate} from '../../utils'
 
 class Comments extends React.Component {

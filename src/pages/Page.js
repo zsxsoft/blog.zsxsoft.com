@@ -1,11 +1,11 @@
 import './Page.scss'
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import Trianglify from 'trianglify'
 
-export default class Page extends PureComponent {
+export default class Page extends Component {
   static propTypes = {
     onDataUpdate: PropTypes.func,
     location: PropTypes.any.isRequired

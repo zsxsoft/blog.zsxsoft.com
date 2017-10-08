@@ -73,7 +73,7 @@ export default class Article extends Page {
                   </span>
                 </div>
               </CardText>
-              <CardText>
+              <CardText style={{padding: 30, fontSize: 16}}>
                 <article style={{color: '#000000'}} dangerouslySetInnerHTML={contentHtml} />
                 <div className='social-share' style={{
                   margin: '0 auto',

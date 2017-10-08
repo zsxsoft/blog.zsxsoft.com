@@ -1,5 +1,3 @@
-import './App.css'
-
 import {Route as OriginalRoute, Redirect, Switch} from 'react-router-dom'
 import React, { Component } from 'react'
 import withWidth, {SMALL} from 'material-ui/utils/withWidth'

@@ -1,5 +1,5 @@
 import './player.css'
-import './index.css'
+import './index.scss'
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime'
 

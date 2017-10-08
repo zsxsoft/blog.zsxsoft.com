@@ -1,16 +1,22 @@
 import {
-  lightBlue500, lightBlue700,
+  fullBlack,
+  fullWhite,
+  grey100,
+  grey300,
+  grey400,
+  grey500,
+  lightBlue500,
+  lightBlue700,
   pinkA200,
-  grey100, grey300, grey400, grey500,
-  white, fullBlack,
-  fullWhite
+  white
 } from 'material-ui/styles/colors'
+
 import {fade} from 'material-ui/utils/colorManipulator'
 import spacing from 'material-ui/styles/spacing'
 
 export default {
   spacing: spacing,
-  fontFamily: 'Roboto, sans-serif',
+  fontFamily: '',
   palette: {
     primary1Color: lightBlue500,
     primary2Color: lightBlue700,

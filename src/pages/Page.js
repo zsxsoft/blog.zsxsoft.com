@@ -70,11 +70,7 @@ export default class Page extends Component {
   }
 
   initState (props) {
-    return fetch(window.config.apiUrl + props.location.pathname, {
-      headers: {
-        'x-webp': window.isSupportWebp ? 1 : 0
-      }
-    })
+    return fetch(window.config.apiUrl + props.location.pathname)
       .then(data => data.json())
       .then(json => {
         if (this.state.mounted) {

@@ -46,6 +46,7 @@ export default class Article extends Page {
           : <div key='article' className={
             classnames({
               [`article-${article.ID}`]: true,
+              'page-article': true,
               'article-titleonly': false,
               'article-canvas-radius-top': true,
               'article-canvas-radius-bottom': false

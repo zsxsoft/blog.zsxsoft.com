@@ -86,7 +86,7 @@ export default class CardWithHeader extends PureComponent {
         }
       `}
       <article key={id} className={`article-card-${id}`}>
-        <Card className={`article-card article-card-${id}`} style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.9)`}}>
+        <Card className={`article-card article-card-${id}`} style={{marginBottom: '1em', borderRadius: '0.5em', background: `rgba(${rgb}, 0.99)`}}>
           {link === '' ? titleContent
             : <Link to={link} style={{display: 'block', position: 'relative'}} className='title-wrapper'>
               <TouchRipple style={{zIndex: 1000}}>

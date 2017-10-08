@@ -40,9 +40,6 @@ const styles = {
     paddingRight: '2em'
   },
   mainSmall: {
-    paddingTop: '3em',
-    paddingLeft: '0.5em',
-    paddingRight: '0.5em'
   }
 }
 
@@ -57,7 +54,7 @@ class App extends Component {
     this.state = {
       openSidebar: false,
       sidebarData: {},
-      mainOpacity: 0.9,
+      mainOpacity: 0.8,
       opacityDirection: 1
     }
   }
@@ -118,11 +115,17 @@ class App extends Component {
     let newDirection = this.state.opacityDirection
     let newOpacity = opacity
     if (this.state.opacityDirection === 1) {
-      newOpacity += 0.1
-      if (newOpacity >= 1) newDirection = 0
+      newOpacity += 0.2
+      if (newOpacity >= 1) {
+        newOpacity = 0.99
+        newDirection = 0
+      }
     } else {
-      newOpacity -= 0.1
-      if (newOpacity <= 0.0) newDirection = 1
+      newOpacity -= 0.2
+      if (newOpacity <= 0.0) {
+        newDirection = 1
+        newOpacity = 0
+      }
     }
 
     this.setState({
@@ -166,19 +169,17 @@ class App extends Component {
               <Menu />
             </IconButton>
           </header>
-          <section style={this.props.width === SMALL ? styles.mainSmall : styles.main}>
-            <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
-              <CSSTransitionGroup
-                transitionName='fade'
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}
-              >
-                <Switch location={this.props.location} key={this.props.location.pathname.split('/')[1]}>
-                  <Route path='/list' component={List} />
-                  <Route path='/post' component={Article} />
-                </Switch>
-              </CSSTransitionGroup>
-            </section>
+          <section style={Object.assign({}, styles.mainContent, {opacity: this.state.mainOpacity})}>
+            <CSSTransitionGroup
+              transitionName='fade'
+              transitionEnterTimeout={1000}
+              transitionLeaveTimeout={1000}
+            >
+              <Switch location={this.props.location} key={this.props.location.pathname.split('/')[1]}>
+                <Route path='/list' component={List} />
+                <Route path='/post' component={Article} />
+              </Switch>
+            </CSSTransitionGroup>
           </section>
           {this.props.width === SMALL ? null
             : <FloatingActionButton style={{position: 'fixed', left: '3em', bottom: '3em', color: '#ffffff', zIndex: 8}} onClick={this.updateOpacity}>

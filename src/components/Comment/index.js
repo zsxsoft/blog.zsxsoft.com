@@ -43,7 +43,8 @@ class Comments extends React.Component {
       backgroundColor: 'auto',
       width: isChild ? '90%' : '100%',
       margin: this.props.width === SMALL ? '1em auto' : (isChild ? '0.2rem 0 0 3rem' : '1rem 0 0 auto'),
-      paddingBottom: '1rem'
+      paddingBottom: '1rem',
+      marginBottom: '1rem'
     }}>
       <CardHeader
         title={

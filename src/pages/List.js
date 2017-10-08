@@ -75,7 +75,7 @@ export default class List extends Page {
       article.titleOnly = window.titleOnlyCateId.indexOf(article.Category.ID) >= 0
       return article
     })
-    return (<div>
+    return (<div className='page-list'>
       {articles.length === 0 ? <Waiting /> : null}
       <FlipMove duration={750} staggerDelayBy={100} easing='ease-out' enterAnimation='accordionVertical' leaveAnimation='accordionVertical' onFinish={this.handleAnimationEnd}>
         {articles.map((article, index) => {

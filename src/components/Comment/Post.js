@@ -18,7 +18,8 @@ const hintStyle = {
   color: '#000000'
 }
 const floatingLabelStyle = {
-  color: '#222222'
+  color: 'rgba(0, 0, 0, 0.5)',
+  fontWeight: 'lighter'
 }
 const floatingLabelFocusStyle = {
   color: '#0ea2e5'
@@ -150,15 +151,18 @@ class CommentPost extends PureComponent {
         }
         <CardText style={{paddingTop: 0}}>
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            style={textFieldStyle} inputStyle={hintStyle}
+            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
             onKeyDown={this.handleKeyDown}
             floatingLabelText='Name' onChange={this.handleChange('name')} value={this.state.name} />
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            style={textFieldStyle} inputStyle={hintStyle}
+            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
             onKeyDown={this.handleKeyDown}
             type='email' floatingLabelText='Email' onChange={this.handleChange('email')} value={this.state.email} />
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle} floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            style={textFieldStyle} inputStyle={hintStyle}
+            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
             onKeyDown={this.handleKeyDown}
             floatingLabelText='Website' onChange={this.handleChange('url')} value={this.state.url} />
           <TextField

@@ -1,0 +1,41 @@
+.article {
+  margin-bottom: 1em;
+}
+
+.onlyTitle+.onlyTitle {
+  margin-top: -1em;
+}
+
+.ssrAnimation {
+  transform: translateX(-200%);
+  animation: no-javascript 1s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+  /* If JavaScript not loaded in 3s, just ignore it */
+  animation-delay: 3s;
+}
+
+@keyframes no-javascript {
+  from {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+:global {
+  .list-item-enter {
+    transform: translateX(-100vw);
+    transition: transform 250ms ease-in;
+  }
+  .list-item-enter-active {
+    transform: translateX(0);
+  }
+  .list-item-exit {
+    transform: translateX(0);
+    transition: transform 250ms ease-in;
+  }
+  .list-item-exit-active {
+    transform: translateX(100vw);
+  }
+}
+

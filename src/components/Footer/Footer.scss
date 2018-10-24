@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1pc;
+  padding: 20px;
+  font-size: 14px;
+  text-align: left;
+  color: #777777;
+  line-height: 20px;
+  background: white;
+  }
+
+.right {
+  margin-right: 60px;
+}

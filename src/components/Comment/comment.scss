@@ -1,0 +1,40 @@
+.comment {
+  background-color: initial !important;
+  width: 100%;
+  /*
+  margin: this.props.width === SMALL ? '1em auto' : (isChild ? '0.2rem 0 0 3rem' : '1rem 0 0 auto'),
+  */
+  margin: 1rem 0 0 auto;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.comment.childComment {
+  width: calc(100% - 2em);
+  margin: 0.5rem 1em 0 1em;
+}
+
+div.author {
+  padding-bottom: 0;
+}
+
+.authorText {
+  // It's hard to update material-ui's avatar margin-right: 16px
+  margin-left: -8px;
+}
+
+a.replyLink {
+  margin-left: 1em;
+}
+
+.content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+div.avatar {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0;
+}

@@ -1,62 +1,47 @@
-import { Card, CardActions, CardText } from 'material-ui/Card'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+
 import React, { PureComponent } from 'react'
-import withWidth, {SMALL} from 'material-ui/utils/withWidth'
 
 import PropTypes from 'prop-types'
-import RaisedButton from 'material-ui/RaisedButton'
-import TextField from 'material-ui/TextField'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
-const textFieldFullStyle = {
-  width: 'calc(33.333333% - 3rem)',
-  marginLeft: '1rem',
-  marginRight: '1rem'
-}
-const textFieldSmallStyle = {
-  width: '100%'
-}
-const hintStyle = {
-  color: '#000000'
-}
-const floatingLabelStyle = {
-  color: 'rgba(0, 0, 0, 0.5)',
-  fontWeight: 'lighter'
-}
-const floatingLabelFocusStyle = {
-  color: '#0ea2e5'
-}
+import c from './Post.scss'
 
 class CommentPost extends PureComponent {
+  state = {
+    name: '',
+    email: '',
+    url: '',
+    buttonText: 'COMMENT NOW'
+  }
+
   static propTypes = {
     onPosted: PropTypes.func.isRequired,
     article: PropTypes.object.isRequired,
-    revertComment: PropTypes.object,
-    onRevertClicked: PropTypes.func.isRequired,
-    width: PropTypes.number.isRequired
+    replyComment: PropTypes.object,
+    onReplyClicked: PropTypes.func.isRequired
   }
 
-  constructor (props) {
-    let savedState = {}
-    super(props)
+  componentDidMount () {
     try {
       if (localStorage.userData) {
-        savedState = JSON.parse(localStorage.userData)
+        this.setState({
+          ...this.state,
+          ...JSON.parse(localStorage.userData)
+        })
       }
     } catch (e) {
       console.log('Cannot load saved state: ', e)
     }
-    this.state = {
-      name: savedState.name || '',
-      email: savedState.email || '',
-      url: savedState.url || '',
-      [`content-${this.props.article.ID}`]: savedState[`content-${this.props.article.ID}`] || '',
-      buttonText: 'COMMENT NOW'
-    }
   }
 
   setButtonText = (text, duration = 4000) => {
-    this.setState({buttonText: text}, () => {
+    this.setState({ buttonText: text }, () => {
       setTimeout(() => {
-        this.setState({buttonText: 'COMMENT NOW'})
+        this.setState({ buttonText: 'COMMENT NOW' })
       }, duration)
     })
   }
@@ -72,20 +57,20 @@ class CommentPost extends PureComponent {
 
   handlePost = () => {
     this.props.onPosted(this.state)
-    this.setState({[`content-${this.props.article.ID}`]: ''})
+    this.setState({ [`content-${this.props.article.ID}`]: '' })
   }
 
   handleChange = state => event => {
-    this.setState({[state]: event.target.value}, () => {
+    this.setState({ [state]: event.target.value }, () => {
       this.saveDataToLocalStorage()
     })
   }
 
   handlePostComment = () => {
-    const {article, revertComment} = this.props
-    const {name, email, url} = this.state
+    const { article, replyComment } = this.props
+    const { name, email, url } = this.state
     const content = this.state[`content-${article.ID}`]
-    const revertCommentId = revertComment === null ? 0 : revertComment.ID
+    const replyCommentId = replyComment === null ? 0 : replyComment.ID
     if (!content) {
       return this.setButtonText('评论内容不能为空')
     }
@@ -107,7 +92,7 @@ class CommentPost extends PureComponent {
     formData.append('email', email)
     formData.append('content', content)
     formData.append('homepage', realUrl)
-    formData.append('replyid', revertCommentId)
+    formData.append('replyid', replyCommentId)
     formData.append('format', 'json')
 
     fetch(article.CommentPostUrl.replace(/&amp;/g, '&'), {
@@ -130,57 +115,61 @@ class CommentPost extends PureComponent {
       })
   }
 
-  handleCancel = () => this.props.onRevertClicked(null)
+  handleCancel = () => this.props.onReplyClicked(null)
 
   handleKeyDown = target => {
     if (target.keyCode === 13) this.handlePostComment()
   }
 
   render () {
-    const textFieldStyle = this.props.width === SMALL ? textFieldSmallStyle : textFieldFullStyle
-    return (<Card style={{backgroundColor: 'auto'}}>
+    return (<Card>
       <form id='comment-post'>
-        {this.props.revertComment
-          ? <CardText style={{paddingBottom: 0, color: '#000000'}}>
-          正在回复：{this.props.revertComment.Name} 说的 “{this.props.revertComment.Content.substr(0, 10)}...”。
+        {this.props.replyComment
+          ? <CardContent style={{ paddingBottom: 0, color: '#000000' }}>
+          正在回复：{this.props.replyComment.Name} 说的 “{this.props.replyComment.Content.substr(0, 10)}...”。
             <a
             href={'ja' + 'vascript:;'} // eslint-disable-line
               onClick={this.handleCancel}>[取消]</a>
-          </CardText>
+          </CardContent>
           : null
         }
-        <CardText style={{paddingTop: 0}}>
+        <CardContent>
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle}
-            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            className={c.input}
             onKeyDown={this.handleKeyDown}
-            floatingLabelText='Name' onChange={this.handleChange('name')} value={this.state.name} />
+            label='Name'
+            onChange={this.handleChange('name')}
+            value={this.state.name} />
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle}
-            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            className={c.input}
             onKeyDown={this.handleKeyDown}
-            type='email' floatingLabelText='Email' onChange={this.handleChange('email')} value={this.state.email} />
+            type='email'
+            label='Email'
+            onChange={this.handleChange('email')}
+            value={this.state.email} />
           <TextField
-            style={textFieldStyle} inputStyle={hintStyle}
-            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
+            className={c.input}
             onKeyDown={this.handleKeyDown}
-            floatingLabelText='Website' onChange={this.handleChange('url')} value={this.state.url} />
+            label='Website'
+            onChange={this.handleChange('url')}
+            value={this.state.url} />
           <TextField
-            style={
-              this.props.width === SMALL ? textFieldStyle : Object.assign({}, textFieldStyle, {width: 'calc(100% - 5rem)'})
-            }
-            hintText='发表“好厉害”“好屌”“支持”“顶”等无意义评论，或是发广告，一律封IP :)'
-            inputStyle={hintStyle}
-            hintStyle={{color: '#555555'}}
-            floatingLabelStyle={floatingLabelStyle} floatingLabelFocusStyle={floatingLabelFocusStyle}
-            floatingLabelText='Content' onChange={this.handleChange(`content-${this.props.article.ID}`)} value={this.state[`content-${this.props.article.ID}`]} />
-        </CardText>
+            className={c.textarea}
+            placeholder='发表“好厉害”“好屌”“支持”“顶”等无意义评论，或是发广告，一律封IP :)'
+            multiline
+            rows={3}
+            label='Content'
+            onChange={this.handleChange(`content-${this.props.article.ID}`)}
+            value={this.state[`content-${this.props.article.ID}`]} />
+        </CardContent>
         <CardActions>
-          <RaisedButton primary fullWidth label={this.state.buttonText} onClick={this.handlePostComment} style={{color: '#ffffff'}} />
+          <Button color='primary' fullWidth onClick={this.handlePostComment} variant='contained'>
+            {this.state.buttonText}
+          </Button>
         </CardActions>
       </form>
     </Card>)
   }
 }
 
-export default withWidth()(CommentPost)
+export default CommentPost

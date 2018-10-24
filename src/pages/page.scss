@@ -1,0 +1,39 @@
+.page {
+  padding: 3em 1em 0 1em;
+}
+
+div.avatar {
+  vertical-align: middle;
+  margin-right: 7px;
+  margin-top: 3px;
+  margin-left: 3px;
+  height: 27px;
+  width: 27px;
+  float: left;
+}
+
+.content {
+  color: #000;
+}
+
+.user {
+  overflow: hidden;
+}
+
+.pageSwitch {
+  position: relative;
+  width: 100%;
+  min-height: 36px;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  a {
+    margin-top: 1em;
+  }
+
+  :last-child {
+    margin-left: auto;
+  }
+}

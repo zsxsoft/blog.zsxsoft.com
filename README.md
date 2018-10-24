@@ -6,10 +6,15 @@ blog.zsxsoft.com
 
 The source code of blog.zsxsoft.com
 
-## After installion
-Edit ``material-ui/internal/TouchRipple.js``, L260, remove ``if (hasRipples)`` to prevent the bug.
+WIP
 
-See: https://github.com/Lucifier129/react-lite/issues/124
+## TODO
+
+1. 在支持SSR后，使用React v16.7的新API（这也是不使用``recompose``的原因）。
+2. 不使用``react-jss``，或关注以下Issue。
+    - https://github.com/cssinjs/react-jss/issues/144
+    - https://github.com/cssinjs/jss/issues/501
+3. 使用TypeScript重写（4.0再说吧）
 
 ## Run
 ``npm start``

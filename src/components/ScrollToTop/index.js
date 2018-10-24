@@ -1,10 +1,15 @@
 import React from 'react'
 import { animateToTop } from '../../utils/scroll'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'next/router'
+import PropTypes from 'prop-types'
 
-class ScrollToTop extends React.Component {
+class ScrollToTop extends React.PureComponent {
+  static propTypes = {
+    router: PropTypes.object
+  }
+
   componentDidUpdate (prevProps) {
-    if (this.props.location !== prevProps.location) { // eslint-disable-line
+    if (this.props.router.asPath !== prevProps.router.asPath) {
       setTimeout(animateToTop, 100)
     }
   }

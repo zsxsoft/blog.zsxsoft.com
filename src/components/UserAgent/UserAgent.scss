@@ -1,0 +1,17 @@
+.userAgent {
+  margin-left: -8px;
+  display: inline-flex;
+}
+.item {
+  display: inline-flex;
+  justify-content: left;
+  align-items: center;
+  margin-right: 6px;
+  font-size: 12px;
+
+  img {
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+  }
+}

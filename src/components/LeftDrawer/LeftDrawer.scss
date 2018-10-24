@@ -1,0 +1,22 @@
+.list {
+  width: 250px;
+
+  :hover {
+    color: inherit;
+  }
+}
+
+.logo {
+  cursor: pointer;
+  font-size: 24px;
+  color: rgb(255, 255, 255);
+  line-height: 64px;
+  font-weight: 300;
+  background-color: rgb(66, 66, 66);
+  padding-left: 24px;
+  margin-bottom: 8px;
+}
+
+.sub {
+  /* nothing */
+}

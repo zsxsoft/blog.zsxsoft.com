@@ -1,13 +1,30 @@
 import React from 'react'
-import RefreshIndicator from 'material-ui/RefreshIndicator'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import c from './Waiting.scss'
+import delayUnmount from '../delayUnmount'
 
-export default class Waiting extends React.PureComponent {
+class Waiting extends React.PureComponent {
+  state = {
+    show: false
+  }
+
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({ show: true })
+    }, 0)
+  }
+
+  componentPrepareUnmount () {
+    this.setState({ show: false })
+  }
+
   render () {
-    return <RefreshIndicator
-      size={50}
-      top={100}
-      left={window.innerWidth / 2 - 25}
-      status='loading'
-    />
+    return (
+      <div className={`${c.container} ${this.state.show ? c.show : c.hide}`}>
+        <CircularProgress size={30} />
+      </div>
+    )
   }
 }
+
+export default delayUnmount(Waiting, 300)

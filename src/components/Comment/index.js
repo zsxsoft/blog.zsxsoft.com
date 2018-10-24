@@ -1,73 +1,67 @@
-import { Card, CardHeader, CardText } from 'material-ui/Card'
-import {animateToPosition, getElementPosition} from '../../utils/scroll'
-import withWidth, {SMALL} from 'material-ui/utils/withWidth'
+import Card from '@material-ui/core/Card'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
 
-import Avatar from 'material-ui/Avatar'
+import { animateToPosition, getElementPosition } from '../../utils/scroll'
+
+import Avatar from '@material-ui/core/Avatar'
 import Post from './Post'
 import PropTypes from 'prop-types'
 import React from 'react'
-import {formatDate} from '../../utils'
+import { formatDate } from '../../utils'
+import cn from 'classnames'
+import UserAgent from '../UserAgent'
+
+import c from './comment.scss'
 
 class Comments extends React.Component {
+  state = {
+    replyComment: null
+  }
+
   static propTypes = {
     article: PropTypes.object.isRequired,
     comments: PropTypes.array.isRequired,
     onCommentPosted: PropTypes.func.isRequired,
-    postArea: PropTypes.bool.isRequired,
-    width: PropTypes.number.isRequired
+    postArea: PropTypes.bool.isRequired
   }
 
-  componentDidMount () {
-    window.doCommentLoaded()
-  }
-
-  componentDidUpdate () {
-    window.doCommentLoaded()
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      revertComment: null
-    }
-  }
-
-  handleRevertClicked = (comment) => () => {
+  handleReplyClicked = (comment) => () => {
     const elementPosition = getElementPosition(document.getElementById('comment-post'))
     animateToPosition(elementPosition.y)
-    this.setState({revertComment: comment})
+    this.setState({ replyComment: comment })
   }
 
   makeComments = (comments, isChild = false) => comments.map(comment =>
-    <Card className='comment' key={comment.ID} style={{
-      backgroundColor: 'auto',
-      width: isChild ? '90%' : '100%',
-      margin: this.props.width === SMALL ? '1em auto' : (isChild ? '0.2rem 0 0 3rem' : '1rem 0 0 auto'),
-      paddingBottom: '1rem',
-      marginBottom: '1rem'
-    }}>
+    <Card
+      className={cn({
+        [c.comment]: true,
+        [c.childComment]: isChild
+      })}
+      key={comment.ID}
+    >
       <CardHeader
+        className={c.author}
         title={
-          <span style={{color: '#000000'}}>
-            <a href={comment.HomePage} target='_blank' rel='nofollow'>{comment.Name}</a> at {formatDate(comment.PostTime)}
+          <span className={c.authorText}>
+            <a href={comment.HomePage} target='_blank' rel='nofollow'>
+              {comment.Name}
+            </a>
+            <span>{' '}at {formatDate(comment.PostTime)}</span>
             <a
-              style={{marginLeft: '1rem'}}
+              className={c.replyLink}
               href={'ja' + 'vascript:;'} // eslint-disable-line
-              onClick={this.handleRevertClicked(comment)}>[回复]</a>
+              onClick={this.handleReplyClicked(comment)}
+            >
+              [回复]
+            </a>
           </span>
         }
-        subtitle={
-          <span className='useragent-js' data-useragent={comment.Agent} style={{color: '#000000'}} />
+        subheader={
+          <UserAgent userAgent={comment.Agent} />
         }
-        style={{
-          paddingBottom: 0
-        }}
-        avatar={<Avatar style={{marginTop: 8}} src={comment.Avatar} />} />
-      <CardText style={{
-        paddingTop: 0,
-        paddingBottom: 0,
-        color: '#000000'
-      }} dangerouslySetInnerHTML={{__html: comment.Content}} />
+        avatar={<Avatar src={comment.Avatar} className={c.avatar} />} />
+      <CardContent className={c.content} dangerouslySetInnerHTML={{ __html: comment.Content }} />
       {this.makeComments(comment.Comments, true)}
     </Card>
   )
@@ -76,10 +70,10 @@ class Comments extends React.Component {
     return (<div>
       {this.makeComments(this.props.comments)}
       {this.props.postArea
-        ? <Post article={this.props.article} onPosted={this.props.onCommentPosted} revertComment={this.state.revertComment} onRevertClicked={this.handleRevertClicked(null)} />
+        ? <Post article={this.props.article} onPosted={this.props.onCommentPosted} replyComment={this.state.replyComment} onReplyClicked={this.handleReplyClicked(null)} />
         : null}
     </div>)
   }
 }
 
-export default withWidth()(Comments)
+export default Comments

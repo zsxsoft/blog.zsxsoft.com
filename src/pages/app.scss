@@ -1,0 +1,19 @@
+.menuButton {
+  position: fixed !important;
+  color: #ffffff !important;
+}
+
+.floatingButton {
+  position: fixed !important;
+  bottom: 3em;
+  z-index: 8;
+}
+
+.main {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  line-height: 2em;
+  transition: opacity 2s ease-in-out;
+  position: relative;
+}

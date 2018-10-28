@@ -3,7 +3,7 @@ export default {
   author: 'zsx',
   github: 'https://github.com/zsxsoft',
   themeUrl: 'https://github.com/zsxsoft/blog.zsxsoft.com',
-  apiUrl: 'https://blog.zsxsoft.com/api',
+  apiUrl: process.browser ? 'https://blog.zsxsoft.com/api' : 'http://blog.zsxsoft.com/api',
   titleOnlyCategoires: ['5', '6', '7'],
 
   analytics: {

@@ -131,7 +131,7 @@ class Post extends PureComponent {
             <span>
               <span style={{ float: 'left' }}>{article.Author.StaticName}</span>
               <span style={{ float: 'right' }}>
-                {formatDate(article.PostTime)}
+                <time>{formatDate(article.PostTime)}</time>
                 <span>{' in '}</span>
                 <span>{article.Category.Name}</span>
                 <span> / {article.CommNums} / {article.ViewNums}</span>

@@ -155,7 +155,7 @@ class CommentPost extends PureComponent {
             value={this.state.url} />
           <TextField
             className={c.textarea}
-            placeholder='发表“好厉害”“好屌”“支持”“顶”等无意义评论，或是发广告，一律封IP :)'
+            placeholder='谢绝“好厉害”“好屌”“支持”“顶”等无意义评论；当我回复你的评论时，你会收到邮件提醒。'
             multiline
             rows={3}
             label='Content'

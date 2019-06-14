@@ -69,8 +69,10 @@
     box-shadow: 1px 0px 4px;
   }
 
-  .social-share .icon-google {
-    display: none;
+  .social-share {
+    .icon-google {
+      display: none !important;
+    }
   }
 }
 

@@ -37,7 +37,7 @@ class MyApp extends App {
     loading: false,
     openSidebar: false,
     sidebarData: {},
-    mainOpacity: 0.8,
+    mainOpacity: 0.85,
     opacityDirection: 1
   }
 
@@ -179,7 +179,7 @@ class MyApp extends App {
             >
               <Waiting show={this.state.loading} />
               <main>
-                <header>
+                <header className={c.header}>
                   <LeftDrawer
                     location={this.props.location}
                     open={this.state.openSidebar}

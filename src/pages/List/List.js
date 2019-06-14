@@ -159,7 +159,7 @@ class List extends PureComponent {
               <span>
                 <span style={{ float: 'left' }}>{article.Author.StaticName}</span>
                 <span style={{ float: 'right' }}>
-                  <span>{formatDate(article.PostTime)}</span>
+                  <time>{formatDate(article.PostTime)}</time>
                   <span>{' in '}</span>
                   <Link route={'list'} params={{ ...this.props.router.query, category: article.Category.ID, page: 1 }}>
                     <a>{article.Category.Name}</a>

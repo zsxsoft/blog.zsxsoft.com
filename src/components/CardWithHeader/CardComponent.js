@@ -103,14 +103,18 @@ class CardComponent extends PureComponent {
         {!link
           ? (
             <React.Fragment>
-              {titleContent}
+              <h1 className={c.titleH1}>
+                {titleContent}
+              </h1>
             </React.Fragment>
           )
           : (
             <Link className={c.titleLink} passHref {...link}>
-              <ButtonBase component={A} className={c.button}>
-                {titleContent}
-              </ButtonBase>
+              <h1 className={c.titleH1}>
+                <ButtonBase component={A} className={c.button}>
+                  {titleContent}
+                </ButtonBase>
+              </h1>
             </Link>
           )}
         {children}

@@ -16,7 +16,6 @@ import ScrollToTop from 'components/ScrollToTop'
 import Waiting from 'components/Waiting'
 
 import Tencent from 'components/Analytics/Tencent'
-import Baidu from 'components/Analytics/Baidu'
 
 import { getFrontendUrl } from 'utils/api'
 import { animateToTop } from 'utils/scroll'
@@ -219,7 +218,6 @@ class MyApp extends App {
               <Footer />
 
               <Tencent />
-              <Baidu />
             </MuiThemeProvider>
           </JssProvider>
         </ScrollToTop>

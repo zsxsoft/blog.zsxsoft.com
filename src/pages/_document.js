@@ -56,9 +56,9 @@ export default class MyDocument extends Document {
           <script src='/_next/static/scripts/prism-20181026.js' async />
           <script src='/_next/static/scripts/useragent-0.5.7.js' async />
           <script src='/_next/static/social-share-20181026/js/social-share.min.js' async />
-          <script dangerouslySetInnerHTML={{ __html: 'window.Promise || document.write(\'\\x3Cscript src="//cdn.bootcss.com/es6-promise/4.0.5/es6-promise.min.js">\\x3C/script>\\x3Cscript>ES6Promise.polyfill()\\x3C/script>\')' }} />
-          <script dangerouslySetInnerHTML={{ __html: 'window.fetch || document.write(\'\\x3Cscript src="//cdn.bootcss.com/fetch/2.0.2/fetch.min.js">\\x3C/script>\')' }} />
-          <script dangerouslySetInnerHTML={{ __html: '\'\'.startsWith || document.write(\'\\x3Cscript src="//cdn.bootcss.com/babel-polyfill/6.22.0/polyfill.min.js">\\x3C/script>\')' }} />
+          <script dangerouslySetInnerHTML={{ __html: 'window.Promise || document.write(\'\\x3Cscript src="//cdn.jsdelivr.net/npm/es6-promise@4.2.8/dist/es6-promise.min.js">\\x3C/script>\\x3Cscript>ES6Promise.polyfill()\\x3C/script>\')' }} />
+          <script dangerouslySetInnerHTML={{ __html: 'window.fetch || document.write(\'\\x3Cscript src="//cdn.jsdelivr.net/npm/whatwg-fetch@2.0.4/fetch.min.js">\\x3C/script>\')' }} />
+          <script dangerouslySetInnerHTML={{ __html: '\'\'.startsWith || document.write(\'\\x3Cscript src="//cdn.jsdelivr.net/npm/babel-polyfill@6.26.0/dist/polyfill.min.js">\\x3C/script>\')' }} />
         </body>
       </html>
     )

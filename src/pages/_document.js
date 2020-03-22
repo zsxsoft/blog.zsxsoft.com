@@ -19,13 +19,13 @@ export default class MyDocument extends Document {
       pageContext,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: (
-        <React.Fragment>
+        <>
           <style
             id='jss-server-side'
             dangerouslySetInnerHTML={{ __html: pageContext && pageContext.sheetsRegistry.toString().replace(/\n/g, '') }}
           />
           {flush() || null}
-        </React.Fragment>
+        </>
       )
     }
   }

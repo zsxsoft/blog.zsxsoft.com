@@ -36,7 +36,7 @@ class MyApp extends App {
     loading: false,
     openSidebar: false,
     sidebarData: {},
-    mainOpacity: 0.85,
+    mainOpacity: 0.95,
     opacityDirection: 1
   }
 

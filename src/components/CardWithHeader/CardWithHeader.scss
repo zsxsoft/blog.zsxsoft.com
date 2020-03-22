@@ -72,13 +72,14 @@ div.cardRadiusBottom,
   color: #ffffff;
   font-size: 2em;
   line-height: 36px;
+  font-weight: normal;
 }
 
 .wideTitle {
   position: absolute;
   bottom: 1em;
-  left: 1em;
-  width: calc(100% - 2em);
+  left: 1rem;
+  width: calc(100% - 2rem);
 }
 
 .narrowTitle {
@@ -94,7 +95,7 @@ div.cardRadiusBottom,
     overflow: hidden;
     text-align: left;
     text-overflow: ellipsis;
-    margin-left: 1em;
+    margin-left: 1rem;
     word-break: break-all;
     white-space: nowrap;
     width: calc(100% - 4em);

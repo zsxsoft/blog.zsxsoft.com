@@ -126,29 +126,31 @@ class Post extends PureComponent {
           <meta name='description' content={filterHtml(article.Intro.substr(0, 50))} />
         </Head>
         <CardWithHeader titleOnly={false} title={article.Title}>
-          <CardContent className={`${pc.content} ${pc.user}`}>
-            <Avatar className={pc.avatar} src={article.Author.Avatar} />
-            <span>
-              <span style={{ float: 'left' }}>{article.Author.StaticName}</span>
-              <span style={{ float: 'right' }}>
-                <time>{formatDate(article.PostTime)}</time>
-                <span>{' in '}</span>
-                <span>{article.Category.Name}</span>
-                <span> / {article.CommNums} / {article.ViewNums}</span>
+          <div className={`${pc.content} ${c.content}`}>
+            <div className={`${pc.user} ${c.user}`}>
+              <Avatar className={pc.avatar} src={article.Author.Avatar} />
+              <span>
+                <span style={{ float: 'left' }}>{article.Author.StaticName}</span>
+                <span style={{ float: 'right' }}>
+                  <time>{formatDate(article.PostTime)}</time>
+                  <span>{' in '}</span>
+                  <span>{article.Category.Name}</span>
+                  <span> / {article.CommNums} / {article.ViewNums}</span>
+                </span>
               </span>
-            </span>
-          </CardContent>
-          <CardContent className={c.article}>
-            <article className={pc.content} dangerouslySetInnerHTML={contentHtml} />
-            <div className={`social-share ${c.center}`} />
-          </CardContent>
-          <CardContent className={`${c.center}`} >
-            <p>如果本文对你有帮助，你可以用支付宝支持一下：</p>
-            <Alipay />
-          </CardContent>
-          <CardContent>
-            <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} postArea article={article} />
-          </CardContent>
+            </div>
+            <div className={c.article}>
+              <article dangerouslySetInnerHTML={contentHtml} />
+              <div className={`social-share ${c.center}`} />
+            </div>
+            <div className={`${c.center}`} >
+              <p>如果本文对你有帮助，你可以用支付宝支持一下：</p>
+              <Alipay />
+            </div>
+            <div>
+              <Comment comments={article.Comments} onCommentPosted={this.handleCommentPosted} postArea article={article} />
+            </div>
+          </div>
         </CardWithHeader>
         <div className={pc.pageSwitch}>
           {article.Prev === null ? null : <Button component={Link} route='post' params={{ id: article.Prev.ID }} variant='contained' color='primary'>← {article.Prev.Title}</Button>}

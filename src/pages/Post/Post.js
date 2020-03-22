@@ -125,7 +125,7 @@ class Post extends PureComponent {
           <title>{article.Title} - {config.title}</title>
           <meta name='description' content={filterHtml(article.Intro.substr(0, 50))} />
         </Head>
-        <CardWithHeader titleOnly={false} title={article.Title}>
+        <CardWithHeader titleOnly={false} title={article.Title} inArticle>
           <div className={`${pc.content} ${c.content}`}>
             <div className={`${pc.user} ${c.user}`}>
               <Avatar className={pc.avatar} src={article.Author.Avatar} />

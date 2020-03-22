@@ -71,7 +71,8 @@ class CardComponent extends PureComponent {
       titleOnly,
       secondaryTitle,
       radiusTop = true,
-      radiusBottom = true
+      radiusBottom = true,
+      inArticle = false
     } = this.props
     const height = titleOnly ? 50 : 150
 
@@ -82,7 +83,7 @@ class CardComponent extends PureComponent {
         {!this.state.ssr && <div className={`${c.canvas}`} data-color={this.props.colorString} ref={this.getTitleWrapperRef} height={height} />}
         {
           !titleOnly
-            ? <span className={c.wideTitle}>{title}</span>
+            ? <span className={`${c.wideTitle} ${inArticle ? c.titleInArticle : ''}`}>{title}</span>
             : (
               <span className={c.narrowTitle}>
                 <span className={c.primary}>{title}</span>

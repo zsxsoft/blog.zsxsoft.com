@@ -88,8 +88,11 @@ class Post extends PureComponent {
       status: 200,
       dataLoaded: true,
       loading: false
+    }, () => {
+      setTimeout(() => {
+        this.props.doEverything()
+      }, 1000)
     })
-    this.props.doEverything()
     this.props.onDataUpdate(this.state.data.sidebar)
   }
 
@@ -99,6 +102,9 @@ class Post extends PureComponent {
     } else {
       this.props.onDataUpdate(this.state.data.sidebar)
     }
+    setTimeout(() => {
+      this.props.doEverything()
+    }, 1000)
   }
 
   handleCommentPosted = () => {

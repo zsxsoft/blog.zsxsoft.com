@@ -16,11 +16,11 @@ export default (Component) => {
     }
 
     componentDidMount () {
-      this.doEverything()
+      // this.doEverything()
     }
 
     componentDidUpdate () {
-      this.doEverything()
+      // this.doEverything()
     }
 
     render () {

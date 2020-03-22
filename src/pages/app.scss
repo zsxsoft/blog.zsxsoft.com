@@ -1,6 +1,7 @@
 .menuButton {
   position: fixed !important;
   color: #ffffff !important;
+  z-index: 5;
 }
 
 .floatingButton {
@@ -26,6 +27,3 @@
   position: relative;
 }
 
-.header {
-  height: 3em;
-}

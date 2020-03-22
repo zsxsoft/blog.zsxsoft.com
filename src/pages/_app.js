@@ -37,7 +37,9 @@ class MyApp extends App {
     openSidebar: false,
     sidebarData: {},
     mainOpacity: 0.95,
-    opacityDirection: 1
+    opacityDirection: 1,
+    scrollPos: 0,
+    floatingButtonClass: c.show
   }
 
   static async getInitialProps ({ Component, ctx, ...props }) {
@@ -89,6 +91,19 @@ class MyApp extends App {
         value: Math.round(window.performance.now() - window.startTime)
       })
     }
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = (e) => {
+    const { scrollPos } = this.state
+    this.setState({
+      scrollPos: document.body.getBoundingClientRect().top,
+      floatingButtonClass: document.body.getBoundingClientRect().top > scrollPos ? c.show : c.hide
+    })
   }
 
   formatHtmlToData = html => {
@@ -208,12 +223,16 @@ class MyApp extends App {
                   </TransitionGroup>
 
                 </section>
-                <Button variant='fab' color='primary' className={c.floatingButton} style={{ left: '3em' }} onClick={this.updateOpacity}>
-                  <Extension />
-                </Button>
-                <Button variant='fab' color='primary' className={c.floatingButton} style={{ right: '3em' }} onClick={animateToTop}>
-                  <Top />
-                </Button>
+                <div className={`${c.floatingButton} ${this.state.floatingButtonClass}`} style={{ left: '3em' }}>
+                  <Button variant='fab' color='primary' onClick={this.updateOpacity}>
+                    <Extension />
+                  </Button>
+                </div>
+                <div className={`${c.floatingButton} ${this.state.floatingButtonClass}`} style={{ right: '3em' }}>
+                  <Button variant='fab' color='primary' onClick={animateToTop}>
+                    <Top />
+                  </Button>
+                </div>
               </main>
               <Footer />
 

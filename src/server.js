@@ -5,7 +5,6 @@ const express = require('express')
 const pathToRegExp = require('path-to-regexp')
 const { parse } = require('url')
 const routes = require('./route')
-const uglifyjs = require('uglify-es')
 const server = express()
 const fetch = require('node-fetch')
 

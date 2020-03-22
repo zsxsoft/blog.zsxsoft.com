@@ -164,6 +164,8 @@ class MyApp extends App {
 
   render () {
     const { Component, pageProps } = this.props
+    console.log(123456)
+    console.log(this.pageContext)
 
     return (
       <Container>

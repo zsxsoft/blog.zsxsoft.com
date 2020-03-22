@@ -1,13 +1,15 @@
 import Document, { Main, Head, NextScript } from 'next/document'
 import React from 'react'
 import flush from 'styled-jsx/server'
+import getPageContext from '../utils/getPageContext'
 
 export default class MyDocument extends Document {
   static async getInitialProps (ctx) {
-    let pageContext
+    let pageContext = getPageContext()
     const page = ctx.renderPage((Component) => {
       const WrappedComponent = (props) => {
         pageContext = props.pageContext
+
         return <Component {...props} />
       }
 
@@ -33,7 +35,6 @@ export default class MyDocument extends Document {
   render () {
     const { pageContext } = this.props
 
-    // console.log(pageContext)
     return (
       <html lang='zh-Hans-CN'>
         <Head>

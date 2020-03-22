@@ -17,7 +17,7 @@ import classnames from 'classnames'
 import api, { convertQueryToListParams } from '../../utils/api'
 
 import { withRouter } from 'next/router'
-import { Trail, config as springConfig } from 'react-spring'
+import { Trail } from 'react-spring/renderprops'
 import withGlobal from 'components/withGlobal'
 
 import c from './List.scss'
@@ -193,7 +193,7 @@ class List extends PureComponent {
         {/* react-spring doesn't support SSR, and i have to keep the html client rendered is same as server. */}
         {!this.state.ssr
           ? (
-            <Trail config={springConfig.stiff} items={articles} keys={item => item.ID} from={{ transform: 'translateX(-200%)' }} to={{ transform: 'translateX(0%)' }}>
+            <Trail items={articles} keys={item => item.ID} from={{ transform: 'translateX(-200%)' }} to={{ transform: 'translateX(0%)' }}>
               {(article, index) => style => {
                 return this.getArticleComponent(article, index, articles, { style })
               }}

@@ -1,7 +1,7 @@
 const path = require('path')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
-const withTM = require('next-plugin-transpile-modules')
+const withTM = require('next-transpile-modules')
 const merge = require('webpack-merge')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -57,7 +57,7 @@ const sassWrapper = withSass({
 })
 
 const transpileModuleWrapper = withTM({
-  transpileModules: [],
+  transpileModules: ['react-spring', '@babel/runtime'],
   ...sassWrapper
 })
 const cssWrapper = withCSS({

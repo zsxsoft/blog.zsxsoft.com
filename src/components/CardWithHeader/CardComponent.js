@@ -12,7 +12,7 @@ import ButtonBase from '@material-ui/core/ButtonBase'
 import CardPropTypes from './CardPropTypes'
 import c from './CardWithHeader.scss'
 
-const A = ({ ...props }) => <a {...props} />
+const H1 = ({ ...props }) => <h1 {...props} />
 
 const styles = {
   article: {
@@ -110,11 +110,11 @@ class CardComponent extends PureComponent {
           )
           : (
             <Link className={c.titleLink} passHref {...link}>
-              <h1 className={c.titleH1}>
-                <ButtonBase component={A} className={c.button}>
+              <a className={c.titleH1}>
+                <ButtonBase component={H1} className={c.button}>
                   {titleContent}
                 </ButtonBase>
-              </h1>
+              </a>
             </Link>
           )}
         {children}

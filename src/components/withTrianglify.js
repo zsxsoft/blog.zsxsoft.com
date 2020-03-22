@@ -8,7 +8,7 @@ const doQueue = () => {
   if (queue.length === 0 || queueRunning) return
   queueRunning = true
   const e = queue.shift()
-  const pattern = Trianglify({ width: 1024, height: Math.floor(e.getAttribute('height')), x_colors: e.getAttribute('data-color') })
+  const pattern = Trianglify({ width: 1280, height: Math.floor(e.getAttribute('height')), x_colors: e.getAttribute('data-color') })
   e.style.backgroundImage = `url(${pattern.png()})`
   e.style.opacity = 1
   e.setAttribute('data-trianglified', 'true')

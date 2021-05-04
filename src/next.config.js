@@ -1,3 +1,14 @@
+// fuck node-sass first
+(() => {
+  Module = require('module')
+  Module.prototype.requireOrig = Module.prototype.require
+  Module.prototype.require = function (path) {
+    if (path === 'node-sass') {
+      return this.requireOrig('sass')
+    }
+    return this.requireOrig(path)
+  }
+})();
 const path = require('path')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
@@ -6,6 +17,7 @@ const merge = require('webpack-merge')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 
 const webpack = require('webpack')
 

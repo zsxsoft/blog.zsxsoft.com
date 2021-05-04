@@ -15,8 +15,6 @@ import Footer from 'components/Footer'
 import ScrollToTop from 'components/ScrollToTop'
 import Waiting from 'components/Waiting'
 
-import Tencent from 'components/Analytics/Tencent'
-
 import { getFrontendUrl } from 'utils/api'
 import { animateToTop } from 'utils/scroll'
 import getPageContext from 'utils/getPageContext'
@@ -236,7 +234,6 @@ class MyApp extends App {
               </main>
               <Footer />
 
-              <Tencent />
             </MuiThemeProvider>
           </JssProvider>
         </ScrollToTop>
